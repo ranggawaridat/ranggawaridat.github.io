@@ -1,112 +1,256 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WRDT</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #0a0a0a;
-      color: #f5f5f5;
-      font-family: 'Courier New', monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      font-size: 3rem;
-      color: #e63946;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.2rem;
-      font-weight: normal;
-      color: #b5179e;
-    }
-    .typing {
-      border-right: 2px solid #f5f5f5;
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 4s steps(30, end), blink .75s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
-    section {
-      max-width: 700px;
-      margin: 2rem auto;
-    }
-    .skills {
-      text-align: left;
-      background: rgba(255,255,255,0.05);
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(229,57,53,0.2);
-    }
-    .skills h3 {
-      color: #e63946;
-      margin-bottom: 1rem;
-    }
-    .skills ul {
-      list-style: none;
-      padding: 0;
-    }
-    .skills li {
-      margin: 0.6rem 0;
-    }
-    .contact a {
-      color: #b5179e;
-      text-decoration: none;
-      margin: 0 0.8rem;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-    .contact a:hover {
-      color: #e63946;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rangga Waridat — Developer</title>
+<meta name="description" content="Rangga Waridat — Android, Backend & Web developer. Clean code, pragmatic solutions.">
+<!-- Open Graph (bagus saat preview di IG/twitter) -->
+<meta property="og:title" content="Rangga Waridat — Developer">
+<meta property="og:description" content="Android, Backend & Web developer. Clean code, pragmatic solutions.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="">
+<style>
+  :root{
+    --bg:#0f1720;
+    --card:#0b1220;
+    --muted:#9aa4b2;
+    --accent:#6ee7b7;
+    --glass: rgba(255,255,255,0.03);
+    --radius:16px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,#071023 0%, var(--bg) 100%);
+    color:#e6eef6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+  }
+  .wrap{
+    width:100%;
+    max-width:760px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:calc(var(--radius) + 8px);
+    padding:28px;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    border: 1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+  }
+  header{
+    display:flex;
+    gap:16px;
+    align-items:center;
+  }
+  .avatar{
+    width:84px;
+    height:84px;
+    border-radius:20px;
+    flex:0 0 84px;
+    background:linear-gradient(180deg,#0ea5a4,#3b82f6);
+    display:grid;
+    place-items:center;
+    font-weight:700;
+    font-size:26px;
+    color:white;
+    box-shadow: 0 6px 18px rgba(14,165,164,0.12);
+  }
+  h1{
+    margin:0;
+    font-size:20px;
+    letter-spacing:0.2px;
+  }
+  .role{color:var(--muted); margin-top:6px; font-size:13px}
+  p.lead{
+    margin:18px 0 20px 0;
+    color:#cfe7ff;
+    line-height:1.45;
+  }
+
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 14px}
+  .chip{
+    background:var(--glass);
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:13px;
+    color:var(--muted);
+    border: 1px solid rgba(255,255,255,0.02);
+  }
+
+  .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+  .btn{
+    appearance:none;
+    border:0;
+    padding:10px 14px;
+    border-radius:12px;
+    background:linear-gradient(90deg,#0ea5a4,#3b82f6);
+    color:#042028;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    box-shadow: 0 6px 18px rgba(59,130,246,0.12);
+    transition:transform .12s ease, box-shadow .12s ease, opacity .12s;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--muted);
+    box-shadow:none;
+  }
+
+  .links{display:grid; gap:10px; margin-top:18px}
+  .link-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 14px;
+    border-radius:12px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.02);
+    text-decoration:none;
+    color:inherit;
+    font-weight:600;
+  }
+  .link-card small{color:var(--muted); font-weight:500}
+  footer{margin-top:18px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
+  .small{color:var(--muted); font-size:13px}
+
+  /* responsive */
+  @media (max-width:520px){
+    .avatar{width:64px;height:64px;border-radius:14px}
+    header{gap:12px}
+    .wrap{padding:18px}
+    .btn{width:100%}
+    .actions{flex-direction:column}
+  }
+
+  /* small animated accent */
+  .dot{
+    width:10px;height:10px;border-radius:99px;background:var(--accent);box-shadow:0 6px 18px rgba(110,231,183,0.12);
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-6px)}
+    100%{transform:translateY(0)}
+  }
+
+  /* subtle focus */
+  a:focus, button:focus{outline:2px solid rgba(110,231,183,0.12); outline-offset:3px}
+</style>
 </head>
 <body>
-  <header>
-    <h1>WRDT</h1>
-    <h2 class="typing">Exorcising bugs since day one.</h2>
-  </header>
+  <main class="wrap" id="app">
+    <header>
+      <div class="avatar" aria-hidden="true">RW</div>
+      <div style="flex:1">
+        <h1>Rangga Waridat <span style="font-size:12px; color:var(--muted); font-weight:600">· developer</span></h1>
+        <div class="role">Android • Backend • Web — pragmatic, production-ready</div>
+        <div style="margin-top:8px; display:flex; gap:8px; align-items:center">
+          <div class="dot" title="Available for work"></div>
+          <div style="font-size:13px; color:var(--muted)">Open to freelance & collaboration</div>
+        </div>
+      </div>
+      <div style="margin-left:12px">
+        <button class="btn ghost" id="themeToggle" title="Toggle theme">Toggle</button>
+      </div>
+    </header>
 
-  <section class="about">
-    <p>Independent developer. Focused on Android, Backend, and Web.<br>
-    I work solo — design, code, and deploy — everything.<br>
-    Like an exorcist wandering in silence.</p>
-  </section>
+    <p class="lead">Saya membangun aplikasi Android dan web yang fokus pada keandalan dan pengalaman pengguna. Saya senang memecah masalah menjadi solusi sederhana yang bisa diproduksi.</p>
 
-  <section class="skills">
-    <h3>The Grimoire of Tech</h3>
-    <ul>
-      <li>✞ <b>Android Exorcism</b> → Kotlin, Jetpack Compose <i>(banishing crashes with holy null checks)</i></li>
-      <li>☠ <b>Backend Banishment</b> → FastAPI, PostgreSQL <i>(summoning data from the void)</i></li>
-      <li>🔮 <b>Web Invocation</b> → HTML, CSS, JavaScript, React <i>(casting responsive UI charms)</i></li>
-      <li>🔥 <b>Deployment Rituals</b> → ? , Docker<i>(deploying with midnight chants)</i></li>
-      <li>😅 <b>Solo Party Mode</b> → Yes, I’m the priest, mage, tank, healer, and bug bait — all at once.</li>
-    </ul>
-  </section>
+    <div class="chips" aria-hidden="true">
+      <div class="chip">Kotlin · Jetpack Compose</div>
+      <div class="chip">FastAPI · Python</div>
+      <div class="chip">React · TypeScript</div>
+      <div class="chip">Clean Architecture</div>
+      <div class="chip">CI/CD · Docker</div>
+    </div>
 
-  <section class="collab">
-    <p><i>Those who dare to collaborate, step forward.<br>
-    Reach me through the seals below.</i></p>
-  </section>
+    <div class="actions">
+      <a class="btn" href="https://github.com/" target="_blank" rel="noopener" id="githubBtn">
+        <!-- GitHub icon (inline SVG) -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 .5C5.7.5.9 5.3.9 11.6c0 4.7 3 8.7 7.2 10.1.5.1.7-.2.7-.5v-1.9c-2.9.7-3.5-1.2-3.5-1.2-.4-1-1-1.3-1-1.3-.8-.6.1-.6.1-.6.9.1 1.4.9 1.4.9.8 1.4 2 1 .5.7-.7-.1-1.1-.9-1.1-.9-.8-1.3.1-1 .1-1 .9.1 1.4 1 1.4 1 .8 1.4 2 1 1.6.8.1-.7.3-1 .5-1.2-2.3-.3-4.7-1.1-4.7-4.9 0-1.1.4-2 1-2.8-.1-.3-.4-1.5.1-3.1 0 0 .8-.3 2.8 1 1-.3 2-.4 3-.4s2.1.1 3 .4c2-1.4 2.8-1 2.8-1 .5 1.6.2 2.8.1 3.1.6.8 1 1.7 1 2.8 0 3.8-2.4 4.6-4.7 4.9.3.3.6.9.6 1.9v2.8c0 .3.2.6.7.5 4.2-1.4 7.2-5.4 7.2-10.1C23 5.3 18.3.5 12 .5z" fill="currentColor"/></svg>
+        GitHub
+      </a>
 
-  <section class="contact">
-    <a href="https://github.com/RanggaWaridat" target="_blank">GitHub</a>
-    <a href="https://wa.me/6283811926077" target="_blank">Whatsapp</a>
-  </section>
-</body>
-</html>
+      <a class="btn ghost" href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+
+      <button class="btn ghost" id="copyEmail">Copy email</button>
+    </div>
+
+    <div class="links">
+      <a class="link-card" href="https://your-portfolio.example/" target="_blank" rel="noopener">
+        <div>
+          Portfolio
+          <div style="font-size:12px; color:var(--muted)">Project highlights & case studies</div>
+        </div>
+        <small>→</small>
+      </a>
+
+      <a class="link-card" href="https://play.google.com/store" target="_blank" rel="noopener">
+        <div>
+          Apps
+          <div style="font-size:12px; color:var(--muted)">Android apps on Play Store</div>
+        </div>
+        <small>→</small>
+      </a>
+
+      <a class="link-card" href="mailto:hello@example.com" id="emailLink">
+        <div>
+          Email
+          <div style="font-size:12px; color:var(--muted)">hello[at]example.com</div>
+        </div>
+        <small>✉</small>
+      </a>
+    </div>
+
+    <footer>
+      <div class="small">Based in Indonesia · Available for freelance</div>
+      <div class="small">Built with ☕ & code</div>
+    </footer>
+  </main>
+
+<script>
+  // PERSONALIZE: replace placeholders quickly
+  const USER = {
+    name: "Rangga Waridat",
+    email: "hello@example.com",
+    github: "https://github.com/your-username",
+    linkedin: "https://linkedin.com/in/your-profile",
+    portfolio: "https://your-portfolio.example",
+    playstore: "https://play.google.com/store/apps/dev?id=YOUR_ID"
+  };
+
+  // wire links automatically (so you can edit USER fields)
+  document.getElementById('githubBtn').href = USER.github;
+  document.querySelectorAll('a[href^="https://linkedin.com/"]')[0].href = USER.linkedin;
+  document.querySelectorAll('a[href^="https://your-portfolio.example/"]')[0].href = USER.portfolio;
+  document.querySelectorAll('a[href^="https://play.google.com/"]')[0].href = USER.playstore;
+  const emailLink = document.getElementById('emailLink');
+  emailLink.href = 'mailto:' + USER.email;
+  emailLink.querySelector('div > div').textContent = USER.email;
+
+  // copy email
+  document.getElementById('copyEmail').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(USER.email);
+      const original = document.getElementById('copyEmail').textContent;
+      document.getElementById('copyEmail').textContent = 'Copied!';
+      setTimeout(()=> document.getElementById('copyEmail').textContent = original, 1400);
+    } catch (e){
+      alert('Copy failed — please copy manually: ' + USER.email);
+    }
+  });
+
+  // simple theme toggle (light variant)
+  const wrap = document.query

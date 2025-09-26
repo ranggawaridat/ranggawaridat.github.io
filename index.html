@@ -1,113 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WRDT</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rangga Waridat — Android · FastAPI · ML/AI</title>
+  <meta name="description" content="Rangga Waridat — Android developer, FastAPI backend, ML/AI (CV, NLP, Edge AI). Portfolio, projects, contact." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #0a0a0a;
-      color: #f5f5f5;
-      font-family: 'Courier New', monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
+    :root{
+      --bg:#0f0422; /* very dark purple */
+      --panel:#1a0b2a; /* dark purple panel */
+      --accent:#6A0DAD; /* purple accent */
+      --muted:#bba6d9;
+      --glass: rgba(255,255,255,0.03);
+      --card-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      --radius:14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    h1 {
-      font-size: 3rem;
-      color: #e63946;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.2rem;
-      font-weight: normal;
-      color: #b5179e;
-    }
-    .typing {
-      border-right: 2px solid #f5f5f5;
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 4s steps(30, end), blink .75s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
-    section {
-      max-width: 700px;
-      margin: 2rem auto;
-    }
-    .skills {
-      text-align: left;
-      background: rgba(255,255,255,0.05);
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(229,57,53,0.2);
-    }
-    .skills h3 {
-      color: #e63946;
-      margin-bottom: 1rem;
-    }
-    .skills ul {
-      list-style: none;
-      padding: 0;
-    }
-    .skills li {
-      margin: 0.6rem 0;
-    }
-    .contact a {
-      color: #b5179e;
-      text-decoration: none;
-      margin: 0 0.8rem;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-    .contact a:hover {
-      color: #e63946;
-    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg) 0%, #0b0620 100%);color:#efe6ff}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:980px;margin:28px auto;padding:28px}
+
+    header{display:flex;gap:20px;align-items:center}
+    .avatar{width:104px;height:104px;border-radius:16px;background:linear-gradient(180deg,#2a1140, #200a30);display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.04)}
+    .avatar h1{margin:0;font-size:28px;color:var(--muted)}
+
+    .hero{flex:1}
+    .typing{margin-bottom:14px}
+    .lead{color:var(--muted);line-height:1.5;margin:0 0 14px}
+
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{background:var(--glass);padding:6px 10px;border-radius:999px;font-weight:600;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+
+    main{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:26px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:var(--radius);box-shadow:var(--card-shadow);border:1px solid rgba(255,255,255,0.03)}
+
+    section h2{margin:0 0 12px;font-size:18px}
+    .skills{display:flex;flex-direction:column;gap:8px}
+    .skill{display:flex;justify-content:space-between;align-items:center}
+    .skill .name{color:var(--muted)}
+
+    .projects{display:grid;gap:12px}
+    .project{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+    .project h3{margin:0 0 6px}
+    .project p{margin:0;color:#d9cfea;font-size:14px}
+
+    .contact-list{display:flex;flex-direction:column;gap:10px}
+    .cta{display:inline-block;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),#4a0c8f);color:white;font-weight:700;border:1px solid rgba(255,255,255,0.06)}
+
+    footer{text-align:center;margin-top:28px;color:rgba(255,255,255,0.25);font-size:13px}
+
+    @media (max-width:900px){main{grid-template-columns:1fr;}.avatar{display:none}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>WRDT</h1>
-    <h2 class="typing">Exorcising bugs from day one.</h2>
-  </header>
+  <div class="container">
+    <header>
+      <div class="avatar card">
+        <h1>RW</h1>
+      </div>
+      <div class="hero">
+        <!-- Typing SVG banner -->
+        <div class="typing">
+          <a href="https://git.io/typing-svg" target="_blank" rel="noopener">
+            <img src="https://readme-typing-svg.demolab.com?font=Cinzel&size=28&duration=4000&pause=1000&color=6A0DAD&center=true&vCenter=true&width=800&lines=Hi%2C+I'm+Rangga+Waridat;Android+%26+FastAPI+Craftsman;Passionate+about+ML%2FAI+%7C+CV+%26+NLP;Exploring+the+future+with+Edge+AI;Building+tech+that+matters" alt="typing" />
+          </a>
+        </div>
+        <p class="lead">I'm an Android developer and FastAPI backend engineer building ML-powered apps and Edge AI solutions. I focus on Computer Vision, Natural Language Processing, and deploying efficient AI on devices.</p>
+        <div class="badges">
+          <span class="badge">Android</span>
+          <span class="badge">FastAPI</span>
+          <span class="badge">Computer Vision</span>
+          <span class="badge">NLP</span>
+          <span class="badge">Edge AI</span>
+        </div>
+      </div>
+    </header>
 
-  <section class="about">
-    <p>Developer focused on Android, Backend, and Web.<br>
-    Experienced in delivering robust and scalable applications.<br>
-    Committed to turning ideas into high-quality digital products.</p>
-  </section>
+    <main>
+      <div>
+        <section class="card">
+          <h2>Featured Projects</h2>
+          <div class="projects">
+            <div class="project">
+              <h3>OCR Receipt Scanner (Android + FastAPI)</h3>
+              <p>Offline-capable Android app that scans receipts, extracts structured data, and syncs with a FastAPI backend. Built with Tesseract + pytesseract and TF Lite optimizations.</p>
+            </div>
 
+            <div class="project">
+              <h3>Indonesian Sentiment API</h3>
+              <p>FastAPI service providing sentiment analysis & summarization for Bahasa Indonesia. Fine-tuned IndoBERT models and deployed with Docker.</p>
+            </div>
 
-  <section class="skills">
-    <h3>The Grimoire of Tech</h3>
-    <ul>
-      <li>✞ <b>Android Exorcism</b> → Kotlin, Jetpack Compose <i>(banishing crashes with holy null checks)</i></li>
-      <li>☠ <b>Backend Banishment</b> → FastAPI, PostgreSQL <i>(summoning data from the void)</i></li>
-      <li>🔮 <b>Web Invocation</b> → HTML, CSS, JavaScript, React <i>(casting responsive UI charms)</i></li>
-      <li>🔥 <b>Deployment Rituals</b> → ? , Docker<i>(deploying with midnight chants)</i></li>
-      <li>😅 <b>Solo Party Mode</b> → Yes, I’m the priest, mage, tank, healer, and bug bait — all at once.</li>
-    </ul>
-  </section>
+            <div class="project">
+              <h3>Edge Object Detection for Farming</h3>
+              <p>Lightweight YOLO-based model quantized for mobile/IoT to detect plant disease and notify farmers through an Android app.</p>
+            </div>
 
-  <section class="collab">
-    <p><i>Those who dare to collaborate, step forward.<br>
-    Reach me through the seals below.</i></p>
-  </section>
+          </div>
+        </section>
 
-  <section class="contact">
-    <a href="https://github.com/RanggaWaridat" target="_blank">GitHub</a>
-    <a href="https://wa.me/6283811926077" target="_blank">Whatsapp</a>
-  </section>
+        <section class="card" style="margin-top:14px">
+          <h2>About Me</h2>
+          <p style="color:var(--muted)">I build products that bridge research and real-world use. I love turning ML prototypes into production-ready apps — especially on Android and constrained devices. My mission: create AI tools that are useful for local businesses and scale globally.</p>
+        </section>
+
+        <section class="card" style="margin-top:14px">
+          <h2>Roadmap Snapshot</h2>
+          <p style="color:var(--muted);margin-top:8px">Focus: CV → NLP → Edge AI. Short-term: freelance & micro SaaS. Mid-term: Edge-optimized apps. Long-term: publishable research & collaborations.</p>
+        </section>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h2>Skills</h2>
+          <div class="skills" style="margin-top:10px">
+            <div class="skill"><span class="name">Languages</span><strong>Python, Kotlin, Java</strong></div>
+            <div class="skill"><span class="name">Mobile</span><strong>Android, Jetpack Compose, TF Lite</strong></div>
+            <div class="skill"><span class="name">Backend</span><strong>FastAPI, Docker, PostgreSQL</strong></div>
+            <div class="skill"><span class="name">ML</span><strong>PyTorch, TensorFlow, Hugging Face</strong></div>
+            <div class="skill"><span class="name">Tools</span><strong>OpenCV, YOLO, Git</strong></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h2>Contact & Social</h2>
+          <div class="contact-list" style="margin-top:10px">
+            <a class="cta" href="mailto:ranggawaridat@gmail.com">Email Me</a>
+            <a class="cta" href="https://linkedin.com/in/rangga-waridat" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="cta" href="https://github.com/ranggawaridat" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h2>Quick Links</h2>
+          <ul style="margin:8px 0 0 16px;color:var(--muted)">
+            <li><a href="#">Portfolio (coming soon)</a></li>
+            <li><a href="#">CV / Resume</a></li>
+            <li><a href="#">Roadmap</a></li>
+          </ul>
+        </div>
+
+      </aside>
+    </main>
+
+    <footer>
+      Rangga Waridat • Focused on CV · NLP · Edge AI
+    </footer>
+  </div>
 </body>
 </html>

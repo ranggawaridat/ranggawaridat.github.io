@@ -4,36 +4,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rangga Waridat — Roadmap</title>
-  <meta name="description" content="Rangga Waridat — Roadmap focus on CV, NLP, Edge AI." />
+  <title>Rangga Waridat</title>
+  <meta name="description" content="Personal page of Rangga Waridat." />
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #1a1a1a;
-      --accent: #6A0DAD; /* purple */
-      --gold: #DAA520;  /* gold */
-      --muted: #555;
-      --card-bg: #fdfdfd;
-      --radius: 12px;
+    :root{
+      --bg:#ffffff;
+      --accent:#6A0DAD; /* purple */
+      --gold:#d4af37;
+      --text:#222222;
+      --muted:#555555;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body { background: var(--bg); color: var(--text); line-height: 1.6; }
-    .container { max-width: 860px; margin: 0 auto; padding: 20px; }
-    header { text-align: center; margin-bottom: 30px; }
-    header h1 { font-size: 28px; color: var(--accent); }
-    header p { color: var(--muted); margin-top: 6px; }.roadmap { display: flex; flex-direction: column; gap: 20px; }
-.phase { background: var(--card-bg); padding: 16px 18px; border-radius: var(--radius); border-left: 6px solid var(--accent); box-shadow: 0 4px 8px rgba(0,0,0,0.04); }
-.phase:nth-child(even) { border-left-color: var(--gold); }
-.phase h2 { margin:0 0 8px; font-size: 20px; color: var(--accent); }
-.phase ul { padding-left: 18px; margin: 0; }
-.phase ul li { margin-bottom: 6px; }
-footer { text-align:center; font-size: 13px; color: var(--muted); margin-top: 30px; padding: 20px 0; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);line-height:1.6}
+    .container{max-width:960px;margin:0 auto;padding:40px 20px;text-align:center}
+    header h1{font-size:36px;color:var(--accent);margin-bottom:10px}
+    header p{color:var(--muted);margin-bottom:30px}.card{background:#fafafa;border-radius:16px;padding:30px;margin:20px auto;box-shadow:0 6px 14px rgba(0,0,0,0.08);max-width:600px}
+.card h2{font-size:24px;color:var(--accent);margin-bottom:10px}
+.card p{color:var(--text)}
+.highlight{color:var(--gold)}
 
-@media (max-width:600px) {
-  .container { padding: 14px; }
-  header h1 { font-size: 24px; }
-  .phase h2 { font-size: 18px; }
+footer{text-align:center;margin-top:50px;color:var(--muted);font-size:14px}
+
+@media(max-width:600px){
+  header h1{font-size:28px}
+  .card{padding:20px}
+  .card h2{font-size:20px}
 }
 
   </style>
@@ -41,74 +37,29 @@ footer { text-align:center; font-size: 13px; color: var(--muted); margin-top: 30
 <body>
   <div class="container">
     <header>
-      <h1>My AI Roadmap</h1>
-      <p>Focus: Computer Vision · NLP · Edge AI</p>
-    </header><main class="roadmap">
-  <div class="phase">
-    <h2>Phase 0: Foundations</h2>
-    <ul>
-      <li>Python advanced (OOP, async, typing)</li>
-      <li>Git & GitHub workflow</li>
-      <li>Data handling: Pandas, Numpy</li>
-      <li>ML basics: regression, classification, clustering</li>
-      <li>FastAPI & Docker basics</li>
-    </ul>
-  </div>
+      <h1>Rangga Waridat</h1>
+      <p><span class="highlight">Android</span> · FastAPI · ML/AI Enthusiast</p>
+    </header><div class="card">
+  <h2>✨ About Me</h2>
+  <p>Saya suka membangun aplikasi, API, dan eksperimen dengan teknologi terbaru. Dari Android apps, FastAPI backend, hingga Artificial Intelligence.</p>
+</div>
 
-  <div class="phase">
-    <h2>Phase 1: Computer Vision</h2>
-    <ul>
-      <li>OpenCV preprocessing & augmentation</li>
-      <li>CNN & Transfer Learning</li>
-      <li>Object Detection (YOLOv8, Detectron2)</li>
-      <li>Image Segmentation (U-Net, SAM)</li>
-      <li>Project: OCR Receipt Scanner (Android + FastAPI)</li>
-    </ul>
-  </div>
+<div class="card">
+  <h2>🚀 Interests</h2>
+  <p>Computer Vision · NLP · Edge AI · Micro SaaS · Research & Innovation</p>
+</div>
 
-  <div class="phase">
-    <h2>Phase 2: NLP</h2>
-    <ul>
-      <li>Text preprocessing & embeddings</li>
-      <li>Transformers (BERT, IndoBERT, Hugging Face)</li>
-      <li>Fine-tuning: classification, summarization, NER</li>
-      <li>Project: Sentiment API for Indonesian e-commerce</li>
-    </ul>
-  </div>
-
-  <div class="phase">
-    <h2>Phase 3: Edge AI</h2>
-    <ul>
-      <li>TensorFlow Lite / PyTorch Mobile</li>
-      <li>Quantization & pruning</li>
-      <li>Offline deployment on Android / IoT</li>
-      <li>Projects: OCR offline, Chatbot offline, IoT + CV/NLP</li>
-    </ul>
-  </div>
-
-  <div class="phase">
-    <h2>Phase 4: Monetization & Portfolio</h2>
-    <ul>
-      <li>Deploy APIs (CV/NLP/Edge) to cloud</li>
-      <li>Micro-SaaS & Android templates</li>
-      <li>Freelance platforms (Upwork, Toptal, Fiverr)</li>
-      <li>Portfolio website & LinkedIn showcase</li>
-    </ul>
-  </div>
-
-  <div class="phase">
-    <h2>Phase 5: Research & Academics</h2>
-    <ul>
-      <li>Research topics: OCR/NLP Bahasa, Edge AI optimization</li>
-      <li>Write & submit papers</li>
-      <li>Collaborate with international labs</li>
-      <li>Pursue scholarships & joint research</li>
-    </ul>
-  </div>
-</main>
+<div class="card">
+  <h2>🌐 Connect</h2>
+  <p>
+    <a href="https://github.com/ranggawaridat" target="_blank">GitHub</a> · 
+    <a href="#">LinkedIn</a> · 
+    <a href="mailto: ranggawaridat@gmail.com">Email</a>
+  </p>
+</div>
 
 <footer>
-  © 2025 Rangga Waridat — Roadmap: CV · NLP · Edge AI
+  © 2025 Rangga Waridat
 </footer>
 
   </div>

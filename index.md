@@ -1,6 +1,9 @@
-# 👋 Selamat datang!
+---
+layout: home
+title: "R. Waridat's Lab"
+---
 
-Hallo, aku Rangga.  
-Di sini aku mendokumentasikan perjalanan belajar — mulai dari eksperimen kecil, catatan teori, sampai proyek nyata.
+Selamat datang di **R. Waridat’s Lab** 🧪  
+Tempat aku menyimpan *eksperimen, catatan, dan ide liar* di bidang Machine Learning, Android, dan Backend Development.
 
-➡️ Cek daftar eksperimenku di [halaman eksperimen](experiments/).
+> “Ilmu itu harus bisa direplikasi dan dikembangkan bersama.”

@@ -1,6 +1,6 @@
 title: "R. Waridat's Lab"
 description: "Eksperimen, catatan, dan ide"
-theme: minima
+remote_theme: "mmistakes/minimal-mistakes"
 markdown: kramdown
 plugins:
   - jekyll-feed

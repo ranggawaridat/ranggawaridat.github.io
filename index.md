@@ -1,9 +1,5 @@
----
-layout: home
-title: "R. Waridat's Lab"
----
+# 🧪 Daftar Eksperiment
 
-Selamat datang di **R. Waridat’s Lab** 🧪  
-Tempat aku menyimpan *eksperimen, catatan, dan ide liar* di bidang Machine Learning, Android, dan Backend Development.
-
-> “Ilmu itu harus bisa direplikasi dan dikembangkan bersama.”
+1. [Linear Regression dari Nol](experiments/linear-regression.md)  
+2. [Decision Tree dan Random Forest](experiments/decision-tree.md)  
+3. [K-Nearest Neighbors Eksperimen](experiments/knn.md)  

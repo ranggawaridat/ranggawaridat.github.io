@@ -1,7 +1,5 @@
 title: "R. Waridat's Lab"
-description: "Eksperimen, catatan, dan ide"
-theme: minima
+description: "HEksperimen, catatan, dan ide"
 markdown: kramdown
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
+theme: minima
+

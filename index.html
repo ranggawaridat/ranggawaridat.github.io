@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wrdt — The Realm of Creation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #0b0b0f; color: #d1caff; font-family: 'Poppins', sans-serif; }
+    .fade-in { animation: fadeIn 1.2s ease-in-out; }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    .glow { text-shadow: 0 0 10px #8b5cf6, 0 0 20px #8b5cf6; }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(139,92,246,0.3); }
+  </style>
+</head>
+<body class="fade-in">
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center px-6 py-4 bg-black/40 backdrop-blur-lg fixed w-full top-0 z-50 border-b border-purple-900">
+    <h1 class="text-2xl font-bold text-purple-400 glow">wrdt.site</h1>
+    <div class="space-x-6 text-purple-300">
+      <a href="#home" class="hover:text-purple-400">Home</a>
+      <a href="#projects" class="hover:text-purple-400">Projects</a>
+      <a href="#contact" class="hover:text-purple-400">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Home -->
+  <section id="home" class="pt-28 pb-24 text-center px-6">
+    <h2 class="text-4xl font-bold mb-4 glow text-purple-400">Welcome to The Realm</h2>
+    <p class="max-w-2xl mx-auto text-purple-200">
+    Trying to understand not only how something works — but why <em>it <span class="text-purple-400 font-semibold">lives</em></span>.
+
+    </p>
+    <div class="mt-10">
+      <a href="#projects" class="bg-purple-600 text-white px-6 py-3 rounded-full hover:bg-purple-700 transition shadow-lg">Enter the Project Realm ✨</a>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-24 px-6 bg-gradient-to-b from-black to-purple-950 text-center">
+    <h2 class="text-3xl font-bold mb-12 glow text-purple-300">🌑 The Gates of Creation</h2>
+    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div class="card rounded-2xl p-8">
+        <h3 class="text-xl font-semibold mb-2 text-purple-400">Web Development</h3>
+        <p class="text-purple-200 italic mb-4">The first gate awaits...</p>
+        <span class="text-gray-400 text-sm">🕯️ Coming Soon...</span>
+      </div>
+      <div class="card rounded-2xl p-8">
+        <h3 class="text-xl font-semibold mb-2 text-purple-400">Android Realm</h3>
+        <p class="text-purple-200 italic mb-4">Where Kotlin meets magic.</p>
+        <span class="text-gray-400 text-sm">🕯️ Coming Soon...</span>
+      </div>
+      <div class="card rounded-2xl p-8">
+        <h3 class="text-xl font-semibold mb-2 text-purple-400">Machine Learning & AI</h3>
+        <p class="text-purple-200 italic mb-4">The realm of thinking spirits.</p>
+        <span class="text-gray-400 text-sm">🕯️ Coming Soon...</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 text-center bg-black/60 backdrop-blur-lg">
+    <h2 class="text-2xl font-bold mb-4 text-purple-400 glow">Contact</h2>
+    <p class="text-purple-200 mb-6">"If you wish to open the gate of collaboration, send your message across the void"</p>
+    <a href="mailto:ranggawaridat@gmail.com" class="bg-purple-700 text-white px-6 py-3 rounded-full hover:bg-purple-800 transition">Send Message</a>
+    <div class="mt-6 flex justify-center space-x-6 text-purple-300">
+      <a href="https://github.com/ranggawaridat" class="hover:text-purple-400">GitHub</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-purple-400 border-t border-purple-800 bg-black/50">
+    © 2025 wrdt.site | Crafted under the moonlight 🌙
+  </footer>
+</body>
+</html>

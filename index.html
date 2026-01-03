@@ -8,226 +8,54 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    html { scroll-behavior: smooth; }
     body {
-      background-color: #0b0b0f;
-      color: #d6d6e7;
+      background-color: #0a0a0d;
+      color: #d0d0e2;
       font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-      letter-spacing: 0.015em;
+      letter-spacing: 0.02em;
     }
     .fade {
-      animation: fadeIn 1.4s ease-out;
+      animation: fadeIn 1.8s ease-out;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .divider {
-      width: 72px;
-      height: 1px;
-      background: rgba(214,214,231,0.2);
-      margin: 4rem auto;
-    }
     .soft {
-      color: rgba(214,214,231,0.65);
-    }
-    .lang {
-      display: none;
-    }
-    .lang.active {
-      display: block;
-    }
-    button.toggle {
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 4px 10px;
-      font-size: 12px;
-      border-radius: 999px;
-      transition: all 0.2s ease;
-    }
-    button.toggle.active {
-      background: rgba(255,255,255,0.1);
-      color: white;
+      color: rgba(208,208,226,0.6);
     }
   </style>
 </head>
 
 <body class="fade">
 
-  <!-- NAV -->
-  <nav class="fixed top-0 w-full px-8 py-6 flex justify-between items-center bg-black/40 backdrop-blur border-b border-white/5 z-50">
-    <span class="text-sm tracking-widest text-white/80">wrdt</span>
-    <div class="space-x-2">
-      <button id="btn-en" class="toggle active">EN</button>
-      <button id="btn-id" class="toggle">ID</button>
-    </div>
-  </nav>
+  <main class="min-h-screen flex flex-col justify-center items-center text-center px-6 space-y-14 max-w-xl mx-auto">
 
-  <!-- STORY -->
-  <section class="min-h-screen flex flex-col justify-center px-6 pt-24 max-w-2xl mx-auto space-y-16">
+    <p class="text-xl">
+      I watch systems longer than most people stay interested.
+    </p>
 
-    <!-- CHAPTER 1 -->
-    <div class="lang en active">
-      <p class="text-xl leading-relaxed">
-        I started by watching systems quietly.
-      </p>
-      <p class="mt-4">
-        Not how they were described,<br/>
-        but how they behaved when no one was paying attention.
-      </p>
-    </div>
+    <p class="text-xl">
+      Stabilitas sering terlihat nyata sebelum ada yang berani menekannya.
+    </p>
 
-    <div class="lang id">
-      <p class="text-xl leading-relaxed">
-        Aku memulai dengan mengamati sistem secara diam-diam.
-      </p>
-      <p class="mt-4">
-        Bukan dari bagaimana mereka dijelaskan,<br/>
-        tapi dari bagaimana mereka berperilaku saat tidak ada yang memperhatikan.
-      </p>
-    </div>
+    <p class="text-xl">
+      Failure does not arrive — it drifts.
+    </p>
 
-    <div class="divider"></div>
+    <p class="text-xl">
+      Aku belajar membaca pola, bukan kejadian.
+    </p>
 
-    <!-- CHAPTER 2 -->
-    <div class="lang en active">
-      <p>
-        Most systems look stable at first.
-      </p>
-      <p class="mt-4">
-        Until pressure arrives.<br/>
-        Until assumptions are tested.<br/>
-        Until something subtle begins to drift.
-      </p>
-    </div>
+    <p class="text-xl soft">
+      Understanding takes time, dan aku tidak terburu-buru.
+    </p>
 
-    <div class="lang id">
-      <p>
-        Kebanyakan sistem terlihat stabil pada awalnya.
-      </p>
-      <p class="mt-4">
-        Sampai tekanan datang.<br/>
-        Sampai asumsi diuji.<br/>
-        Sampai sesuatu mulai bergeser perlahan.
-      </p>
-    </div>
+  </main>
 
-    <div class="divider"></div>
-
-    <!-- CHAPTER 3 -->
-    <div class="lang en active">
-      <p>
-        I learned not to panic when failure appeared.
-      </p>
-      <p class="mt-4">
-        Failure is rarely a single event.<br/>
-        It is usually a pattern asking to be noticed.
-      </p>
-    </div>
-
-    <div class="lang id">
-      <p>
-        Aku belajar untuk tidak panik saat kegagalan muncul.
-      </p>
-      <p class="mt-4">
-        Kegagalan jarang berupa satu kejadian.<br/>
-        Biasanya ia adalah pola yang ingin diperhatikan.
-      </p>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- CHAPTER 4 -->
-    <div class="lang en active">
-      <p>
-        Over time, my focus shifted.
-      </p>
-      <p class="mt-4">
-        From building impressive systems<br/>
-        to understanding resilient ones.
-      </p>
-    </div>
-
-    <div class="lang id">
-      <p>
-        Seiring waktu, fokusku bergeser.
-      </p>
-      <p class="mt-4">
-        Dari membangun sistem yang terlihat hebat,<br/>
-        menjadi memahami sistem yang mampu bertahan.
-      </p>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- CHAPTER 5 -->
-    <div class="lang en active">
-      <p>
-        This way of thinking is not fast.
-      </p>
-      <p class="mt-4">
-        It requires patience,<br/>
-        careful observation,<br/>
-        and respect for complexity.
-      </p>
-    </div>
-
-    <div class="lang id">
-      <p>
-        Cara berpikir ini tidak cepat.
-      </p>
-      <p class="mt-4">
-        Ia membutuhkan kesabaran,<br/>
-        pengamatan yang hati-hati,<br/>
-        dan penghormatan pada kompleksitas.
-      </p>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- END -->
-    <div class="lang en active">
-      <p class="soft">
-        If you choose to think this way,<br/>
-        you will start noticing things others overlook.
-      </p>
-    </div>
-
-    <div class="lang id">
-      <p class="soft">
-        Jika kamu memilih cara berpikir ini,<br/>
-        kamu akan mulai melihat hal-hal yang sering terlewatkan oleh orang lain.
-      </p>
-    </div>
-
-  </section>
-
-  <footer class="text-center py-10 text-xs soft border-t border-white/5 mt-20">
-    still observing
+  <footer class="text-center py-8 text-xs soft">
+    <a href="notes.html" class="hover:underline underline-offset-4">notes</a>
   </footer>
-
-  <script>
-    const btnEn = document.getElementById("btn-en");
-    const btnId = document.getElementById("btn-id");
-    const enBlocks = document.querySelectorAll(".lang.en");
-    const idBlocks = document.querySelectorAll(".lang.id");
-
-    function showEN() {
-      enBlocks.forEach(b => b.classList.add("active"));
-      idBlocks.forEach(b => b.classList.remove("active"));
-      btnEn.classList.add("active");
-      btnId.classList.remove("active");
-    }
-
-    function showID() {
-      idBlocks.forEach(b => b.classList.add("active"));
-      enBlocks.forEach(b => b.classList.remove("active"));
-      btnId.classList.add("active");
-      btnEn.classList.remove("active");
-    }
-
-    btnEn.addEventListener("click", showEN);
-    btnId.addEventListener("click", showID);
-  </script>
 
 </body>
 </html>

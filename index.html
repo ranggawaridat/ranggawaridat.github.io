@@ -10,35 +10,43 @@
   <style>
     html { scroll-behavior: smooth; }
     body {
-      background-color: #0a0a0d;
-      color: #cfcfe6;
+      background-color: #0b0b0f;
+      color: #d6d6e7;
       font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.015em;
     }
-
     .fade {
-      animation: fadeIn 1.6s ease-out;
+      animation: fadeIn 1.4s ease-out;
     }
-
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .divider {
-      width: 60px;
+      width: 72px;
       height: 1px;
-      background: rgba(207,207,230,0.2);
-      margin: 3rem auto;
+      background: rgba(214,214,231,0.2);
+      margin: 4rem auto;
     }
-
-    .whisper {
-      color: rgba(207,207,230,0.55);
+    .soft {
+      color: rgba(214,214,231,0.65);
     }
-
-    .hover-dim:hover {
-      color: #ffffff;
-      transition: color 0.3s ease;
+    .lang {
+      display: none;
+    }
+    .lang.active {
+      display: block;
+    }
+    button.toggle {
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 4px 10px;
+      font-size: 12px;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+    button.toggle.active {
+      background: rgba(255,255,255,0.1);
+      color: white;
     }
   </style>
 </head>
@@ -48,108 +56,178 @@
   <!-- NAV -->
   <nav class="fixed top-0 w-full px-8 py-6 flex justify-between items-center bg-black/40 backdrop-blur border-b border-white/5 z-50">
     <span class="text-sm tracking-widest text-white/80">wrdt</span>
-    <span class="text-xs whisper hidden md:block">quiet systems, observed closely</span>
+    <div class="space-x-2">
+      <button id="btn-en" class="toggle active">EN</button>
+      <button id="btn-id" class="toggle">ID</button>
+    </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24">
-    <p class="text-xl md:text-2xl leading-relaxed max-w-xl">
-      Systems do not fail loudly.
-    </p>
-    <p class="mt-6 text-xl md:text-2xl leading-relaxed max-w-xl">
-      They drift.
-    </p>
-    <p class="mt-6 text-xl md:text-2xl leading-relaxed max-w-xl">
-      Until someone notices.
-    </p>
-  </section>
+  <!-- STORY -->
+  <section class="min-h-screen flex flex-col justify-center px-6 pt-24 max-w-2xl mx-auto space-y-16">
 
-  <div class="divider"></div>
-
-  <!-- NOTES -->
-  <section class="max-w-2xl mx-auto px-6 py-12 text-left space-y-10">
-
-    <div>
-      <p class="leading-relaxed">
-        Most structures appear stable<br/>
-        when nothing is asking questions.
+    <!-- CHAPTER 1 -->
+    <div class="lang en active">
+      <p class="text-xl leading-relaxed">
+        I started by watching systems quietly.
+      </p>
+      <p class="mt-4">
+        Not how they were described,<br/>
+        but how they behaved when no one was paying attention.
       </p>
     </div>
 
-    <div>
-      <p class="leading-relaxed">
-        Pressure reveals alignment.<br/>
-        Silence reveals control.
+    <div class="lang id">
+      <p class="text-xl leading-relaxed">
+        Aku memulai dengan mengamati sistem secara diam-diam.
+      </p>
+      <p class="mt-4">
+        Bukan dari bagaimana mereka dijelaskan,<br/>
+        tapi dari bagaimana mereka berperilaku saat tidak ada yang memperhatikan.
       </p>
     </div>
 
-    <div>
-      <p class="leading-relaxed">
-        I am less interested in creation<br/>
-        than in what survives repetition.
+    <div class="divider"></div>
+
+    <!-- CHAPTER 2 -->
+    <div class="lang en active">
+      <p>
+        Most systems look stable at first.
+      </p>
+      <p class="mt-4">
+        Until pressure arrives.<br/>
+        Until assumptions are tested.<br/>
+        Until something subtle begins to drift.
       </p>
     </div>
 
-    <div>
-      <p class="leading-relaxed">
-        Patterns emerge<br/>
-        when intentions are removed.
+    <div class="lang id">
+      <p>
+        Kebanyakan sistem terlihat stabil pada awalnya.
+      </p>
+      <p class="mt-4">
+        Sampai tekanan datang.<br/>
+        Sampai asumsi diuji.<br/>
+        Sampai sesuatu mulai bergeser perlahan.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CHAPTER 3 -->
+    <div class="lang en active">
+      <p>
+        I learned not to panic when failure appeared.
+      </p>
+      <p class="mt-4">
+        Failure is rarely a single event.<br/>
+        It is usually a pattern asking to be noticed.
+      </p>
+    </div>
+
+    <div class="lang id">
+      <p>
+        Aku belajar untuk tidak panik saat kegagalan muncul.
+      </p>
+      <p class="mt-4">
+        Kegagalan jarang berupa satu kejadian.<br/>
+        Biasanya ia adalah pola yang ingin diperhatikan.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CHAPTER 4 -->
+    <div class="lang en active">
+      <p>
+        Over time, my focus shifted.
+      </p>
+      <p class="mt-4">
+        From building impressive systems<br/>
+        to understanding resilient ones.
+      </p>
+    </div>
+
+    <div class="lang id">
+      <p>
+        Seiring waktu, fokusku bergeser.
+      </p>
+      <p class="mt-4">
+        Dari membangun sistem yang terlihat hebat,<br/>
+        menjadi memahami sistem yang mampu bertahan.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CHAPTER 5 -->
+    <div class="lang en active">
+      <p>
+        This way of thinking is not fast.
+      </p>
+      <p class="mt-4">
+        It requires patience,<br/>
+        careful observation,<br/>
+        and respect for complexity.
+      </p>
+    </div>
+
+    <div class="lang id">
+      <p>
+        Cara berpikir ini tidak cepat.
+      </p>
+      <p class="mt-4">
+        Ia membutuhkan kesabaran,<br/>
+        pengamatan yang hati-hati,<br/>
+        dan penghormatan pada kompleksitas.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- END -->
+    <div class="lang en active">
+      <p class="soft">
+        If you choose to think this way,<br/>
+        you will start noticing things others overlook.
+      </p>
+    </div>
+
+    <div class="lang id">
+      <p class="soft">
+        Jika kamu memilih cara berpikir ini,<br/>
+        kamu akan mulai melihat hal-hal yang sering terlewatkan oleh orang lain.
       </p>
     </div>
 
   </section>
 
-  <div class="divider"></div>
-
-  <!-- FRAGMENTS -->
-  <section class="max-w-2xl mx-auto px-6 py-12 space-y-6">
-
-    <p>Some systems rely on permission.</p>
-    <p>Others rely on presence.</p>
-    <p>
-      Coordination does not require awareness —<br/>
-      only agreement.
-    </p>
-
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- NOTES LIST -->
-  <section class="max-w-2xl mx-auto px-6 py-12 space-y-4 text-sm whisper">
-
-    <p>Centralized decisions end quickly.</p>
-    <p>Distributed ones take time to notice.</p>
-    <p>Recovery is a form of memory.</p>
-    <p>Observation is never neutral.</p>
-
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- DISCLAIMER -->
-  <section class="max-w-2xl mx-auto px-6 py-12 text-sm whisper">
-    <p>
-      These notes describe structures.<br/>
-      Interpretation belongs to the reader.
-    </p>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="max-w-2xl mx-auto px-6 py-20 text-sm">
-    <p class="mb-6">
-      If you found something familiar here,<br/>
-      you already know how to reach me.
-    </p>
-    <a href="mailto:ranggawaridat@gmail.com" class="hover-dim underline underline-offset-4">
-      send
-    </a>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="text-center py-10 text-xs whisper border-t border-white/5">
-    still observing drift
+  <footer class="text-center py-10 text-xs soft border-t border-white/5 mt-20">
+    still observing
   </footer>
+
+  <script>
+    const btnEn = document.getElementById("btn-en");
+    const btnId = document.getElementById("btn-id");
+    const enBlocks = document.querySelectorAll(".lang.en");
+    const idBlocks = document.querySelectorAll(".lang.id");
+
+    function showEN() {
+      enBlocks.forEach(b => b.classList.add("active"));
+      idBlocks.forEach(b => b.classList.remove("active"));
+      btnEn.classList.add("active");
+      btnId.classList.remove("active");
+    }
+
+    function showID() {
+      idBlocks.forEach(b => b.classList.add("active"));
+      enBlocks.forEach(b => b.classList.remove("active"));
+      btnId.classList.add("active");
+      btnEn.classList.remove("active");
+    }
+
+    btnEn.addEventListener("click", showEN);
+    btnId.addEventListener("click", showID);
+  </script>
 
 </body>
 </html>

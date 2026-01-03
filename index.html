@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>wrdt — quiet presence</title>
+
+  <title>wrdt — quiet systems</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     html { scroll-behavior: smooth; }
+
     body {
       background-color: #050508;
       color: #e5e7eb;
@@ -20,7 +23,7 @@
     }
 
     @keyframes fade {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
@@ -34,13 +37,14 @@
 
 <body class="fade">
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur border-b border-white/10">
   <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <span class="text-sm tracking-widest text-gray-300">WRDT</span>
-    <div class="space-x-6 text-sm text-gray-400 hidden md:block">
+    <span class="text-xs tracking-[0.4em] text-gray-400">WRDT</span>
+    <div class="space-x-6 text-xs text-gray-500 hidden md:block">
       <a href="#about" class="hover:text-white">about</a>
       <a href="#work" class="hover:text-white">work</a>
+      <a href="#notes" class="hover:text-white">notes</a>
       <a href="#contact" class="hover:text-white">contact</a>
     </div>
   </div>
@@ -49,18 +53,19 @@
 <!-- HERO -->
 <section class="min-h-screen flex items-center justify-center px-6">
   <div class="text-center max-w-2xl">
-    <p class="text-xs tracking-[0.4em] text-gray-500 mb-6">
-      QUIET • OBSERVE • BUILD
+    <p class="text-xs tracking-[0.4em] text-gray-500 mb-8">
+      QUIET · OBSERVE · BUILD
     </p>
-    <h1 class="text-4xl md:text-5xl font-light leading-tight mb-6">
-      I don’t try to be loud.  
+
+    <h1 class="text-4xl md:text-5xl font-light leading-tight mb-8">
+      I don’t try to be visible.  
       <br class="hidden md:block"/>
-      I try to be <span class="text-white">real</span>.
+      I try to be <span class="text-white">correct</span>.
     </h1>
+
     <p class="text-gray-400 text-sm md:text-base leading-relaxed">
-      I build things slowly.  
-      Thoughtfully.  
-      Usually at night.
+      Systems. Failure. Control.  
+      Usually explored after midnight.
     </p>
   </div>
 </section>
@@ -68,14 +73,15 @@
 <!-- ABOUT -->
 <section id="about" class="py-28 px-6 bg-black/60">
   <div class="max-w-3xl mx-auto">
-    <h2 class="text-xl mb-6 text-gray-200">about</h2>
-    <p class="text-gray-400 leading-relaxed">
-      I like systems that don’t panic.  
-      Code that survives silence.  
-      And ideas that still work when nobody is watching.
+    <h2 class="text-lg mb-6 text-gray-200 tracking-wide">about</h2>
+
+    <p class="text-gray-400 leading-relaxed text-sm">
+      I study how systems behave when assumptions collapse.  
+      When networks degrade.  
+      When trust is partial.
       <br/><br/>
-      This site isn’t a showcase.  
-      It’s a trace.
+      This site is not a portfolio.  
+      It is a trace of ongoing thought.
     </p>
   </div>
 </section>
@@ -83,32 +89,90 @@
 <!-- WORK -->
 <section id="work" class="py-28 px-6">
   <div class="max-w-5xl mx-auto">
-    <h2 class="text-xl mb-12 text-gray-200">work</h2>
+    <h2 class="text-lg mb-12 text-gray-200 tracking-wide">work</h2>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="space-y-6">
+
       <div class="glass p-6 rounded-xl">
-        <p class="text-gray-300 mb-2">Web</p>
-        <p class="text-xs text-gray-500">
-          Minimal interfaces.  
-          Calm systems.
+        <p class="text-gray-200 mb-2">Go — Systems Engineering</p>
+        <p class="text-xs text-gray-500 leading-relaxed">
+          Backend systems written for long execution and low noise.  
+          Emphasis on concurrency models, memory behavior,
+          and predictable failure modes.
+          <br/><br/>
+          Designed to run quietly — and stay alive.
         </p>
       </div>
 
       <div class="glass p-6 rounded-xl">
-        <p class="text-gray-300 mb-2">Android</p>
-        <p class="text-xs text-gray-500">
-          Practical.  
-          Built to last.
+        <p class="text-gray-200 mb-2">Cloud Native — Failure-Oriented Design</p>
+        <p class="text-xs text-gray-500 leading-relaxed">
+          Containerized systems built around node loss,
+          unstable networks, and imperfect observability.
+          <br/><br/>
+          Architecture assumes something will break —
+          the question is where, and how gracefully.
         </p>
       </div>
 
       <div class="glass p-6 rounded-xl">
-        <p class="text-gray-300 mb-2">AI / Systems</p>
-        <p class="text-xs text-gray-500">
-          Learning quietly.  
-          Iterating slowly.
+        <p class="text-gray-200 mb-2">
+          Adversarial Distributed Systems (C2 / Botnet Research)
+        </p>
+        <p class="text-xs text-gray-500 leading-relaxed">
+          Academic and experimental research into
+          distributed command structures, peer coordination,
+          and low-resource participation.
+          <br/><br/>
+          Studied as a systems problem under hostile conditions —
+          not as spectacle.
         </p>
       </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section id="notes" class="py-28 px-6 bg-black/80">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-lg mb-10 text-gray-200 tracking-wide">notes</h2>
+
+    <div class="space-y-6 text-xs text-gray-500 leading-relaxed">
+
+      <div class="glass p-5 rounded-xl">
+        <p class="text-gray-400 mb-2">on control</p>
+        <p>
+          Centralized systems fail loudly.  
+          Distributed systems fail quietly —  
+          until coordination emerges.
+        </p>
+      </div>
+
+      <div class="glass p-5 rounded-xl">
+        <p class="text-gray-400 mb-2">on botnets</p>
+        <p>
+          Scale is trivial.  
+          Coordination under constraint is not.
+        </p>
+      </div>
+
+      <div class="glass p-5 rounded-xl">
+        <p class="text-gray-400 mb-2">on resilience</p>
+        <p>
+          Most systems are built to work.  
+          Few are built to degrade gracefully.
+        </p>
+      </div>
+
+      <div class="glass p-5 rounded-xl">
+        <p class="text-gray-400 mb-2">on red teaming</p>
+        <p>
+          Attack paths are documentation  
+          written from the other side.
+        </p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -116,14 +180,15 @@
 <!-- CONTACT -->
 <section id="contact" class="py-24 px-6 bg-black/70">
   <div class="max-w-3xl mx-auto text-center">
-    <h2 class="text-lg mb-4 text-gray-200">contact</h2>
+    <h2 class="text-sm mb-4 text-gray-200 tracking-wide">contact</h2>
+
     <p class="text-gray-500 text-sm mb-8">
-      If you have something meaningful to build,  
-      we can talk.
+      If you are building something fragile —  
+      we might have something to discuss.
     </p>
 
     <a href="mailto:ranggawaridat@gmail.com"
-       class="inline-block px-8 py-3 text-sm border border-white/20 rounded-full hover:bg-white hover:text-black transition">
+       class="inline-block px-8 py-3 text-xs border border-white/20 rounded-full hover:bg-white hover:text-black transition">
       send message
     </a>
 
@@ -137,7 +202,7 @@
 
 <!-- FOOTER -->
 <footer class="py-6 text-center text-xs text-gray-600">
-  wrdt.site — still here
+  wrdt.site — still observing
 </footer>
 
 </body>

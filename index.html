@@ -2,186 +2,154 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>wrdt — quiet systems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>wrdt</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     html { scroll-behavior: smooth; }
-
     body {
-      background-color: #050508;
-      color: #e5e7eb;
-      font-family: 'Inter', system-ui, sans-serif;
-      letter-spacing: 0.3px;
+      background-color: #0a0a0d;
+      color: #cfcfe6;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+      letter-spacing: 0.02em;
     }
 
     .fade {
-      animation: fade 1.4s ease forwards;
+      animation: fadeIn 1.6s ease-out;
     }
 
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .glass {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: rgba(207,207,230,0.2);
+      margin: 3rem auto;
+    }
+
+    .whisper {
+      color: rgba(207,207,230,0.55);
+    }
+
+    .hover-dim:hover {
+      color: #ffffff;
+      transition: color 0.3s ease;
     }
   </style>
 </head>
 
 <body class="fade">
 
-<!-- NAVBAR -->
-<nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur border-b border-white/10">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <span class="text-xs tracking-[0.4em] text-gray-400">WRDT</span>
-    <div class="space-x-6 text-xs text-gray-500 hidden md:block">
-      <a href="#about" class="hover:text-white">about</a>
-      <a href="#stance" class="hover:text-white">research</a>
-      <a href="#work" class="hover:text-white">work</a>
-      <a href="#notes" class="hover:text-white">notes</a>
-      <a href="#contact" class="hover:text-white">contact</a>
-    </div>
-  </div>
-</nav>
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full px-8 py-6 flex justify-between items-center bg-black/40 backdrop-blur border-b border-white/5 z-50">
+    <span class="text-sm tracking-widest text-white/80">wrdt</span>
+    <span class="text-xs whisper hidden md:block">quiet systems, observed closely</span>
+  </nav>
 
-<!-- HERO -->
-<section class="min-h-screen flex items-center justify-center px-6">
-  <div class="text-center max-w-2xl">
-    <h1 class="text-4xl md:text-5xl font-light leading-tight mb-8">
-      I work with systems<br/>
-      that are expected to fail.
-    </h1>
-
-    <p class="text-gray-400 text-sm md:text-base">
-      Silence is a design choice.
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24">
+    <p class="text-xl md:text-2xl leading-relaxed max-w-xl">
+      Systems do not fail loudly.
     </p>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="py-28 px-6 bg-black/60">
-  <div class="max-w-3xl mx-auto">
-    <h2 class="text-lg mb-6 text-gray-200 tracking-wide">about</h2>
-
-    <p class="text-gray-400 leading-relaxed text-sm">
-      Most systems look stable until pressure is applied.
-      <br/><br/>
-      I am interested in what breaks first — and why.
-      <br/><br/>
-      This site documents questions, not conclusions.
+    <p class="mt-6 text-xl md:text-2xl leading-relaxed max-w-xl">
+      They drift.
     </p>
-  </div>
-</section>
+    <p class="mt-6 text-xl md:text-2xl leading-relaxed max-w-xl">
+      Until someone notices.
+    </p>
+  </section>
 
-<!-- RESEARCH STANCE -->
-<section id="stance" class="py-28 px-6">
-  <div class="max-w-3xl mx-auto">
-    <h2 class="text-lg mb-6 text-gray-200 tracking-wide">research stance</h2>
+  <div class="divider"></div>
 
-    <div class="glass p-6 rounded-xl text-sm text-gray-400 leading-relaxed">
-      My work treats adversarial systems as an engineering problem.
-      <br/><br/>
-      Understanding control structures helps improve defensive design.
+  <!-- NOTES -->
+  <section class="max-w-2xl mx-auto px-6 py-12 text-left space-y-10">
+
+    <div>
+      <p class="leading-relaxed">
+        Most structures appear stable<br/>
+        when nothing is asking questions.
+      </p>
     </div>
-  </div>
-</section>
 
-<!-- WORK -->
-<section id="work" class="py-28 px-6 bg-black/70">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-lg mb-12 text-gray-200 tracking-wide">work</h2>
-
-    <div class="space-y-6">
-
-      <div class="glass p-6 rounded-xl">
-        <p class="text-gray-200 mb-2">Go — Systems Engineering</p>
-        <p class="text-xs text-gray-500 leading-relaxed">
-          Go forces simplicity, which exposes mistakes early.
-        </p>
-      </div>
-
-      <div class="glass p-6 rounded-xl">
-        <p class="text-gray-200 mb-2">Cloud Native Architecture</p>
-        <p class="text-xs text-gray-500 leading-relaxed">
-          Cloud-native systems should assume partial failure as normal.
-        </p>
-      </div>
-
-      <div class="glass p-6 rounded-xl">
-        <p class="text-gray-200 mb-2">Distributed Control Systems</p>
-        <p class="text-xs text-gray-500 leading-relaxed">
-          The interesting problem is not scale,
-          but coordination under constraint.
-        </p>
-      </div>
-
+    <div>
+      <p class="leading-relaxed">
+        Pressure reveals alignment.<br/>
+        Silence reveals control.
+      </p>
     </div>
-  </div>
-</section>
 
-<!-- NOTES -->
-<section id="notes" class="py-28 px-6">
-  <div class="max-w-3xl mx-auto">
-    <h2 class="text-lg mb-10 text-gray-200 tracking-wide">notes</h2>
-
-    <div class="space-y-6 text-xs text-gray-500 leading-relaxed">
-
-      <div class="glass p-5 rounded-xl">
-        Centralized control fails loudly.<br/>
-        Distributed control fails quietly.
-      </div>
-
-      <div class="glass p-5 rounded-xl">
-        Attack paths are unintentional documentation.
-      </div>
-
-      <div class="glass p-5 rounded-xl">
-        Resilience is measured after recovery, not uptime.
-      </div>
-
+    <div>
+      <p class="leading-relaxed">
+        I am less interested in creation<br/>
+        than in what survives repetition.
+      </p>
     </div>
-  </div>
-</section>
 
-<!-- DISCLAIMER -->
-<section class="py-20 px-6 bg-black/80">
-  <div class="max-w-3xl mx-auto text-xs text-gray-500 leading-relaxed">
-    All research presented here is approached analytically and defensively.
-  </div>
-</section>
+    <div>
+      <p class="leading-relaxed">
+        Patterns emerge<br/>
+        when intentions are removed.
+      </p>
+    </div>
 
-<!-- CONTACT -->
-<section id="contact" class="py-24 px-6 bg-black/70">
-  <div class="max-w-3xl mx-auto text-center">
-    <p class="text-gray-400 text-sm mb-8">
-      If you think in failure modes,<br/>
-      we will understand each other.
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FRAGMENTS -->
+  <section class="max-w-2xl mx-auto px-6 py-12 space-y-6">
+
+    <p>Some systems rely on permission.</p>
+    <p>Others rely on presence.</p>
+    <p>
+      Coordination does not require awareness —<br/>
+      only agreement.
     </p>
 
-    <a href="mailto:ranggawaridat@gmail.com"
-       class="inline-block px-8 py-3 text-xs border border-white/20 rounded-full hover:bg-white hover:text-black transition">
-      send message
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- NOTES LIST -->
+  <section class="max-w-2xl mx-auto px-6 py-12 space-y-4 text-sm whisper">
+
+    <p>Centralized decisions end quickly.</p>
+    <p>Distributed ones take time to notice.</p>
+    <p>Recovery is a form of memory.</p>
+    <p>Observation is never neutral.</p>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DISCLAIMER -->
+  <section class="max-w-2xl mx-auto px-6 py-12 text-sm whisper">
+    <p>
+      These notes describe structures.<br/>
+      Interpretation belongs to the reader.
+    </p>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="max-w-2xl mx-auto px-6 py-20 text-sm">
+    <p class="mb-6">
+      If you found something familiar here,<br/>
+      you already know how to reach me.
+    </p>
+    <a href="mailto:ranggawaridat@gmail.com" class="hover-dim underline underline-offset-4">
+      send
     </a>
+  </section>
 
-    <div class="mt-8 text-xs text-gray-500">
-      <a href="https://github.com/ranggawaridat" class="hover:text-white">
-        github
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="py-6 text-center text-xs text-gray-600">
-  wrdt.site — still observing
-</footer>
+  <!-- FOOTER -->
+  <footer class="text-center py-10 text-xs whisper border-t border-white/5">
+    still observing drift
+  </footer>
 
 </body>
 </html>

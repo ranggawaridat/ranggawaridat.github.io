@@ -43,6 +43,7 @@
     <span class="text-xs tracking-[0.4em] text-gray-400">WRDT</span>
     <div class="space-x-6 text-xs text-gray-500 hidden md:block">
       <a href="#about" class="hover:text-white">about</a>
+      <a href="#stance" class="hover:text-white">research</a>
       <a href="#work" class="hover:text-white">work</a>
       <a href="#notes" class="hover:text-white">notes</a>
       <a href="#contact" class="hover:text-white">contact</a>
@@ -53,19 +54,13 @@
 <!-- HERO -->
 <section class="min-h-screen flex items-center justify-center px-6">
   <div class="text-center max-w-2xl">
-    <p class="text-xs tracking-[0.4em] text-gray-500 mb-8">
-      QUIET · OBSERVE · BUILD
-    </p>
-
     <h1 class="text-4xl md:text-5xl font-light leading-tight mb-8">
-      I don’t try to be visible.  
-      <br class="hidden md:block"/>
-      I try to be <span class="text-white">correct</span>.
+      I work with systems<br/>
+      that are expected to fail.
     </h1>
 
-    <p class="text-gray-400 text-sm md:text-base leading-relaxed">
-      Systems. Failure. Control.  
-      Usually explored after midnight.
+    <p class="text-gray-400 text-sm md:text-base">
+      Silence is a design choice.
     </p>
   </div>
 </section>
@@ -76,18 +71,30 @@
     <h2 class="text-lg mb-6 text-gray-200 tracking-wide">about</h2>
 
     <p class="text-gray-400 leading-relaxed text-sm">
-      I study how systems behave when assumptions collapse.  
-      When networks degrade.  
-      When trust is partial.
+      Most systems look stable until pressure is applied.
       <br/><br/>
-      This site is not a portfolio.  
-      It is a trace of ongoing thought.
+      I am interested in what breaks first — and why.
+      <br/><br/>
+      This site documents questions, not conclusions.
     </p>
   </div>
 </section>
 
+<!-- RESEARCH STANCE -->
+<section id="stance" class="py-28 px-6">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-lg mb-6 text-gray-200 tracking-wide">research stance</h2>
+
+    <div class="glass p-6 rounded-xl text-sm text-gray-400 leading-relaxed">
+      My work treats adversarial systems as an engineering problem.
+      <br/><br/>
+      Understanding control structures helps improve defensive design.
+    </div>
+  </div>
+</section>
+
 <!-- WORK -->
-<section id="work" class="py-28 px-6">
+<section id="work" class="py-28 px-6 bg-black/70">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-lg mb-12 text-gray-200 tracking-wide">work</h2>
 
@@ -96,36 +103,22 @@
       <div class="glass p-6 rounded-xl">
         <p class="text-gray-200 mb-2">Go — Systems Engineering</p>
         <p class="text-xs text-gray-500 leading-relaxed">
-          Backend systems written for long execution and low noise.  
-          Emphasis on concurrency models, memory behavior,
-          and predictable failure modes.
-          <br/><br/>
-          Designed to run quietly — and stay alive.
+          Go forces simplicity, which exposes mistakes early.
         </p>
       </div>
 
       <div class="glass p-6 rounded-xl">
-        <p class="text-gray-200 mb-2">Cloud Native — Failure-Oriented Design</p>
+        <p class="text-gray-200 mb-2">Cloud Native Architecture</p>
         <p class="text-xs text-gray-500 leading-relaxed">
-          Containerized systems built around node loss,
-          unstable networks, and imperfect observability.
-          <br/><br/>
-          Architecture assumes something will break —
-          the question is where, and how gracefully.
+          Cloud-native systems should assume partial failure as normal.
         </p>
       </div>
 
       <div class="glass p-6 rounded-xl">
-        <p class="text-gray-200 mb-2">
-          Adversarial Distributed Systems (C2 / Botnet Research)
-        </p>
+        <p class="text-gray-200 mb-2">Distributed Control Systems</p>
         <p class="text-xs text-gray-500 leading-relaxed">
-          Academic and experimental research into
-          distributed command structures, peer coordination,
-          and low-resource participation.
-          <br/><br/>
-          Studied as a systems problem under hostile conditions —
-          not as spectacle.
+          The interesting problem is not scale,
+          but coordination under constraint.
         </p>
       </div>
 
@@ -134,57 +127,42 @@
 </section>
 
 <!-- NOTES -->
-<section id="notes" class="py-28 px-6 bg-black/80">
+<section id="notes" class="py-28 px-6">
   <div class="max-w-3xl mx-auto">
     <h2 class="text-lg mb-10 text-gray-200 tracking-wide">notes</h2>
 
     <div class="space-y-6 text-xs text-gray-500 leading-relaxed">
 
       <div class="glass p-5 rounded-xl">
-        <p class="text-gray-400 mb-2">on control</p>
-        <p>
-          Centralized systems fail loudly.  
-          Distributed systems fail quietly —  
-          until coordination emerges.
-        </p>
+        Centralized control fails loudly.<br/>
+        Distributed control fails quietly.
       </div>
 
       <div class="glass p-5 rounded-xl">
-        <p class="text-gray-400 mb-2">on botnets</p>
-        <p>
-          Scale is trivial.  
-          Coordination under constraint is not.
-        </p>
+        Attack paths are unintentional documentation.
       </div>
 
       <div class="glass p-5 rounded-xl">
-        <p class="text-gray-400 mb-2">on resilience</p>
-        <p>
-          Most systems are built to work.  
-          Few are built to degrade gracefully.
-        </p>
-      </div>
-
-      <div class="glass p-5 rounded-xl">
-        <p class="text-gray-400 mb-2">on red teaming</p>
-        <p>
-          Attack paths are documentation  
-          written from the other side.
-        </p>
+        Resilience is measured after recovery, not uptime.
       </div>
 
     </div>
   </div>
 </section>
 
+<!-- DISCLAIMER -->
+<section class="py-20 px-6 bg-black/80">
+  <div class="max-w-3xl mx-auto text-xs text-gray-500 leading-relaxed">
+    All research presented here is approached analytically and defensively.
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" class="py-24 px-6 bg-black/70">
   <div class="max-w-3xl mx-auto text-center">
-    <h2 class="text-sm mb-4 text-gray-200 tracking-wide">contact</h2>
-
-    <p class="text-gray-500 text-sm mb-8">
-      If you are building something fragile —  
-      we might have something to discuss.
+    <p class="text-gray-400 text-sm mb-8">
+      If you think in failure modes,<br/>
+      we will understand each other.
     </p>
 
     <a href="mailto:ranggawaridat@gmail.com"

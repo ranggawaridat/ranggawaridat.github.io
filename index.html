@@ -2,60 +2,152 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>wrdt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>wrdt — quiet systems</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
+    html { scroll-behavior: smooth; }
+
     body {
-      background-color: #0a0a0d;
-      color: #d0d0e2;
-      font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-      letter-spacing: 0.02em;
+      background-color: #050508;
+      color: #e5e7eb;
+      font-family: 'Inter', system-ui, sans-serif;
+      letter-spacing: 0.3px;
     }
+
     .fade {
-      animation: fadeIn 1.8s ease-out;
+      animation: fade 1.4s ease forwards;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .soft {
-      color: rgba(208,208,226,0.6);
+
+    .glass {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
     }
   </style>
 </head>
 
 <body class="fade">
 
-  <main class="min-h-screen flex flex-col justify-center items-center text-center px-6 space-y-14 max-w-xl mx-auto">
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur border-b border-white/10">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <span class="text-xs tracking-[0.4em] text-gray-400">WRDT</span>
+    <div class="space-x-6 text-xs text-gray-500 hidden md:block">
+      <a href="#about" class="hover:text-white">about</a>
+      <a href="#stance" class="hover:text-white">research</a>
+      <a href="#notes" class="hover:text-white">notes</a>
+      <a href="#contact" class="hover:text-white">contact</a>
+    </div>
+  </div>
+</nav>
 
-    <p class="text-xl">
-      I watch systems longer than most people stay interested.
+<!-- HERO -->
+<section class="min-h-screen flex items-center justify-center px-6">
+  <div class="text-center max-w-2xl">
+    <p class="text-xs tracking-[0.4em] text-gray-500 mb-8">
+      QUIET · OBSERVE · BUILD
+    </p>
+    
+<section class="min-h-screen flex items-center justify-center px-6">
+  <div class="text-center max-w-2xl">
+    <h1 class="text-4xl md:text-5xl font-light leading-tight mb-8">
+      I work with systems<br/>
+      that are expected to fail.
+    </h1>
+
+    <p class="text-gray-400 text-sm md:text-base">
+      Silence is a design choice.
+    </p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-28 px-6 bg-black/60">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-lg mb-6 text-gray-200 tracking-wide">about</h2>
+
+    <p class="text-gray-400 leading-relaxed text-sm">
+      I study how systems behave when assumptions collapse.  
+      When networks degrade.  
+      When trust is partial.
+      <br/><br/>
+      This site is not a portfolio.  
+      It is a trace of ongoing thought.
+    </p>
+  </div>
+</section>
+
+<!-- RESEARCH STANCE -->
+<section id="stance" class="py-28 px-6">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-lg mb-6 text-gray-200 tracking-wide">research stance</h2>
+
+    <div class="glass p-6 rounded-xl text-sm text-gray-400 leading-relaxed">
+      My work treats adversarial systems as an engineering problem.
+      <br/><br/>
+      Understanding control structures helps improve defensive design.
+    </div>
+  </div>
+</setion>
+
+<!-- NOTES -->
+<section id="notes" class="py-28 px-6">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-lg mb-10 text-gray-200 tracking-wide">notes</h2>
+
+    <div class="space-y-6 text-xs text-gray-500 leading-relaxed">
+
+      <div class="glass p-5 rounded-xl">
+        Centralized control fails loudly.<br/>
+        Distributed control fails quietly.
+      </div>
+
+      <div class="glass p-5 rounded-xl">
+        Attack paths are unintentional documentation.
+      </div>
+
+      <div class="glass p-5 rounded-xl">
+        Resilience is measured after recovery, not uptime.
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24 px-6 bg-black/70">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="text-gray-400 text-sm mb-8">
+      If you are building something fragile —  
+      we might have something to discuss.
     </p>
 
-    <p class="text-xl">
-      Stabilitas sering terlihat nyata sebelum ada yang berani menekannya.
-    </p>
+    <a href="mailto:ranggawaridat@gmail.com"
+       class="inline-block px-8 py-3 text-xs border border-white/20 rounded-full hover:bg-white hover:text-black transition">
+      send message
+    </a>
 
-    <p class="text-xl">
-      Failure does not arrive — it drifts.
-    </p>
+    <div class="mt-8 text-xs text-gray-500">
+      <a href="https://github.com/ranggawaridat" class="hover:text-white">
+        github
+      </a>
+    </div>
+  </div>
+</section>
 
-    <p class="text-xl">
-      Aku belajar membaca pola, bukan kejadian.
-    </p>
-
-    <p class="text-xl soft">
-      Understanding takes time, dan aku tidak terburu-buru.
-    </p>
-
-  </main>
-
-  <footer class="text-center py-8 text-xs soft">
-    <a href="notes.html" class="hover:underline underline-offset-4">notes</a>
-  </footer>
+<!-- FOOTER -->
+<footer class="py-6 text-center text-xs text-gray-600">
+  wrdt.site — still observing
+</footer>
 
 </body>
 </html>

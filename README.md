@@ -1,1 +1,0 @@
-# ranggawaridat.github.io

@@ -1,64 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rangga Waridat — v0.1.0</title>
 
-  <title>wrdt — quiet systems</title>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-  <script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root {
+  --bg: #0f1117;
+  --card: #161b22;
+  --accent: #00ffd1;
+  --text: #e6edf3;
+  --muted: #8b949e;
+}
 
-  <style>
-    html { scroll-behavior: smooth; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      background-color: #050508;
-      color: #e5e7eb;
-      font-family: 'Inter', system-ui, sans-serif;
-      letter-spacing: 0.3px;
-    }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
 
-    .fade {
-      animation: fade 1.4s ease forwards;
-    }
+.container {
+  max-width: 700px;
+  width: 100%;
+}
 
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+.version {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
 
-    .glass {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-    }
-  </style>
+h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+.card {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #21262d;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+}
+
+.card h2 {
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+</style>
 </head>
 
-<body class="fade">
+<body>
+  <div class="container">
 
-<!-- NAVBAR -->
-<nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur border-b border-white/10">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <span class="text-xs tracking-[0.4em] text-gray-400">WRDT</span>
-    <div class="space-x-6 text-xs text-gray-500 hidden md:block">
+    <div class="version">version: 0.1.0 — in progress</div>
+
+    <h1>Backend Engineer Building Scalable Systems</h1>
+    <div class="subtitle">
+      Focused on Go, PostgreSQL, authentication architecture, and production-ready backend systems.
     </div>
+
+    <div class="card">
+      <h2>// current_status</h2>
+      <p>
+        I am currently exploring backend fundamentals and system design.
+        This website represents the engineer I am becoming — not the level I am today.
+        Every project here is part of the journey.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>// roadmap</h2>
+      <p>
+        → Master REST API architecture<br>
+        → Deep understanding of PostgreSQL<br>
+        → Authentication & Authorization systems<br>
+        → Docker & production deployment<br>
+        → Scalable SaaS backend systems
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>// philosophy</h2>
+      <p>
+        Build in public. Learn deeply. Avoid shortcuts.
+        Skill is earned, not claimed.
+      </p>
+    </div>
+
+    <div class="footer">
+      © 2026 Rangga Waridat — Becoming v1.0.0
+    </div>
+
   </div>
-</nav>
-
-<!-- HERO -->   
-<section class="min-h-screen flex items-center justify-center px-6">
-  <div class="text-center max-w-2xl">
-    <h1 class="text-4xl md:text-5xl font-light leading-tight mb-8">
-      I work with systems<br/>
-      that are expected to fail.
-    </h1>
-
-    <p class="text-gray-400 text-sm md:text-base">
-      Silence is a design choice.
-    </p>
-  </div>
-</section>
-
 </body>
 </html>

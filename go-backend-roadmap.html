@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Go Backend Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060608;
+    --surface: #0d0d14;
+    --surface2: #13131e;
+    --border: #1c1c2e;
+    --border2: #252538;
+    --text: #e4e4f0;
+    --muted: #5a5a7a;
+    --muted2: #3a3a55;
+    --c1: #00ffc8;
+    --c2: #ff4d6d;
+    --c3: #ffd166;
+    --c4: #a78bfa;
+    --c5: #38bdf8;
+    --c6: #fb923c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRID NOISE BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,200,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,200,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── GLOW ORBS ─── */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+    animation: orb-drift 20s ease-in-out infinite alternate;
+  }
+  .orb-1 { width: 500px; height: 500px; background: rgba(0,255,200,0.04); top: -100px; left: -100px; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(167,139,250,0.04); bottom: 100px; right: -100px; animation-delay: -10s; }
+  @keyframes orb-drift { from { transform: translate(0,0); } to { transform: translate(40px, 30px); } }
+
+  /* ─── LAYOUT ─── */
+  .wrapper { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ─── HEADER ─── */
+  header {
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .header-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,255,200,0.06); border: 1px solid rgba(0,255,200,0.2);
+    border-radius: 4px; padding: 4px 12px;
+    font-size: 10px; letter-spacing: 3px; color: var(--c1);
+    margin-bottom: 20px; font-weight: 500;
+  }
+  .header-tag::before { content: ''; width: 6px; height: 6px; background: var(--c1); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.8);} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+  }
+  h1 span { color: var(--c1); }
+  .header-sub { color: var(--muted); font-size: 13px; line-height: 1.7; max-width: 520px; }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    display: flex; gap: 0; flex-wrap: wrap;
+    border: 1px solid var(--border2); border-radius: 10px;
+    overflow: hidden; margin-bottom: 48px;
+  }
+  .stat-item {
+    flex: 1; min-width: 120px; padding: 16px 20px;
+    border-right: 1px solid var(--border2);
+    background: var(--surface);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--c1); }
+  .stat-label { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-top: 2px; }
+
+  /* ─── PROGRESS OVERVIEW ─── */
+  .progress-overview {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 10px; padding: 20px 24px; margin-bottom: 48px;
+  }
+  .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .progress-title { font-size: 11px; letter-spacing: 2px; color: var(--muted); }
+  .progress-pct { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--c1); }
+  .progress-track { height: 4px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--c1), var(--c4)); border-radius: 2px; transition: width 0.5s ease; width: 0%; }
+
+  /* ─── SECTION TITLES ─── */
+  .section-label {
+    font-size: 10px; letter-spacing: 4px; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ─── PHASE CARDS ─── */
+  .phase-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .phase-card.open { border-color: var(--phase-color, var(--c1)); }
+  .phase-card:not(.open):hover { border-color: var(--border2); }
+
+  .phase-header {
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .phase-header:hover { background: rgba(255,255,255,0.02); }
+
+  .phase-num {
+    width: 48px; height: 48px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--phase-color, var(--c1));
+    color: var(--phase-color, var(--c1));
+    flex-shrink: 0;
+  }
+
+  .phase-meta { flex: 1; min-width: 0; }
+  .phase-tag {
+    font-size: 9px; letter-spacing: 3px; font-weight: 700;
+    color: var(--phase-color); margin-bottom: 4px; display: block;
+  }
+  .phase-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; }
+  .phase-duration { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .phase-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  .phase-progress-ring { position: relative; width: 44px; height: 44px; }
+  .phase-progress-ring svg { transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: var(--border2); stroke-width: 3; }
+  .ring-fill { fill: none; stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease; }
+  .ring-pct {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+    color: var(--phase-color);
+  }
+  .phase-chevron { color: var(--muted); font-size: 12px; transition: transform 0.25s; }
+  .phase-card.open .phase-chevron { transform: rotate(90deg); }
+
+  /* ─── PHASE BODY ─── */
+  .phase-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    animation: fade-in 0.2s ease;
+  }
+  .phase-card.open .phase-body { display: block; }
+  @keyframes fade-in { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+
+  .phase-body-inner { padding: 24px; }
+
+  /* Goal box */
+  .goal-box {
+    border-radius: 8px; padding: 12px 16px; margin-bottom: 20px;
+    display: flex; gap: 10px; align-items: flex-start;
+    background: rgba(0,0,0,0.25);
+    border-left: 3px solid var(--phase-color);
+    font-size: 13px; line-height: 1.6; color: #ccc;
+  }
+  .goal-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 6px 14px; border-radius: 6px; font-size: 11px; letter-spacing: 1px;
+    cursor: pointer; border: 1px solid var(--border2); background: transparent;
+    color: var(--muted); font-family: 'JetBrains Mono', monospace;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { border-color: var(--phase-color); color: var(--text); }
+  .tab-btn.active { background: var(--phase-color); color: #000; border-color: var(--phase-color); font-weight: 700; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Topics list */
+  .topics-list { display: flex; flex-direction: column; gap: 6px; }
+  .topic-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .topic-item:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
+  .topic-item.checked { opacity: 0.55; }
+
+  .checkbox {
+    width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; margin-top: 1px;
+    border: 1.5px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; font-size: 11px; font-weight: 700;
+  }
+  .topic-item.checked .checkbox {
+    background: var(--phase-color); border-color: var(--phase-color); color: #000;
+  }
+
+  .topic-content { flex: 1; min-width: 0; }
+  .topic-name {
+    font-size: 13px; font-weight: 500; margin-bottom: 3px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .topic-item.checked .topic-name { text-decoration: line-through; color: var(--muted); }
+  .topic-badge {
+    font-size: 8px; padding: 2px 7px; border-radius: 3px; letter-spacing: 1.5px; font-weight: 700;
+  }
+  .topic-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+  /* Subtopics */
+  .subtopics { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+  .subtopic {
+    display: flex; gap: 8px; align-items: flex-start;
+    padding: 8px 12px; border-radius: 6px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.2);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .subtopic:hover { border-color: var(--border2); }
+  .subtopic.checked { opacity: 0.5; }
+  .sub-check {
+    width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; margin-top: 1px;
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; transition: all 0.15s;
+  }
+  .subtopic.checked .sub-check { background: var(--phase-color); border-color: var(--phase-color); color: #000; }
+  .subtopic-text { font-size: 11px; color: #aaa; line-height: 1.5; }
+  .subtopic.checked .subtopic-text { text-decoration: line-through; color: var(--muted2); }
+
+  /* Project box */
+  .project-box {
+    background: var(--surface2); border: 1px solid var(--border2);
+    border-radius: 10px; padding: 16px 18px; margin-top: 4px;
+  }
+  .project-label { font-size: 9px; letter-spacing: 3px; color: var(--muted); margin-bottom: 10px; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--phase-color); }
+  .project-desc { font-size: 12px; color: #aaa; line-height: 1.7; margin-bottom: 12px; }
+  .project-features { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-feat {
+    font-size: 10px; padding: 4px 10px; border-radius: 4px;
+    background: rgba(0,0,0,0.3); border: 1px solid var(--border2);
+    color: var(--muted);
+  }
+
+  /* Resources */
+  .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .resource-card {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px;
+    transition: all 0.15s;
+  }
+  .resource-card:hover { border-color: var(--phase-color); }
+  .resource-type { font-size: 9px; letter-spacing: 2px; color: var(--muted); margin-bottom: 6px; }
+  .resource-name { font-size: 12px; font-weight: 500; margin-bottom: 3px; }
+  .resource-url { font-size: 10px; color: var(--phase-color); }
+
+  /* Tips */
+  .tips-list { display: flex; flex-direction: column; gap: 8px; }
+  .tip-item {
+    display: flex; gap: 10px; padding: 12px 14px;
+    background: rgba(0,0,0,0.2); border-radius: 8px;
+    border: 1px solid var(--border); font-size: 12px; color: #bbb; line-height: 1.6;
+  }
+  .tip-icon { flex-shrink: 0; font-size: 14px; }
+
+  /* ─── DIVIDER ─── */
+  .milestone-divider {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 24px 0; gap: 8px;
+  }
+  .divider-line { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--c1), transparent); }
+  .divider-badge {
+    background: var(--surface); border: 1px solid rgba(0,255,200,0.3);
+    border-radius: 20px; padding: 8px 20px;
+    font-size: 10px; letter-spacing: 3px; color: var(--c1); font-weight: 700;
+    text-align: center;
+  }
+  .divider-line2 { width: 1px; height: 32px; background: linear-gradient(to bottom, transparent, var(--border)); }
+
+  /* ─── NEXT LEVEL ─── */
+  .next-level-section { margin-top: 8px; }
+  .next-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .next-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+    transition: all 0.2s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .next-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--card-color, var(--c1));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .next-card:hover::before { transform: scaleX(1); }
+  .next-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .next-icon { font-size: 24px; margin-bottom: 10px; }
+  .next-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .next-desc { font-size: 11px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+  .next-when {
+    font-size: 10px; padding: 3px 10px; border-radius: 4px; display: inline-block;
+    background: rgba(0,0,0,0.3); color: var(--muted);
+    border: 1px solid var(--border2);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 0;
+    text-align: center; color: var(--muted2); font-size: 11px; letter-spacing: 1px;
+    margin-top: 48px;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 600px) {
+    .stats-bar { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border2); }
+    .phase-right { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-tag">GOLANG BACKEND ROADMAP 2025</div>
+    <h1>Dari Nol<br>Jadi <span>Backend Dev</span></h1>
+    <p class="header-sub">
+      Roadmap yang jujur — cukup teori untuk ngerti, banyak praktek untuk ingat.
+      Centang topik yang sudah selesai untuk track progress kamu.
+    </p>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">FASE UTAMA</div></div>
+    <div class="stat-item"><div class="stat-num" id="total-topics">0</div><div class="stat-label">TOTAL TOPIK</div></div>
+    <div class="stat-item"><div class="stat-num">4–6</div><div class="stat-label">BULAN TARGET</div></div>
+    <div class="stat-item"><div class="stat-num" id="done-count">0</div><div class="stat-label">SELESAI</div></div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-overview">
+    <div class="progress-header">
+      <span class="progress-title">TOTAL PROGRESS</span>
+      <span class="progress-pct" id="total-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="total-bar"></div></div>
+  </div>
+
+  <!-- PHASES -->
+  <div class="section-label">FASE BELAJAR</div>
+
+  <!-- PHASE DATA injected by JS -->
+  <div id="phases-container"></div>
+
+  <!-- MILESTONE -->
+  <div class="milestone-divider">
+    <div class="divider-line"></div>
+    <div class="divider-badge">✦ &nbsp; KAMU BISA BIKIN & DEPLOY WEB APP SENDIRI &nbsp; ✦</div>
+    <div class="divider-line2"></div>
+  </div>
+
+  <!-- NEXT LEVEL -->
+  <div class="next-level-section">
+    <div class="section-label">LEVEL SELANJUTNYA</div>
+    <div class="next-grid" id="next-grid"></div>
+  </div>
+
+  <footer>KONSISTENSI 1–2 JAM / HARI &nbsp;›&nbsp; MARATHON SESEKALI &nbsp;·&nbsp; GOLANG BACKEND ROADMAP</footer>
+</div>
+
+<script>
+const PHASES = [
+  {
+    id: 'p1', color: '#00ffc8',
+    num: '01', tag: 'FASE 1 · 4–6 MINGGU',
+    title: 'Fondasi Go',
+    duration: '4–6 minggu · ~1.5 jam/hari',
+    goal: '🎯 Target: Bisa nulis program Go yang beneran jalan, ngerti kenapa Go beda dari bahasa lain, dan nyaman sama syntax-nya.',
+    topics: [
+      {
+        name: 'Setup Environment', badge: 'TOOLS', badgeColor: '#38bdf8',
+        desc: 'Persiapan sebelum mulai coding.',
+        subs: [
+          'Install Go dari golang.org/dl (pilih versi stable terbaru)',
+          'Install VS Code + extension "Go" dari Google',
+          'Konfigurasi GOPATH dan GOROOT (Go udah handle otomatis di versi baru)',
+          'Jalankan program "Hello, World!" pertama kamu',
+          'Pahami struktur folder: main.go, go.mod',
+        ]
+      },
+      {
+        name: 'Sintaks Dasar Go', badge: 'CORE', badgeColor: '#00ffc8',
+        desc: 'Building block semua program Go.',
+        subs: [
+          'Variabel: var, := (short declaration), const',
+          'Tipe data: int, float64, string, bool, byte, rune',
+          'Operator: aritmatika, perbandingan, logika',
+          'Konversi tipe: int(x), string(x), strconv package',
+          'Zero value: semua variabel punya nilai default di Go',
+        ]
+      },
+      {
+        name: 'Control Flow', badge: 'CORE', badgeColor: '#00ffc8',
+        desc: 'Go hanya punya "for" — tidak ada while, do-while.',
+        subs: [
+          'if / else if / else (tanpa tanda kurung wajib)',
+          'for loop: classic, while-style, infinite loop',
+          'range: iterasi slice, map, string, channel',
+          'switch: lebih powerful dari bahasa lain, bisa tanpa kondisi',
+          'break, continue, goto (jarang dipakai)',
+        ]
+      },
+      {
+        name: 'Function & Error Handling', badge: 'CORE', badgeColor: '#00ffc8',
+        desc: 'Error handling adalah jiwa dari Go — ini yang paling beda.',
+        subs: [
+          'Deklarasi function: func nama(param type) returnType {}',
+          'Multiple return values: func getUser() (User, error)',
+          'Named return values',
+          'Error sebagai nilai: if err != nil { return err }',
+          'Custom error: errors.New() dan fmt.Errorf()',
+          'Defer: eksekusi di akhir function — berguna untuk cleanup',
+          'Panic & recover (jarang, hanya untuk kondisi kritis)',
+        ]
+      },
+      {
+        name: 'Tipe Komposit', badge: 'CORE', badgeColor: '#00ffc8',
+        desc: 'Array, slice, dan map adalah fondasi manipulasi data.',
+        subs: [
+          'Array: ukuran fixed [5]int{1,2,3,4,5}',
+          'Slice: dynamic, lebih sering dipakai. make(), append(), copy()',
+          'Map: key-value store. make(map[string]int)',
+          'Struct: kumpulan field bertipe berbeda — pengganti class',
+          'Nested struct dan anonymous struct',
+          'Pointer: &variable dan *pointer — tahu kapan pakai pointer',
+        ]
+      },
+      {
+        name: 'Interface & Method', badge: 'CORE', badgeColor: '#00ffc8',
+        desc: 'Interface di Go implicit — tidak perlu "implements".',
+        subs: [
+          'Method: function yang terikat ke tipe tertentu',
+          'Value receiver vs pointer receiver',
+          'Interface: kontrak behavior, bukan inheritance',
+          'Interface kosong: interface{} atau any (Go 1.18+)',
+          'Type assertion dan type switch',
+          'Stringer interface: implement fmt.Stringer untuk custom print',
+        ]
+      },
+      {
+        name: 'Package & Module', badge: 'TOOLS', badgeColor: '#38bdf8',
+        desc: 'Cara Go mengorganisir dan mengimpor kode.',
+        subs: [
+          'go mod init nama-modul — inisialisasi project baru',
+          'go get package@version — tambah dependensi',
+          'go mod tidy — bersihkan dependensi tidak terpakai',
+          'Buat package sendiri dan import antar package',
+          'Exported vs unexported: huruf kapital = public',
+          'Standard library penting: fmt, os, strings, strconv, time',
+        ]
+      },
+    ],
+    project: {
+      title: '🛠 Project: CLI Task Manager',
+      desc: 'Buat aplikasi command-line untuk manage tasks. Fokus ke konsep, bukan UI. Jalankan di terminal.',
+      features: ['Tambah task baru', 'Lihat semua task', 'Tandai task selesai', 'Hapus task', 'Simpan ke file JSON', 'Filter by status'],
+    },
+    resources: [
+      { type: 'INTERACTIVE', name: 'Go Tour', url: 'tour.golang.org' },
+      { type: 'REFERENSI', name: 'Go by Example', url: 'gobyexample.com' },
+      { type: 'DOCS', name: 'Go Standard Library', url: 'pkg.go.dev/std' },
+      { type: 'BUKU', name: 'The Go Programming Language', url: 'gopl.io' },
+    ],
+    tips: [
+      '💡 Jangan skip error handling. Kalau kamu nulis `_` untuk ignore error, tanya diri sendiri: "apakah ini benar-benar aman?"',
+      '⚡ Go Playground (play.golang.org) — test kode kecil tanpa setup apapun',
+      '🔍 Baca source code standard library. Go terkenal punya kode yang sangat clean dan mudah dibaca.',
+    ]
+  },
+
+  {
+    id: 'p2', color: '#ff4d6d',
+    num: '02', tag: 'FASE 2 · 4–5 MINGGU',
+    title: 'REST API & HTTP',
+    duration: '4–5 minggu · ~2 jam/hari',
+    goal: '🎯 Target: Bisa bikin API yang bisa diakses Postman, punya endpoint CRUD lengkap, dan handle error dengan benar.',
+    topics: [
+      {
+        name: 'HTTP Fundamentals', badge: 'KONSEP', badgeColor: '#a78bfa',
+        desc: 'Wajib ngerti ini sebelum nulis satu baris pun framework.',
+        subs: [
+          'HTTP methods: GET (baca), POST (buat), PUT/PATCH (update), DELETE (hapus)',
+          'Status codes: 200 OK, 201 Created, 400 Bad Request, 401, 403, 404, 500',
+          'Request anatomy: URL, headers, body, query params',
+          'Response anatomy: status, headers, body',
+          'REST principles: stateless, resource-based URL, uniform interface',
+          'JSON sebagai format data utama API modern',
+        ]
+      },
+      {
+        name: 'net/http Standard Library', badge: 'CORE', badgeColor: '#ff4d6d',
+        desc: 'Sebelum pakai framework, pahami built-in Go dulu.',
+        subs: [
+          'http.ListenAndServe — start HTTP server',
+          'http.HandleFunc — daftarkan route handler',
+          'http.Request: baca method, URL, body, headers',
+          'http.ResponseWriter: tulis response, set header, status code',
+          'json.Encode dan json.Decode untuk marshal/unmarshal',
+          'Middleware pattern tanpa framework',
+        ]
+      },
+      {
+        name: 'Framework: Gin', badge: 'TOOLS', badgeColor: '#38bdf8',
+        desc: 'Framework paling populer di Go. Ringan, cepat, dokumentasi bagus.',
+        subs: [
+          'Install: go get github.com/gin-gonic/gin',
+          'Router setup: gin.Default() vs gin.New()',
+          'Route groups: /api/v1/...',
+          'Path params: /users/:id — c.Param("id")',
+          'Query params: /users?page=1 — c.Query("page")',
+          'Request body binding: c.ShouldBindJSON(&struct)',
+          'Response helpers: c.JSON(), c.String(), c.Status()',
+          'c.AbortWithStatusJSON() untuk early return',
+        ]
+      },
+      {
+        name: 'Middleware', badge: 'CORE', badgeColor: '#ff4d6d',
+        desc: 'Kode yang jalan sebelum/sesudah setiap request — sangat powerful.',
+        subs: [
+          'Konsep middleware chain',
+          'Built-in: gin.Logger(), gin.Recovery()',
+          'Custom middleware: func() gin.HandlerFunc',
+          'CORS middleware — wajib jika frontend di domain berbeda',
+          'Request ID middleware untuk tracing',
+          'Rate limiting dasar',
+        ]
+      },
+      {
+        name: 'Request Validation', badge: 'CORE', badgeColor: '#ff4d6d',
+        desc: 'Jangan pernah percaya input dari user tanpa validasi.',
+        subs: [
+          'Struct tags untuk validasi: `binding:"required,email"`',
+          'Built-in validators: required, min, max, email, url, len',
+          'Custom validator function',
+          'Error response yang informatif untuk validation error',
+          'Sanitize input: strip whitespace, normalize data',
+        ]
+      },
+      {
+        name: 'Structuring Project', badge: 'PRACTICE', badgeColor: '#ffd166',
+        desc: 'Struktur folder yang skalabel dari awal.',
+        subs: [
+          'Clean architecture dasar: handler → service → repository',
+          'Folder: /cmd, /internal, /pkg, /config',
+          'Dependency injection sederhana (tanpa library)',
+          'Config management dengan environment variables',
+          'Pisahkan routing ke file tersendiri',
+        ]
+      },
+      {
+        name: 'Testing API', badge: 'PRACTICE', badgeColor: '#ffd166',
+        desc: 'Test bukan opsional — ini yang membedakan junior dan mid.',
+        subs: [
+          'Unit test dengan testing package bawaan Go',
+          'Table-driven tests — pola standar Go',
+          'Mock dengan interface',
+          'Integration test dengan httptest package',
+          'Test coverage: go test -cover',
+          'Gunakan Postman/Insomnia untuk manual testing',
+        ]
+      },
+    ],
+    project: {
+      title: '🛠 Project: Blog API',
+      desc: 'REST API lengkap untuk platform blog. Data masih di-memory dulu (map), belum database. Fokus ke struktur kode yang bersih.',
+      features: ['POST /posts — buat artikel', 'GET /posts — list semua', 'GET /posts/:id — detail', 'PUT /posts/:id — update', 'DELETE /posts/:id — hapus', 'GET /posts?tag=golang — filter by tag', 'Validation di semua endpoint', 'Error response konsisten'],
+    },
+    resources: [
+      { type: 'DOCS', name: 'Gin Documentation', url: 'gin-gonic.com/docs' },
+      { type: 'TOOLS', name: 'Postman', url: 'postman.com' },
+      { type: 'TOOLS', name: 'REST Client (VS Code ext)', url: 'marketplace.visualstudio.com' },
+      { type: 'REFERENSI', name: 'HTTP Status Codes', url: 'httpstatuses.io' },
+    ],
+    tips: [
+      '💡 Buat satu error response struct yang konsisten untuk semua endpoint. Frontend developer akan sangat berterima kasih.',
+      '⚡ Gin punya gin-swagger untuk generate dokumentasi API otomatis dari struct tags. Berguna untuk portofolio.',
+      '🔍 Baca kode sumber Gin — sangat clean dan banyak yang bisa dipelajari tentang idiomatic Go.',
+    ]
+  },
+
+  {
+    id: 'p3', color: '#ffd166',
+    num: '03', tag: 'FASE 3 · 4–5 MINGGU',
+    title: 'Database & Persistence',
+    duration: '4–5 minggu · ~2 jam/hari',
+    goal: '🎯 Target: Data tersimpan permanen di database sungguhan, bisa query dengan efisien, dan tidak ada SQL injection.',
+    topics: [
+      {
+        name: 'SQL Fundamentals', badge: 'CORE', badgeColor: '#ffd166',
+        desc: 'SQL adalah skill seumur hidup — bukan cuma untuk Go.',
+        subs: [
+          'SELECT: basic query, WHERE, ORDER BY, LIMIT, OFFSET',
+          'JOIN: INNER JOIN, LEFT JOIN — pahami kapan pakai yang mana',
+          'INSERT, UPDATE, DELETE dengan WHERE yang benar',
+          'Aggregation: COUNT, SUM, AVG, GROUP BY, HAVING',
+          'Subquery dan CTE (Common Table Expression)',
+          'Index: apa itu, kapan perlu, kenapa penting untuk performa',
+          'Transaction: BEGIN, COMMIT, ROLLBACK',
+          'NULL handling: IS NULL, COALESCE, NULLIF',
+        ]
+      },
+      {
+        name: 'PostgreSQL Setup', badge: 'TOOLS', badgeColor: '#38bdf8',
+        desc: 'PostgreSQL adalah pilihan terbaik untuk aplikasi production.',
+        subs: [
+          'Install PostgreSQL via Docker (paling mudah): docker run postgres',
+          'Atau install native di OS kamu',
+          'pgAdmin 4 — GUI untuk manage database secara visual',
+          'psql — command line tool untuk PostgreSQL',
+          'Buat database, user, dan set permission',
+          'Connection string: postgres://user:pass@host:5432/dbname',
+        ]
+      },
+      {
+        name: 'Koneksi dari Go', badge: 'CORE', badgeColor: '#ffd166',
+        desc: 'Cara Go ngobrol sama PostgreSQL.',
+        subs: [
+          'database/sql — standard library, low-level tapi powerful',
+          'pgx — driver PostgreSQL terbaik untuk Go (lebih direkomendasikan)',
+          'sqlx — ekstensi database/sql yang lebih nyaman',
+          'Connection pooling: MaxOpenConns, MaxIdleConns, ConnMaxLifetime',
+          'Prepared statements untuk performa dan keamanan',
+          'Context dengan timeout untuk semua query',
+          'Scan ke struct: rows.Scan(&id, &name, &email)',
+        ]
+      },
+      {
+        name: 'GORM', badge: 'TOOLS', badgeColor: '#38bdf8',
+        desc: 'ORM paling populer di Go. Productif untuk CRUD, tapi tahu limitasinya.',
+        subs: [
+          'Model definition dengan struct tags',
+          'AutoMigrate — buat table dari struct (development only)',
+          'CRUD: Create, First, Find, Save, Delete',
+          'Where conditions: db.Where("age > ?", 18)',
+          'Associations: HasOne, HasMany, BelongsTo, ManyToMany',
+          'Preloading: db.Preload("Posts").Find(&users)',
+          'Raw SQL saat GORM tidak cukup: db.Raw()',
+          'Hooks: BeforeCreate, AfterUpdate, dll',
+        ]
+      },
+      {
+        name: 'Database Migration', badge: 'PRACTICE', badgeColor: '#ffd166',
+        desc: 'Cara mengubah schema database secara aman dan terkontrol.',
+        subs: [
+          'Konsep migration: version control untuk database',
+          'golang-migrate library',
+          'Buat file migration: up (apply) dan down (rollback)',
+          'Naming convention: 000001_create_users_table.up.sql',
+          'Jalankan migration saat app start atau via CLI',
+          'Jangan pernah edit migration yang sudah di-push ke production',
+        ]
+      },
+      {
+        name: 'Repository Pattern', badge: 'PRACTICE', badgeColor: '#ffd166',
+        desc: 'Pisahkan logic database dari business logic — wajib untuk kode yang testable.',
+        subs: [
+          'Interface repository: UserRepository dengan method Create, FindByID, dll',
+          'Implementasi concrete: PostgresUserRepository',
+          'Mock repository untuk testing tanpa database',
+          'Generic repository vs specific repository — tradeoff',
+          'Unit of Work pattern untuk transaction di multiple repository',
+        ]
+      },
+      {
+        name: 'Query Optimization Dasar', badge: 'KONSEP', badgeColor: '#a78bfa',
+        desc: 'Tahu kapan query lambat dan cara cepat fix-nya.',
+        subs: [
+          'EXPLAIN ANALYZE di PostgreSQL — lihat query plan',
+          'N+1 query problem dan cara menghindarinya',
+          'Index yang tepat: B-tree untuk equality/range, hash untuk equality',
+          'Composite index — urutan kolom penting',
+          'Pagination yang benar: cursor-based vs offset-based',
+          'Select kolom yang diperlukan saja, hindari SELECT *',
+        ]
+      },
+    ],
+    project: {
+      title: '🛠 Project: Blog API + Database',
+      desc: 'Upgrade Blog API dari fase sebelumnya dengan PostgreSQL. Tambah fitur user, auth dasar, dan relasi antar tabel.',
+      features: ['User registration & profile', 'Posts dengan relasi ke user', 'Tags dan kategori (many-to-many)', 'Comment system', 'Pagination di list endpoint', 'Database migration', 'Full unit test repository layer'],
+    },
+    resources: [
+      { type: 'LATIHAN SQL', name: 'SQLZoo', url: 'sqlzoo.net' },
+      { type: 'LATIHAN SQL', name: 'PGExercises', url: 'pgexercises.com' },
+      { type: 'DOCS', name: 'GORM Documentation', url: 'gorm.io/docs' },
+      { type: 'TOOLS', name: 'TablePlus', url: 'tableplus.com' },
+    ],
+    tips: [
+      '⚠️ Selalu gunakan parameterized query ($1, $2) — JANGAN string concatenation. SQL injection adalah bug paling mahal.',
+      '💡 GORM bagus untuk prototyping, tapi untuk query complex di production, raw SQL dengan sqlx sering lebih maintainable.',
+      '🔍 Pasang pg_stat_statements di PostgreSQL untuk monitor query yang paling sering dan paling lambat.',
+    ]
+  },
+
+  {
+    id: 'p4', color: '#a78bfa',
+    num: '04', tag: 'FASE 4 · 3–4 MINGGU',
+    title: 'Auth, Docker & Deploy',
+    duration: '3–4 minggu · ~2 jam/hari',
+    goal: '🎯 Target: App kamu bisa diakses orang lain di internet, ada sistem login yang aman, dan bisa di-restart tanpa kehilangan data.',
+    topics: [
+      {
+        name: 'Authentication & JWT', badge: 'CORE', badgeColor: '#a78bfa',
+        desc: 'Sistem login yang aman adalah requirement dasar setiap app.',
+        subs: [
+          'Bcrypt untuk hash password — JANGAN simpan plain text',
+          'JWT (JSON Web Token): header.payload.signature',
+          'Access token (short-lived: 15 menit) dan refresh token (long-lived: 7 hari)',
+          'Simpan JWT di: HttpOnly cookie (lebih aman) atau Authorization header',
+          'Middleware untuk protect route: verifikasi token',
+          'Token blacklist/revoke dengan Redis',
+          'Role-based access control (RBAC) sederhana: admin, user',
+        ]
+      },
+      {
+        name: 'Security Basics', badge: 'CORE', badgeColor: '#a78bfa',
+        desc: 'Harus tahu ini sebelum expose API ke internet.',
+        subs: [
+          'HTTPS — selalu gunakan di production (TLS/SSL)',
+          'CORS: konfigurasi yang benar, jangan pakai *',
+          'Rate limiting: cegah brute force dan DDoS kecil',
+          'Input sanitization dan validation di semua endpoint',
+          'Jangan expose error detail di production response',
+          'Environment variables untuk semua secret — jangan hardcode',
+          'SQL injection, XSS awareness',
+          'OWASP API Security Top 10 — baca overview-nya',
+        ]
+      },
+      {
+        name: 'Docker', badge: 'TOOLS', badgeColor: '#38bdf8',
+        desc: 'Containerize app kamu — kalau jalan di Docker-mu, jalan di mana saja.',
+        subs: [
+          'Konsep container vs VM',
+          'Dockerfile: FROM, WORKDIR, COPY, RUN, CMD, EXPOSE',
+          'Multi-stage build untuk Go — image production yang kecil (<20MB)',
+          'docker build, docker run, docker ps, docker logs',
+          'docker-compose.yml untuk run app + database bersamaan',
+          'Volume untuk persist data PostgreSQL',
+          'Environment variables di Docker dan docker-compose',
+          '.dockerignore — jangan copy file yang tidak perlu',
+        ]
+      },
+      {
+        name: 'Konfigurasi & Environment', badge: 'PRACTICE', badgeColor: '#ffd166',
+        desc: 'App yang professional bisa jalan di berbagai environment.',
+        subs: [
+          'Viper library untuk config management',
+          '.env file untuk development lokal',
+          'Config struct yang bersih dengan validation',
+          'Perbedaan config: development, staging, production',
+          'Secret management: jangan commit .env ke Git',
+          '.gitignore yang benar',
+        ]
+      },
+      {
+        name: 'Deploy ke Cloud (Gratis)', badge: 'PRACTICE', badgeColor: '#ffd166',
+        desc: 'Railway dan Render gratis untuk project portfolio.',
+        subs: [
+          'Railway.app — paling mudah, support Go + PostgreSQL native',
+          'Render.com — free tier dengan PostgreSQL',
+          'Push ke GitHub → auto-deploy (CI/CD otomatis)',
+          'Set environment variables di dashboard',
+          'Custom domain (opsional)',
+          'Monitor logs di dashboard',
+        ]
+      },
+      {
+        name: 'Logging & Observability Dasar', badge: 'PRACTICE', badgeColor: '#ffd166',
+        desc: 'Tahu apa yang terjadi di app kamu saat sudah live.',
+        subs: [
+          'Structured logging dengan zerolog atau zap (bukan fmt.Println)',
+          'Log level: DEBUG, INFO, WARN, ERROR',
+          'Request logging middleware: method, path, status, latency',
+          'Jangan log sensitive data (password, token)',
+          'Sentry atau Rollbar untuk error tracking (ada free tier)',
+        ]
+      },
+      {
+        name: 'CI/CD Dasar', badge: 'TOOLS', badgeColor: '#38bdf8',
+        desc: 'Otomasi testing dan deployment — seperti developer professional.',
+        subs: [
+          'GitHub Actions — gratis untuk repo public dan private',
+          'Workflow: push → run tests → build → deploy',
+          '.github/workflows/deploy.yml',
+          'Fail fast: kalau test gagal, deployment tidak jalan',
+          'Secrets di GitHub untuk API keys dan credentials',
+        ]
+      },
+    ],
+    project: {
+      title: '🛠 Final Project: Full API Platform',
+      desc: 'Gabungkan semua yang sudah dipelajari. Ini project portofolio utama kamu — deploy dan bisa di-akses orang lain.',
+      features: ['Register & login dengan JWT', 'Refresh token mechanism', 'Protected dan public routes', 'Full CRUD dengan PostgreSQL', 'Docker + docker-compose', 'Deploy ke Railway/Render', 'GitHub Actions CI/CD', 'Dokumentasi API (Swagger atau README)', 'Error handling yang konsisten', 'Rate limiting'],
+    },
+    resources: [
+      { type: 'DEPLOY', name: 'Railway', url: 'railway.app' },
+      { type: 'DEPLOY', name: 'Render', url: 'render.com' },
+      { type: 'JWT', name: 'jwt.io Debugger', url: 'jwt.io' },
+      { type: 'SECURITY', name: 'OWASP API Top 10', url: 'owasp.org' },
+    ],
+    tips: [
+      '🚨 Paling penting: jangan pernah commit file .env ke Git. Pasang .gitignore dari hari pertama.',
+      '💡 Setelah deploy, share link API kamu ke komunitas. Feedback nyata lebih berharga dari tutorial manapun.',
+      '⚡ Multi-stage Docker build bisa buat binary Go yang sangat kecil. Go binary + Alpine Linux = image < 20MB.',
+    ]
+  },
+];
+
+const NEXT_LEVEL = [
+  { icon: '⚡', color: '#00ffc8', title: 'Redis & Caching', desc: 'Percepat API dengan cache. Kurangi beban database untuk data yang sering dibaca.', when: 'Setelah deploy project pertama' },
+  { icon: '📨', color: '#ff4d6d', title: 'Message Queue', desc: 'Kafka atau RabbitMQ. Background jobs, async processing, decoupled services.', when: 'Saat butuh proses async' },
+  { icon: '🔗', color: '#ffd166', title: 'gRPC', desc: 'Protocol lebih cepat dari REST untuk komunikasi internal antar service.', when: 'Belajar microservices' },
+  { icon: '☁️', color: '#38bdf8', title: 'AWS / GCP', desc: 'EC2, S3, RDS, Lambda. Hampir semua perusahaan pakai ini di production.', when: 'Setelah nyaman dengan Docker' },
+  { icon: '📊', color: '#a78bfa', title: 'Observability', desc: 'Prometheus + Grafana + Jaeger. Monitor, alert, trace request end-to-end.', when: 'Saat manage app production' },
+  { icon: '🏗️', color: '#fb923c', title: 'System Design', desc: 'Baca "Designing Data-Intensive Applications". Wajib untuk level senior.', when: 'Mulai sekarang, pelan-pelan' },
+  { icon: '🔀', color: '#00ffc8', title: 'Goroutines & Concurrency', desc: 'Ini superpower Go. Channel, WaitGroup, sync.Mutex, worker pool pattern.', when: 'Setelah nyaman REST API' },
+  { icon: '🧪', color: '#ff4d6d', title: 'Advanced Testing', desc: 'TDD, BDD, load testing dengan k6 atau vegeta, contract testing.', when: 'Saat tim mulai berkembang' },
+  { icon: '🔒', color: '#ffd166', title: 'Security Lanjut', desc: 'OAuth2, OpenID Connect, API key management, secret rotation.', when: 'Sebelum production launch' },
+];
+
+// ─── RENDER ENGINE ───────────────────────────────────────────────
+
+function getState() {
+  try { return JSON.parse(localStorage.getItem('roadmap_v2') || '{}'); } catch { return {}; }
+}
+function saveState(s) {
+  try { localStorage.setItem('roadmap_v2', JSON.stringify(s)); } catch {}
+}
+
+let state = getState();
+
+function toggleItem(key) {
+  state[key] = !state[key];
+  saveState(state);
+  updateAll();
+}
+
+function updateAll() {
+  let totalTopics = 0, totalDone = 0;
+
+  PHASES.forEach(phase => {
+    let phaseTotal = 0, phaseDone = 0;
+
+    phase.topics.forEach((topic, ti) => {
+      const topicKey = `${phase.id}-t-${ti}`;
+      phaseTotal++; totalTopics++;
+      if (state[topicKey]) { phaseDone++; totalDone++; }
+
+      topic.subs.forEach((_, si) => {
+        const subKey = `${phase.id}-s-${ti}-${si}`;
+        phaseTotal++; totalTopics++;
+        if (state[subKey]) { phaseDone++; totalDone++; }
+      });
+    });
+
+    const pct = phaseTotal > 0 ? Math.round((phaseDone / phaseTotal) * 100) : 0;
+
+    // ring
+    const ringEl = document.getElementById(`ring-${phase.id}`);
+    const pctEl = document.getElementById(`rpct-${phase.id}`);
+    if (ringEl && pctEl) {
+      const r = 18, circ = 2 * Math.PI * r;
+      ringEl.style.strokeDashoffset = circ - (pct / 100) * circ;
+      pctEl.textContent = pct + '%';
+    }
+
+    // checkboxes
+    phase.topics.forEach((topic, ti) => {
+      const topicKey = `${phase.id}-t-${ti}`;
+      const el = document.getElementById(`topic-${phase.id}-${ti}`);
+      if (el) {
+        if (state[topicKey]) el.classList.add('checked'); else el.classList.remove('checked');
+        const cb = el.querySelector('.checkbox');
+        if (cb) cb.textContent = state[topicKey] ? '✓' : '';
+      }
+
+      topic.subs.forEach((_, si) => {
+        const subKey = `${phase.id}-s-${ti}-${si}`;
+        const sel = document.getElementById(`sub-${phase.id}-${ti}-${si}`);
+        if (sel) {
+          if (state[subKey]) sel.classList.add('checked'); else sel.classList.remove('checked');
+          const scb = sel.querySelector('.sub-check');
+          if (scb) scb.textContent = state[subKey] ? '✓' : '';
+        }
+      });
+    });
+  });
+
+  document.getElementById('total-topics').textContent = totalTopics;
+  document.getElementById('done-count').textContent = totalDone;
+  const overallPct = totalTopics > 0 ? Math.round((totalDone / totalTopics) * 100) : 0;
+  document.getElementById('total-pct').textContent = overallPct + '%';
+  document.getElementById('total-bar').style.width = overallPct + '%';
+}
+
+function buildPhases() {
+  const container = document.getElementById('phases-container');
+  container.innerHTML = PHASES.map((phase, pi) => {
+    const r = 18, circ = 2 * Math.PI * r;
+    const topicsHTML = phase.topics.map((topic, ti) => {
+      const subsHTML = topic.subs.map((sub, si) => `
+        <div class="subtopic" id="sub-${phase.id}-${ti}-${si}"
+             onclick="toggleItem('${phase.id}-s-${ti}-${si}')">
+          <div class="sub-check"></div>
+          <div class="subtopic-text">${sub}</div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="topic-item" id="topic-${phase.id}-${ti}"
+             onclick="toggleItem('${phase.id}-t-${ti}')">
+          <div class="checkbox"></div>
+          <div class="topic-content">
+            <div class="topic-name">
+              ${topic.name}
+              <span class="topic-badge" style="background:${topic.badgeColor}22;color:${topic.badgeColor};border:1px solid ${topic.badgeColor}44;">${topic.badge}</span>
+            </div>
+            <div class="topic-desc">${topic.desc}</div>
+            ${subsHTML ? `<div class="subtopics">${subsHTML}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    const featuresHTML = phase.project.features.map(f => `<span class="project-feat">${f}</span>`).join('');
+    const resourcesHTML = phase.resources.map(r => `
+      <div class="resource-card" style="--phase-color:${phase.color}">
+        <div class="resource-type">${r.type}</div>
+        <div class="resource-name">${r.name}</div>
+        <div class="resource-url">${r.url}</div>
+      </div>
+    `).join('');
+    const tipsHTML = phase.tips.map(t => `
+      <div class="tip-item"><span class="tip-icon">${t.slice(0,2)}</span><span>${t.slice(2)}</span></div>
+    `).join('');
+
+    return `
+      <div class="phase-card" id="card-${phase.id}" style="--phase-color:${phase.color}">
+        <div class="phase-header" onclick="togglePhase('${phase.id}')">
+          <div class="phase-num">${phase.num}</div>
+          <div class="phase-meta">
+            <span class="phase-tag">${phase.tag}</span>
+            <div class="phase-title">${phase.title}</div>
+            <div class="phase-duration">${phase.duration}</div>
+          </div>
+          <div class="phase-right">
+            <div class="phase-progress-ring">
+              <svg width="44" height="44" viewBox="0 0 44 44">
+                <circle class="ring-bg" cx="22" cy="22" r="${r}"/>
+                <circle class="ring-fill" id="ring-${phase.id}" cx="22" cy="22" r="${r}"
+                  stroke="${phase.color}"
+                  stroke-dasharray="${circ}"
+                  stroke-dashoffset="${circ}"/>
+              </svg>
+              <div class="ring-pct" id="rpct-${phase.id}" style="color:${phase.color}">0%</div>
+            </div>
+            <div class="phase-chevron">▶</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-body-inner">
+            <div class="goal-box" style="--phase-color:${phase.color}">${phase.goal}</div>
+
+            <div class="tabs">
+              <button class="tab-btn active" onclick="switchTab(this, '${phase.id}', 'topics')" style="--phase-color:${phase.color}">📋 Topik (${phase.topics.length})</button>
+              <button class="tab-btn" onclick="switchTab(this, '${phase.id}', 'project')" style="--phase-color:${phase.color}">🛠 Project</button>
+              <button class="tab-btn" onclick="switchTab(this, '${phase.id}', 'resources')" style="--phase-color:${phase.color}">📚 Sumber Belajar</button>
+              <button class="tab-btn" onclick="switchTab(this, '${phase.id}', 'tips')" style="--phase-color:${phase.color}">💡 Tips</button>
+            </div>
+
+            <div class="tab-content active" id="tab-${phase.id}-topics">
+              <div class="topics-list">${topicsHTML}</div>
+            </div>
+
+            <div class="tab-content" id="tab-${phase.id}-project">
+              <div class="project-box">
+                <div class="project-label">CAPSTONE PROJECT</div>
+                <div class="project-title">${phase.project.title}</div>
+                <div class="project-desc">${phase.project.desc}</div>
+                <div class="project-features">${featuresHTML}</div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="tab-${phase.id}-resources">
+              <div class="resources-grid">${resourcesHTML}</div>
+            </div>
+
+            <div class="tab-content" id="tab-${phase.id}-tips">
+              <div class="tips-list">${tipsHTML}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function buildNextLevel() {
+  document.getElementById('next-grid').innerHTML = NEXT_LEVEL.map(item => `
+    <div class="next-card" style="--card-color:${item.color}">
+      <div class="next-icon">${item.icon}</div>
+      <div class="next-title" style="color:${item.color}">${item.title}</div>
+      <div class="next-desc">${item.desc}</div>
+      <span class="next-when">Kapan: ${item.when}</span>
+    </div>
+  `).join('');
+}
+
+function togglePhase(id) {
+  const card = document.getElementById(`card-${id}`);
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.phase-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+function switchTab(btn, phaseId, tab) {
+  const body = btn.closest('.phase-body-inner');
+  body.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  body.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(`tab-${phaseId}-${tab}`).classList.add('active');
+}
+
+// ─── INIT ───────────────────────────────────────────────────────
+buildPhases();
+buildNextLevel();
+updateAll();
+
+// Open first phase by default
+togglePhase('p1');
+</script>
+</body>
+</html>

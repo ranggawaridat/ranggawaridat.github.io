@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Go SaaS Roadmap</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f9f9f7;
+    margin: 0;
+    padding: 24px;
+    color: #1a1a18;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: #1a1a18;
+  }
+  p.sub {
+    font-size: 13px;
+    color: #73726c;
+    margin: 0 0 24px;
+  }
+  svg text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .th { font-size: 14px; font-weight: 500; fill: #1a1a18; }
+  .ts { font-size: 12px; font-weight: 400; fill: #5f5e5a; }
+
+  /* c-gray */
+  .c-gray rect, .c-gray circle { fill: #F1EFE8; stroke: #5F5E5A; }
+  .c-gray .th { fill: #2C2C2A; }
+  .c-gray .ts { fill: #5F5E5A; }
+
+  /* c-purple */
+  .c-purple rect { fill: #EEEDFE; stroke: #534AB7; }
+  .c-purple .th { fill: #26215C; }
+  .c-purple .ts { fill: #534AB7; }
+
+  /* c-teal */
+  .c-teal rect { fill: #E1F5EE; stroke: #0F6E56; }
+  .c-teal .th { fill: #04342C; }
+  .c-teal .ts { fill: #0F6E56; }
+
+  /* c-amber */
+  .c-amber rect { fill: #FAEEDA; stroke: #854F0B; }
+  .c-amber .th { fill: #412402; }
+  .c-amber .ts { fill: #854F0B; }
+
+  /* c-coral */
+  .c-coral rect { fill: #FAECE7; stroke: #993C1D; }
+  .c-coral .th { fill: #4A1B0C; }
+  .c-coral .ts { fill: #993C1D; }
+
+  /* c-blue */
+  .c-blue rect { fill: #E6F1FB; stroke: #185FA5; }
+  .c-blue .th { fill: #042C53; }
+  .c-blue .ts { fill: #185FA5; }
+
+  line.arr { stroke: #888780; stroke-width: 1.5; fill: none; }
+  line.timeline { stroke: #d3d1c7; stroke-width: 1; stroke-dasharray: 4 4; }
+
+  @media (prefers-color-scheme: dark) {
+    body { background: #1a1a18; color: #e8e6de; }
+    h1 { color: #e8e6de; }
+    .th { fill: #e8e6de; }
+    .ts { fill: #9c9a92; }
+    .c-gray rect { fill: #2C2C2A; stroke: #B4B2A9; }
+    .c-gray .th { fill: #D3D1C7; }
+    .c-gray .ts { fill: #B4B2A9; }
+    .c-purple rect { fill: #26215C; stroke: #AFA9EC; }
+    .c-purple .th { fill: #CECBF6; }
+    .c-purple .ts { fill: #AFA9EC; }
+    .c-teal rect { fill: #04342C; stroke: #5DCAA5; }
+    .c-teal .th { fill: #9FE1CB; }
+    .c-teal .ts { fill: #5DCAA5; }
+    .c-amber rect { fill: #412402; stroke: #EF9F27; }
+    .c-amber .th { fill: #FAC775; }
+    .c-amber .ts { fill: #EF9F27; }
+    .c-coral rect { fill: #4A1B0C; stroke: #F0997B; }
+    .c-coral .th { fill: #F5C4B3; }
+    .c-coral .ts { fill: #F0997B; }
+    .c-blue rect { fill: #042C53; stroke: #85B7EB; }
+    .c-blue .th { fill: #B5D4F4; }
+    .c-blue .ts { fill: #85B7EB; }
+    line.arr { stroke: #888780; }
+    line.timeline { stroke: #444441; }
+  }
+</style>
+</head>
+<body>
+<h1>Go SaaS Backend Roadmap</h1>
+<p class="sub">Paralel · fokus SaaS · ~14 minggu @ 3 jam/hari</p>
+
+<svg width="100%" viewBox="0 0 680 1580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<!-- PHASE 0 -->
+<g class="c-gray">
+<rect x="40" y="20" width="600" height="36" rx="8" stroke-width="0.5"/>
+<text class="th" x="340" y="38" text-anchor="middle" dominant-baseline="central">Phase 0 — solidify fundamentals (minggu 1–2, paralel bisa skip kalau sudah paham)</text>
+</g>
+<g class="c-gray">
+<rect x="40" y="72" width="178" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="129" y="92" text-anchor="middle" dominant-baseline="central">Go idioms</text>
+<text class="ts" x="129" y="112" text-anchor="middle" dominant-baseline="central">error handling, interfaces</text>
+</g>
+<g class="c-gray">
+<rect x="241" y="72" width="178" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="330" y="92" text-anchor="middle" dominant-baseline="central">Testing</text>
+<text class="ts" x="330" y="112" text-anchor="middle" dominant-baseline="central">table-driven, httptest</text>
+</g>
+<g class="c-gray">
+<rect x="442" y="72" width="198" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="541" y="92" text-anchor="middle" dominant-baseline="central">Project structure</text>
+<text class="ts" x="541" y="112" text-anchor="middle" dominant-baseline="central">cmd/, internal/, pkg/</text>
+</g>
+
+<line x1="340" y1="146" x2="340" y2="178" class="arr" marker-end="url(#arrow)"/>
+
+<!-- PHASE 1 -->
+<g class="c-purple">
+<rect x="40" y="188" width="600" height="36" rx="8" stroke-width="0.5"/>
+<text class="th" x="340" y="206" text-anchor="middle" dominant-baseline="central">Phase 1 — core SaaS backend (minggu 2–5)</text>
+</g>
+<g class="c-purple">
+<rect x="40" y="240" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="180" y="264" text-anchor="middle" dominant-baseline="central">PostgreSQL + sqlc / pgx</text>
+<text class="ts" x="180" y="284" text-anchor="middle" dominant-baseline="central">migrations (golang-migrate)</text>
+<text class="ts" x="180" y="300" text-anchor="middle" dominant-baseline="central">connection pool, env config</text>
+</g>
+<g class="c-purple">
+<rect x="360" y="240" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="500" y="264" text-anchor="middle" dominant-baseline="central">Auth — JWT + Refresh token</text>
+<text class="ts" x="500" y="284" text-anchor="middle" dominant-baseline="central">register / login / logout</text>
+<text class="ts" x="500" y="300" text-anchor="middle" dominant-baseline="central">middleware chain</text>
+</g>
+<g class="c-purple">
+<rect x="40" y="330" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="180" y="354" text-anchor="middle" dominant-baseline="central">Multi-tenancy</text>
+<text class="ts" x="180" y="374" text-anchor="middle" dominant-baseline="central">tenant_id per row (shared DB)</text>
+<text class="ts" x="180" y="390" text-anchor="middle" dominant-baseline="central">atau schema-per-tenant</text>
+</g>
+<g class="c-purple">
+<rect x="360" y="330" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="500" y="354" text-anchor="middle" dominant-baseline="central">RBAC</text>
+<text class="ts" x="500" y="374" text-anchor="middle" dominant-baseline="central">roles: owner / admin / member</text>
+<text class="ts" x="500" y="390" text-anchor="middle" dominant-baseline="central">permission middleware</text>
+</g>
+
+<line x1="340" y1="420" x2="340" y2="452" class="arr" marker-end="url(#arrow)"/>
+
+<!-- PHASE 2 -->
+<g class="c-teal">
+<rect x="40" y="462" width="600" height="36" rx="8" stroke-width="0.5"/>
+<text class="th" x="340" y="480" text-anchor="middle" dominant-baseline="central">Phase 2 — production-ready API (minggu 5–8)</text>
+</g>
+<g class="c-teal">
+<rect x="40" y="514" width="178" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="129" y="536" text-anchor="middle" dominant-baseline="central">Framework: Gin / Chi</text>
+<text class="ts" x="129" y="556" text-anchor="middle" dominant-baseline="central">routing groups</text>
+<text class="ts" x="129" y="572" text-anchor="middle" dominant-baseline="central">validation (go-playground)</text>
+</g>
+<g class="c-teal">
+<rect x="241" y="514" width="178" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="330" y="536" text-anchor="middle" dominant-baseline="central">Redis cache + rate limit</text>
+<text class="ts" x="330" y="556" text-anchor="middle" dominant-baseline="central">session store</text>
+<text class="ts" x="330" y="572" text-anchor="middle" dominant-baseline="central">rate limiter per tenant</text>
+</g>
+<g class="c-teal">
+<rect x="442" y="514" width="198" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="541" y="536" text-anchor="middle" dominant-baseline="central">Structured logging</text>
+<text class="ts" x="541" y="556" text-anchor="middle" dominant-baseline="central">slog / zerolog</text>
+<text class="ts" x="541" y="572" text-anchor="middle" dominant-baseline="central">request-id tracing</text>
+</g>
+<g class="c-teal">
+<rect x="40" y="604" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="180" y="628" text-anchor="middle" dominant-baseline="central">Background jobs</text>
+<text class="ts" x="180" y="648" text-anchor="middle" dominant-baseline="central">asynq (Redis-backed queue)</text>
+<text class="ts" x="180" y="664" text-anchor="middle" dominant-baseline="central">email, webhook, cleanup</text>
+</g>
+<g class="c-teal">
+<rect x="360" y="604" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="500" y="628" text-anchor="middle" dominant-baseline="central">File upload + storage</text>
+<text class="ts" x="500" y="648" text-anchor="middle" dominant-baseline="central">S3-compatible (MinIO local)</text>
+<text class="ts" x="500" y="664" text-anchor="middle" dominant-baseline="central">presigned URL pattern</text>
+</g>
+
+<line x1="340" y1="694" x2="340" y2="726" class="arr" marker-end="url(#arrow)"/>
+
+<!-- PHASE 3 -->
+<g class="c-amber">
+<rect x="40" y="736" width="600" height="36" rx="8" stroke-width="0.5"/>
+<text class="th" x="340" y="754" text-anchor="middle" dominant-baseline="central">Phase 3 — billing + subscription (minggu 8–11)</text>
+</g>
+<g class="c-amber">
+<rect x="40" y="788" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="180" y="812" text-anchor="middle" dominant-baseline="central">Stripe integrasi</text>
+<text class="ts" x="180" y="832" text-anchor="middle" dominant-baseline="central">customer, subscription, price</text>
+<text class="ts" x="180" y="848" text-anchor="middle" dominant-baseline="central">checkout + billing portal</text>
+</g>
+<g class="c-amber">
+<rect x="360" y="788" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="500" y="812" text-anchor="middle" dominant-baseline="central">Webhook handler</text>
+<text class="ts" x="500" y="832" text-anchor="middle" dominant-baseline="central">idempotency key</text>
+<text class="ts" x="500" y="848" text-anchor="middle" dominant-baseline="central">plan upgrade / downgrade</text>
+</g>
+<g class="c-amber">
+<rect x="40" y="878" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="180" y="902" text-anchor="middle" dominant-baseline="central">Usage metering</text>
+<text class="ts" x="180" y="922" text-anchor="middle" dominant-baseline="central">feature flags per plan</text>
+<text class="ts" x="180" y="938" text-anchor="middle" dominant-baseline="central">usage limit enforcement</text>
+</g>
+<g class="c-amber">
+<rect x="360" y="878" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="500" y="902" text-anchor="middle" dominant-baseline="central">Trial + grace period</text>
+<text class="ts" x="500" y="922" text-anchor="middle" dominant-baseline="central">auto-expire, reminder email</text>
+<text class="ts" x="500" y="938" text-anchor="middle" dominant-baseline="central">dunning workflow</text>
+</g>
+
+<line x1="340" y1="968" x2="340" y2="1000" class="arr" marker-end="url(#arrow)"/>
+
+<!-- PHASE 4 -->
+<g class="c-coral">
+<rect x="40" y="1010" width="600" height="36" rx="8" stroke-width="0.5"/>
+<text class="th" x="340" y="1028" text-anchor="middle" dominant-baseline="central">Phase 4 — deploy + observability (minggu 11–14)</text>
+</g>
+<g class="c-coral">
+<rect x="40" y="1062" width="178" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="129" y="1084" text-anchor="middle" dominant-baseline="central">Docker + Compose</text>
+<text class="ts" x="129" y="1104" text-anchor="middle" dominant-baseline="central">multi-stage build</text>
+<text class="ts" x="129" y="1120" text-anchor="middle" dominant-baseline="central">secrets via env</text>
+</g>
+<g class="c-coral">
+<rect x="241" y="1062" width="178" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="330" y="1084" text-anchor="middle" dominant-baseline="central">CI/CD</text>
+<text class="ts" x="330" y="1104" text-anchor="middle" dominant-baseline="central">GitHub Actions</text>
+<text class="ts" x="330" y="1120" text-anchor="middle" dominant-baseline="central">test + lint + deploy</text>
+</g>
+<g class="c-coral">
+<rect x="442" y="1062" width="198" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="541" y="1084" text-anchor="middle" dominant-baseline="central">Metrics + alerts</text>
+<text class="ts" x="541" y="1104" text-anchor="middle" dominant-baseline="central">Prometheus + Grafana</text>
+<text class="ts" x="541" y="1120" text-anchor="middle" dominant-baseline="central">uptime, latency, errors</text>
+</g>
+<g class="c-coral">
+<rect x="40" y="1152" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="180" y="1176" text-anchor="middle" dominant-baseline="central">Deploy target</text>
+<text class="ts" x="180" y="1196" text-anchor="middle" dominant-baseline="central">Railway / Fly.io / VPS</text>
+<text class="ts" x="180" y="1212" text-anchor="middle" dominant-baseline="central">managed Postgres + Redis</text>
+</g>
+<g class="c-coral">
+<rect x="360" y="1152" width="280" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="500" y="1176" text-anchor="middle" dominant-baseline="central">Health + readiness</text>
+<text class="ts" x="500" y="1196" text-anchor="middle" dominant-baseline="central">/healthz, /readyz</text>
+<text class="ts" x="500" y="1212" text-anchor="middle" dominant-baseline="central">graceful shutdown</text>
+</g>
+
+<line x1="340" y1="1242" x2="340" y2="1274" class="arr" marker-end="url(#arrow)"/>
+
+<!-- PHASE 5 -->
+<g class="c-blue">
+<rect x="40" y="1284" width="600" height="36" rx="8" stroke-width="0.5"/>
+<text class="th" x="340" y="1302" text-anchor="middle" dominant-baseline="central">Phase 5 — launch &amp; iterate (minggu 14+)</text>
+</g>
+<g class="c-blue">
+<rect x="40" y="1336" width="178" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="129" y="1358" text-anchor="middle" dominant-baseline="central">MVP SaaS product</text>
+<text class="ts" x="129" y="1378" text-anchor="middle" dominant-baseline="central">landing + pricing page</text>
+<text class="ts" x="129" y="1394" text-anchor="middle" dominant-baseline="central">onboarding flow</text>
+</g>
+<g class="c-blue">
+<rect x="241" y="1336" width="178" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="330" y="1358" text-anchor="middle" dominant-baseline="central">Freelance portofolio</text>
+<text class="ts" x="330" y="1378" text-anchor="middle" dominant-baseline="central">GitHub + case study</text>
+<text class="ts" x="330" y="1394" text-anchor="middle" dominant-baseline="central">Upwork / toptal</text>
+</g>
+<g class="c-blue">
+<rect x="442" y="1336" width="198" height="70" rx="8" stroke-width="0.5"/>
+<text class="th" x="541" y="1358" text-anchor="middle" dominant-baseline="central">Job-ready checklist</text>
+<text class="ts" x="541" y="1378" text-anchor="middle" dominant-baseline="central">system design, live coding</text>
+<text class="ts" x="541" y="1394" text-anchor="middle" dominant-baseline="central">Go-specific interview prep</text>
+</g>
+
+<!-- Timeline spine -->
+<line x1="648" y1="188" x2="648" y2="1430" class="timeline"/>
+<text class="ts" x="650" y="200" text-anchor="middle">minggu</text>
+<text class="ts" x="650" y="216" text-anchor="middle">1–2</text>
+<text class="ts" x="650" y="480" text-anchor="middle">3–5</text>
+<text class="ts" x="650" y="754" text-anchor="middle">5–8</text>
+<text class="ts" x="650" y="1028" text-anchor="middle">8–11</text>
+<text class="ts" x="650" y="1302" text-anchor="middle">11–14</text>
+<text class="ts" x="650" y="1430" text-anchor="middle">14+</text>
+
+</svg>
+</body>
+</html>

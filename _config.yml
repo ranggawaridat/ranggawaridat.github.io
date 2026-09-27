@@ -1,0 +1,17 @@
+title: "Rangga Waridat"
+description: "Catatan belajar programming, backend, dan software development."
+url: "https://ranggawaridat.github.io"
+
+markdown: kramdown
+
+permalink: /blog/:year/:month/:day/:title/
+
+author:
+  name: "Rangga Waridat"
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"

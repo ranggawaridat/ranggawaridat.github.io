@@ -1,0 +1,72 @@
+---
+layout: default
+title: "Home"
+---
+
+<section class="home-hero" aria-labelledby="home-title">
+
+    <div class="hero-meta">
+        <span>01</span>
+        <span>ARCHIVE</span>
+    </div>
+
+    <div class="hero-content">
+        <p class="hero-kicker">A personal collection of thoughts, notes, and things learned.</p>
+
+        <h1 id="home-title">
+            A record of<br>
+            what I learn.
+        </h1>
+
+        <p class="hero-subtitle">
+            I write things down so I can return to them.
+        </p>
+    </div>
+
+    <div class="hero-footer">
+        <span>Learning, writing, remembering.</span>
+        <span>↓</span>
+    </div>
+
+</section>
+
+<section class="articles">
+
+    {% for post in site.posts %}
+
+    <article class="article-card">
+
+        <p class="post-date">
+            {{ post.date | date: "%d %B %Y" }}
+        </p>
+
+        <h3>
+            <a href="{{ post.url | relative_url }}">
+                {{ post.title }}
+            </a>
+        </h3>
+
+        {% if post.description %}
+        <p>
+            {{ post.description }}
+        </p>
+        {% endif %}
+
+        <a
+            class="read-more"
+            href="{{ post.url | relative_url }}"
+        >
+            Baca →
+        </a>
+
+    </article>
+
+    {% else %}
+
+    <p>
+        Belum ada Catatan.
+    </p>
+
+    {% endfor %}
+
+</section>

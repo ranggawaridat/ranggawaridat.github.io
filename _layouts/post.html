@@ -1,0 +1,39 @@
+---
+layout: default
+---
+
+<article class="post">
+
+    <header class="post-header">
+
+        <p class="post-date">
+            {{ page.date | date: "%d %B %Y" }}
+        </p>
+
+        <h1>
+            {{ page.title }}
+        </h1>
+
+        {% if page.description %}
+        <p class="post-description">
+            {{ page.description }}
+        </p>
+        {% endif %}
+
+    </header>
+
+
+    <div class="post-content">
+        {{ content }}
+    </div>
+
+
+    <div class="post-footer">
+
+        <a href="{{ '/' | relative_url }}">
+            ← Kembali
+        </a>
+
+    </div>
+
+</article>

@@ -1011,7 +1011,7 @@ Kita akan menjalankan test.
 
 Kita akan melakukan commit.
 
-Dan mungkin deployment pertama kita juga gagal. 😄
+Dan mungkin deployment pertama kita juga gagal.
 
 Tapi justru dari situlah proses belajar sebenarnya terjadi.
 
@@ -1061,4 +1061,4 @@ Lalu satu langkah kecil setelahnya.
 
 Dan satu langkah lagi.
 
-Sampai tanpa sadar, `Hello World` yang dulu hanya mencetak satu kalimat sudah berubah menjadi sesuatu yang benar-benar bisa digunakan orang lain. ❤️
+Sampai tanpa sadar, `Hello World` yang dulu hanya mencetak satu kalimat sudah berubah menjadi sesuatu yang benar-benar bisa digunakan orang lain.

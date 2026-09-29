@@ -1,13 +1,20 @@
 title: "Rangga Waridat"
 description: "Catatan belajar programming, backend, dan software development."
-url: "https://ranggawaridat.github.io"
-
+url: "https://wrdt.site"
+lang: "id"
+locale: "id_ID"
 markdown: kramdown
-
 permalink: /blog/:year/:month/:day/:title/
 
 author:
   name: "Rangga Waridat"
+  email: "ranggawaridat@gmail.com"
+
+social:
+  name: "Rangga Waridat"
+  twitter: "@cmdprompt777"
+  instagram: "@ranggawaridat"
+  facebook: "@rnggwrdt"
 
 defaults:
   - scope:

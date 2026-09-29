@@ -1,29 +1,54 @@
 <!DOCTYPE html>
+<html lang="{{ site.lang | default: 'id' }}">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="{{ site.author.name }}">
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="theme-color" content="#0f172a">
 
     <title>
         {% if page.title %}
-            {{ page.title }} — {{ site.title }}
+            {% if page.title != 'Home' %}
+                {{ page.title }} — {{ site.title }}
+            {% else %}
+                {{ site.title }} — Catatan Belajar Programming
+            {% endif %}
         {% else %}
             {{ site.title }}
         {% endif %}
     </title>
 
-    <meta
-        name="description"
-        content="{{ page.description | default: site.description }}"
-    >
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
-    <link
-        rel="stylesheet"
-        href="{{ '/assets/css/style.css' | relative_url }}"
-    >
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="{{ site.locale | default: 'id_ID' }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:title" content="{% if page.title and page.title != 'Home' %}{{ page.title }}{% else %}{{ site.title }} — Catatan Belajar Programming{% endif %}">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ '/assets/images/og-default.svg' | absolute_url }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ site.social.twitter }}">
+    <meta name="twitter:title" content="{% if page.title and page.title != 'Home' %}{{ page.title }}{% else %}{{ site.title }} — Catatan Belajar Programming{% endif %}">
+    <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+    <meta name="twitter:image" content="{{ '/assets/images/og-default.svg' | absolute_url }}">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "{{ site.title }}",
+            "url": "{{ site.url }}",
+            "description": "{{ site.description }}",
+            "inLanguage": "{{ site.lang | default: 'id' }}"
+        }
+    </script>
 </head>
 
 <body>

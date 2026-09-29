@@ -1,0 +1,9 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0F172A"/>
+  <rect x="70" y="70" width="1060" height="490" rx="26" fill="#111827" stroke="#334155"/>
+  <circle cx="160" cy="170" r="54" fill="#38BDF8" fill-opacity="0.18"/>
+  <path d="M125 206C143.344 182.072 166.578 170 194.702 170C221.204 170 243.549 181.124 261.736 203.373L234.425 233.073C224.082 220.79 212.347 214.648 199.219 214.648C185.006 214.648 171.911 220.974 159.935 233.625L125 206ZM126 301.977L177.469 258.501L202.06 282.155L245.37 238.506L294.63 286.677V378.68H126V301.977Z" fill="#F8FAFC"/>
+  <text x="140" y="310" fill="#F8FAFC" font-size="52" font-family="Verdana, Arial, sans-serif" font-weight="700">Rangga Waridat</text>
+  <text x="140" y="375" fill="#94A3B8" font-size="28" font-family="Verdana, Arial, sans-serif">Catatan Belajar Programming</text>
+  <text x="140" y="470" fill="#38BDF8" font-size="24" font-family="Verdana, Arial, sans-serif">backend • software development • learning notes</text>
+</svg>

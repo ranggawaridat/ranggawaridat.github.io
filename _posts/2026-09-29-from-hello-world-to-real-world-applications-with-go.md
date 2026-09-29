@@ -1,4 +1,9 @@
-# From Hello World to Real-World Applications with Go
+---
+layout: post
+title: "From Hello World to Real-World Applications with Go"
+date: 2026-09-29
+description: "A journey from basic Go syntax to APIs, databases, testing, and deployment."
+---
 
 Ketika pertama kali belajar Go, mungkin kita memulainya dengan kode yang sangat sederhana:
 

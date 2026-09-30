@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "From Hello World to Real-World Applications with Go"
-date: 2026-09-29
+date: 2026-09-30
 description: "A journey from basic Go syntax to APIs, databases, testing, and deployment."
 ---
 

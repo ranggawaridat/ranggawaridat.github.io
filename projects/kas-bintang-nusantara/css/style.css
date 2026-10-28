@@ -980,12 +980,112 @@ p {
     font-size: 0.72rem;
   }
 
+  /* =========================================
+   GITHUB RELEASE BUTTON
+========================================= */
+
+.btn-github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 14px 19px;
+
+  background: #24292F;
+  color: #FFFFFF;
+
+  border: 1px solid #ffffff30;
+  border-radius: 15px;
+
+  font-size: 0.94rem;
+  font-weight: 750;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-github:hover {
+  background: #111827;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 25px #00000030;
+}
+
+.btn-github svg {
+  width: 20px;
+  height: 20px;
+
+  flex-shrink: 0;
+}
+
+.btn-github:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   DOWNLOAD BUTTON IMPROVEMENTS
+========================================= */
+
+.download-actions .btn {
+  width: 100%;
+  text-align: center;
+}
+
+.download-actions {
+  min-width: 220px;
+}
+
+.download-note {
+  display: block;
+  text-align: center;
+}
+
+/* =========================================
+   RESPONSIVE DOWNLOAD BUTTONS
+========================================= */
+
+@media (max-width: 800px) {
+
+  .download-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .download-actions .btn {
+    width: 100%;
+  }
+
+  .download-note {
+    width: 100%;
+    text-align: center;
+  }
+}
 }
 
 
 /* =========================================
    ACCESSIBILITY
 ========================================= */
+
+@media (max-width: 440px) {
+
+  .btn-github {
+    padding: 13px 16px;
+    font-size: 0.85rem;
+  }
+
+  .btn-github svg {
+    width: 18px;
+    height: 18px;
+  }
+
+}
 
 @media (prefers-reduced-motion: reduce) {
 

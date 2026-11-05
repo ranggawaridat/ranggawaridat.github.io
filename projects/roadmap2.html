@@ -1,203 +1,859 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Roadmap 24 bulan Product Systems Builder — Go, distributed systems, software architecture, dan product engineering.">
-<title>FORGE — Product Systems Builder Roadmap</title>
+<meta name="theme-color" content="#101014">
+<title>Product Systems Builder | Roadmap</title>
+
 <style>
 :root {
-  color-scheme: light dark;
-  --site-primary: #183D35;
-  --site-secondary: #B68A55;
-  --site-background: #101713;
-  --site-on-primary: #F5F4EC;
-  --site-on-secondary: #17130D;
-  --site-on-background: #F1F0E8;
-  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --site-font-heading: Georgia, "Times New Roman", serif;
-  --site-heading-scale: 1;
-  --site-spacing-scale: 1;
-  --site-radius-scale: 1;
-  --site-decoration-opacity: 1;
-  --bg: light-dark(#F4F2EA, #101713);
-  --surface: light-dark(#FFFEF9, #18221D);
-  --surface-2: light-dark(#EBE9DF, #202D26);
-  --ink: light-dark(#1B2821, #F1F0E8);
-  --muted: light-dark(#68736A, #A6B1A7);
-  --line: light-dark(#D9D7CB, #34443A);
-  --accent: var(--site-secondary);
-  --green: #7BB49A;
-  --gold: #D8B77E;
-  --red: #D78D79;
-  --shadow: 0 18px 50px rgba(0,0,0,.14);
+  --bg: #101014;
+  --panel: #19191f;
+  --panel2: #202027;
+  --border: #34343d;
+  --text: #eeeaf3;
+  --muted: #92909e;
+  --accent: #b69aff;
+  --green: #8bd6ad;
+  --gold: #e3c58d;
+  --red: #d98787;
 }
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--site-font-body); }
-button, input { font: inherit; }
-button { cursor: pointer; }
-#app { min-height: 100vh; width: 100%; background-color: var(--site-background); background: var(--bg); border-radius: 0; overflow: hidden; }
-.ambient { position: absolute; pointer-events: none; opacity: var(--site-decoration-opacity); filter: blur(1px); }
-.ambient.one { width: 420px; height: 420px; right: -120px; top: -150px; border-radius: 50%; background: radial-gradient(circle, rgba(182,138,85,.17), transparent 68%); }
-.ambient.two { width: 520px; height: 520px; left: -260px; top: 780px; border-radius: 50%; background: radial-gradient(circle, rgba(81,140,111,.15), transparent 70%); }
-.shell { max-width: 1220px; margin: 0 auto; padding: calc(30px * var(--site-spacing-scale)) 26px 80px; position: relative; }
-.topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding: 4px 0 24px; border-bottom:1px solid var(--line); }
-.brand { display:flex; align-items:center; gap:12px; letter-spacing:.2em; font-size:12px; font-weight:800; }
-.brand-mark { width:34px; height:34px; display:grid; place-items:center; border:1px solid var(--site-secondary); color:var(--site-secondary); transform:rotate(45deg); border-radius:9px; font-family:var(--site-font-heading); font-size:19px; }
-.brand-mark span { transform:rotate(-45deg); }
-.top-actions { display:flex; align-items:center; gap:10px; }
-.eyebrow { color:var(--site-secondary); font-size:10px; font-weight:800; letter-spacing:.22em; text-transform:uppercase; }
-.pill { border:1px solid var(--line); border-radius:999px; padding:8px 12px; color:var(--muted); font-size:11px; }
-.hero { display:grid; grid-template-columns: 1.35fr .65fr; gap:38px; align-items:center; padding:76px 0 56px; }
-h1,h2,h3,h4 { font-family:var(--site-font-heading); font-weight:500; }
-h1 { font-size:clamp(44px,7vw,82px); line-height:.98; letter-spacing:-.045em; margin:16px 0 22px; max-width:800px; }
-h1 em { color:var(--site-secondary); font-style:italic; }
-.hero-copy { max-width:690px; color:var(--muted); font-size:15px; line-height:1.85; }
-.hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
-.btn { border:1px solid var(--line); padding:12px 17px; border-radius:10px; color:var(--ink); background:var(--surface); font-size:12px; font-weight:700; transition:.2s ease; }
-.btn:hover { transform:translateY(-2px); border-color:var(--site-secondary); }
-.btn.primary { background:var(--site-primary); color:var(--site-on-primary); border-color:var(--site-primary); }
-.hero-card { background:linear-gradient(145deg,var(--site-primary),#111C17); color:#F4F1E8; border:1px solid rgba(216,183,126,.4); border-radius:20px; padding:26px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
-.hero-card:after { content:""; position:absolute; width:230px;height:230px;right:-100px;top:-90px;border:1px solid rgba(216,183,126,.28);border-radius:50%;box-shadow:0 0 0 25px rgba(216,183,126,.04),0 0 0 55px rgba(216,183,126,.035); }
-.hero-card .big { font-family:var(--site-font-heading); font-size:66px; line-height:1; color:#E0C18D; margin:22px 0 6px; }
-.hero-card p { color:#C0C9C0; font-size:12px; line-height:1.7; max-width:250px; }
-.hero-card .mini-line { height:1px; background:rgba(255,255,255,.2); margin:20px 0; }
-.stat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-.stat strong { display:block; font-family:var(--site-font-heading); font-size:23px; color:#E0C18D; }
-.stat span { font-size:10px; color:#B9C4BA; }
-.section { padding:34px 0; }
-.section-head { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:20px; }
-.section-head h2 { font-size:clamp(28px,4vw,42px); margin:7px 0 0; }
-.section-head p { max-width:460px; color:var(--muted); font-size:12px; line-height:1.7; margin:0; }
-.progress-panel { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:22px; display:grid; grid-template-columns:1fr auto; gap:18px; align-items:center; }
-.progress-label { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:12px; font-size:12px; font-weight:700; }
-.progress-track { height:9px; background:var(--surface-2); border-radius:99px; overflow:hidden; }
-.progress-fill { width:0%; height:100%; background:linear-gradient(90deg,var(--site-primary),var(--site-secondary)); border-radius:99px; transition:width .35s ease; }
-.progress-number { font-family:var(--site-font-heading); font-size:35px; color:var(--site-secondary); white-space:nowrap; }
-.tabs { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0; }
-.tab { border:1px solid var(--line); border-radius:999px; padding:9px 13px; background:transparent; color:var(--muted); font-size:11px; }
-.tab.active { background:var(--site-primary); color:var(--site-on-primary); border-color:var(--site-primary); }
-.phase-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-.phase { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; position:relative; transition:.2s; }
-.phase:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
-.phase-top { display:flex; justify-content:space-between; gap:12px; align-items:start; }
-.phase-num { color:var(--site-secondary); font-size:10px; font-weight:800; letter-spacing:.16em; }
-.phase-time { color:var(--muted); font-size:10px; border:1px solid var(--line); padding:6px 9px; border-radius:999px; white-space:nowrap; }
-.phase h3 { font-size:25px; line-height:1.08; margin:12px 0 8px; }
-.phase-desc { color:var(--muted); font-size:12px; line-height:1.7; min-height:40px; }
-.phase-meta { display:flex; flex-wrap:wrap; gap:6px; margin:13px 0 15px; }
-.tag { font-size:9px; padding:6px 8px; border-radius:999px; background:var(--surface-2); color:var(--muted); }
-.phase-progress { display:flex; align-items:center; gap:9px; margin-top:14px; }
-.phase-progress .progress-track { flex:1; height:5px; }
-.phase-progress small { color:var(--muted); font-size:10px; }
-.text-link { border:0; background:none; color:var(--site-secondary); font-size:11px; font-weight:800; padding:0; margin-top:12px; }
-.phase-detail { display:none; margin-top:16px; padding-top:15px; border-top:1px solid var(--line); }
-.phase.open .phase-detail { display:block; }
-.detail-title { font-size:10px; color:var(--site-secondary); font-weight:800; letter-spacing:.13em; text-transform:uppercase; margin:12px 0 8px; }
-.check-list { display:grid; gap:8px; }
-.check-item { display:flex; gap:9px; align-items:flex-start; font-size:11px; line-height:1.55; color:var(--muted); }
-.check-item input { accent-color:var(--site-primary); margin-top:2px; }
-.deliverable { background:var(--surface-2); padding:11px 12px; border-radius:10px; font-size:11px; line-height:1.6; }
-.project-grid,.resource-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; }
-.project,.resource { background:var(--surface); border:1px solid var(--line); border-radius:15px; padding:18px; }
-.project .index { color:var(--site-secondary); font-size:10px; font-weight:800; letter-spacing:.15em; }
-.project h3 { font-size:21px; margin:10px 0 7px; }
-.project p,.resource p { color:var(--muted); font-size:11px; line-height:1.7; }
-.project ul { padding-left:16px; margin:12px 0; color:var(--muted); font-size:10px; line-height:1.9; }
-.project .outcome { border-top:1px solid var(--line); padding-top:12px; margin-top:12px; font-size:10px; color:var(--ink); }
-.resource-type { color:var(--site-secondary); font-size:9px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
-.resource h3 { font-size:19px; margin:9px 0 6px; }
-.resource a { color:var(--site-secondary); font-size:10px; text-decoration:none; font-weight:800; }
-.resource a:hover { text-decoration:underline; }
-.reading-plan { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.reading-box { border:1px solid var(--line); background:var(--surface); border-radius:15px; padding:19px; }
-.reading-box h3 { font-size:21px; margin:0 0 12px; }
-.read-row { display:flex; gap:10px; padding:11px 0; border-top:1px solid var(--line); }
-.read-row:first-of-type { border-top:0; }
-.read-num { color:var(--site-secondary); font-family:var(--site-font-heading); font-size:20px; }
-.read-row strong { display:block; font-size:11px; line-height:1.45; }
-.read-row span { display:block; color:var(--muted); font-size:10px; margin-top:4px; }
-.stack-table { width:100%; border-collapse:collapse; background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; font-size:11px; }
-.stack-table th,.stack-table td { padding:13px 15px; text-align:left; border-bottom:1px solid var(--line); }
-.stack-table th { color:var(--site-secondary); font-size:9px; text-transform:uppercase; letter-spacing:.12em; }
-.stack-table td:first-child { color:var(--muted); width:27%; }
-.stack-table tr:last-child td { border-bottom:0; }
-.weekly { display:grid; grid-template-columns:repeat(5,1fr); gap:9px; }
-.week { padding:15px; border:1px solid var(--line); background:var(--surface); border-radius:12px; }
-.week strong { font-family:var(--site-font-heading); font-size:24px; color:var(--site-secondary); display:block; }
-.week span { font-size:10px; font-weight:800; display:block; margin:5px 0; }
-.week small { color:var(--muted); font-size:10px; line-height:1.5; display:block; }
-.footer { border-top:1px solid var(--line); margin-top:45px; padding-top:22px; display:flex; justify-content:space-between; gap:15px; color:var(--muted); font-size:10px; }
-.toast { position:fixed; bottom:20px; left:50%; transform:translate(-50%,20px); background:var(--site-primary); color:var(--site-on-primary); padding:11px 16px; border-radius:999px; font-size:11px; opacity:0; pointer-events:none; transition:.25s; z-index:10; }
-.toast.show { opacity:1; transform:translate(-50%,0); }
-@media(max-width:800px) { .hero { grid-template-columns:1fr; padding-top:52px; } .hero-card { max-width:520px; } .project-grid,.resource-grid { grid-template-columns:repeat(2,1fr); } .weekly { grid-template-columns:repeat(3,1fr); } }
-@media(max-width:560px) { .shell { padding:18px 16px 55px; } .topbar { align-items:flex-start; } .top-actions .pill { display:none; } .hero { padding:42px 0 35px; gap:25px; } .phase-grid,.project-grid,.resource-grid,.reading-plan { grid-template-columns:1fr; } .progress-panel { grid-template-columns:1fr; } .progress-number { font-size:28px; } .section { padding:25px 0; } .section-head { display:block; } .section-head p { margin-top:10px; } .weekly { grid-template-columns:repeat(2,1fr); } .footer { flex-direction:column; } .stack-table { font-size:10px; } .stack-table th,.stack-table td { padding:10px 8px; } }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at top, #292039 0%, transparent 55%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 30px 20px 70px;
+}
+
+.hero {
+  padding: 38px 25px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: linear-gradient(135deg,#272039,#19191f 70%);
+  margin-bottom: 25px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: clamp(28px,5vw,46px);
+  line-height: 1.15;
+  margin: 15px 0;
+}
+
+h2 { font-size: 23px; }
+
+h3 {
+  font-size: 17px;
+  margin: 0 0 10px;
+}
+
+p { color: var(--muted); }
+
+.subtitle {
+  max-width: 650px;
+  color: #c2bdcc;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 16px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 27px;
+  color: var(--accent);
+}
+
+.stat span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.progress-track {
+  height: 9px;
+  background: #33313c;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#9874e6,#8bd6ad);
+  transition: width .3s;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.phase {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 17px;
+  overflow: hidden;
+}
+
+.phase summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 21px;
+}
+
+.phase summary::-webkit-details-marker { display:none; }
+
+.phase-head {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.phase-number {
+  background: #342b49;
+  color: var(--accent);
+  min-width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.phase-title {
+  flex: 1;
+}
+
+.phase-title h3 { margin: 0; }
+
+.phase-title small {
+  color: var(--muted);
+}
+
+.phase-percent {
+  color: var(--green);
+  font-size: 13px;
+}
+
+.phase-body {
+  padding: 0 21px 22px;
+  border-top: 1px solid var(--border);
+}
+
+.section-title {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 22px 0 10px;
+}
+
+.task {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 10px 0;
+  border-bottom: 1px solid #292830;
+  cursor: pointer;
+}
+
+.task:last-child { border: none; }
+
+.task input {
+  appearance: none;
+  min-width: 19px;
+  width: 19px;
+  height: 19px;
+  margin-top: 3px;
+  border: 1.5px solid #777181;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.task input:checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.task input:checked::after {
+  content: "✓";
+  color: #141a17;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  left: 3px;
+  top: -1px;
+}
+
+.task span {
+  font-size: 14px;
+}
+
+.task input:checked + span {
+  text-decoration: line-through;
+  color: #777581;
+}
+
+.project {
+  background: #22212b;
+  border: 1px solid #3c354a;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.project h3 { color: var(--accent); }
+
+.badge {
+  display: inline-block;
+  padding: 4px 9px;
+  background: #332b44;
+  color: var(--accent);
+  border-radius: 20px;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.tools {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+button {
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  padding: 10px 15px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover { border-color: var(--accent); }
+
+button.primary {
+  background: #483666;
+  border-color: #7356a6;
+}
+
+button.danger { color: var(--red); }
+
+.resource {
+  padding: 13px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.resource a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.resource a:hover { text-decoration: underline; }
+
+footer {
+  text-align: center;
+  padding: 35px 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media(max-width:600px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .container { padding: 15px 12px 50px; }
+  .hero { padding: 27px 19px; }
+  .phase-percent { display: none; }
+}
 </style>
 </head>
+
 <body>
-<div id="app">
-  <div class="ambient one"></div><div class="ambient two"></div>
-  <main class="shell">
-    <nav class="topbar">
-      <div class="brand"><div class="brand-mark"><span>F</span></div><span>FORGE / ENGINEERING PATH</span></div>
-      <div class="top-actions"><span class="pill">24 MONTH ROADMAP</span><span class="eyebrow">GO · SYSTEMS · PRODUCT</span></div>
-    </nav>
-    <header class="hero">
-      <div>
-        <div class="eyebrow">THE INDEPENDENT BUILDER PROGRAM</div>
-        <h1>Build systems.<br><em>Shape products.</em></h1>
-        <p class="hero-copy">Roadmap spesialisasi 24 bulan untuk menjadi <strong>Product Systems Builder</strong> — engineer yang mampu merancang, membangun, mengoperasikan, dan mengembangkan produk software kompleks. Go adalah senjata utama. Distributed systems adalah kedalaman. Product engineering adalah identitas.</p>
-        <div class="hero-actions"><button class="btn primary" onclick="document.querySelector('#roadmap').scrollIntoView({behavior:'smooth'})">Jelajahi roadmap ↓</button><button class="btn" onclick="window.print()">Cetak / Save PDF ↗</button></div>
-      </div>
-      <aside class="hero-card">
-        <div class="eyebrow">YOUR NORTH STAR</div>
-        <div class="big">01—24</div>
-        <p>Dua puluh empat bulan membangun kedalaman engineering melalui satu ekosistem produk yang terus berevolusi.</p>
-        <div class="mini-line"></div>
-        <div class="stat-row"><div class="stat"><strong>6</strong><span>Fase belajar</span></div><div class="stat"><strong>5</strong><span>Portfolio utama</span></div><div class="stat"><strong>7</strong><span>Research papers</span></div></div>
-      </aside>
-    </header>
-    <section class="section" id="progress">
-      <div class="section-head"><div><div class="eyebrow">YOUR FIELD NOTES</div><h2>Progress tracker</h2></div><p>Tandai kompetensi yang sudah benar-benar kamu buktikan lewat implementasi, eksperimen, atau dokumentasi — bukan sekadar pernah dibaca.</p></div>
-      <div class="progress-panel"><div><div class="progress-label"><span>Keseluruhan roadmap</span><span id="progressText">0 dari 36 milestone</span></div><div class="progress-track"><div class="progress-fill" id="overallBar"></div></div></div><div class="progress-number" id="progressPct">0%</div></div>
-    </section>
-    <section class="section" id="roadmap">
-      <div class="section-head"><div><div class="eyebrow">THE 24-MONTH JOURNEY</div><h2>Six stages of mastery</h2></div><p>Buka setiap fase untuk melihat materi, checklist kompetensi, dan bukti kelulusan yang harus kamu hasilkan.</p></div>
-      <div class="tabs" id="phaseFilters"><button class="tab active" data-filter="all">Semua fase</button><button class="tab" data-filter="foundation">Fondasi</button><button class="tab" data-filter="systems">Systems</button><button class="tab" data-filter="architecture">Architecture</button><button class="tab" data-filter="production">Production</button></div>
-      <div class="phase-grid" id="phaseGrid"></div>
-    </section>
-    <section class="section" id="portfolio">
-      <div class="section-head"><div><div class="eyebrow">PROOF OF WORK</div><h2>Portfolio ladder</h2></div><p>Satu ekosistem yang tumbuh dari proyek kecil menjadi developer infrastructure product. Jangan membangun semuanya sekaligus.</p></div>
-      <div class="project-grid" id="projectGrid"></div>
-    </section>
-    <section class="section" id="library">
-      <div class="section-head"><div><div class="eyebrow">THE ENGINEER'S LIBRARY</div><h2>Books & research papers</h2></div><p>Baca untuk menjawab masalah yang sedang kamu hadapi. Setiap bacaan harus terhubung dengan eksperimen nyata.</p></div>
-      <div class="reading-plan">
-        <div class="reading-box"><h3>Essential books</h3><div id="bookList"></div></div>
-        <div class="reading-box"><h3>Foundational papers</h3><div id="paperList"></div></div>
-      </div>
-    </section>
-    <section class="section" id="stack">
-      <div class="section-head"><div><div class="eyebrow">TOOLS, NOT TROPHIES</div><h2>Core technology stack</h2></div><p>Fokus pada sedikit teknologi, pahami trade-off-nya, dan tambah alat baru hanya ketika kebutuhan produk memanggilnya.</p></div>
-      <table class="stack-table"><thead><tr><th>Area</th><th>Primary stack</th><th>Prioritas</th></tr></thead><tbody>
-        <tr><td>Language</td><td>Go</td><td>Dalami sekarang</td></tr><tr><td>Database</td><td>PostgreSQL</td><td>Dalami sekarang</td></tr><tr><td>Networking & API</td><td>HTTP, TCP, TLS, REST, gRPC</td><td>Dalami sekarang</td></tr><tr><td>Cache & messaging</td><td>Redis + NATS atau RabbitMQ</td><td>Fase 2</td></tr><tr><td>Infrastructure</td><td>Linux, Docker, GitHub Actions</td><td>Bertahap</td></tr><tr><td>Observability</td><td>Prometheus, Grafana, OpenTelemetry</td><td>Fase 5</td></tr><tr><td>Testing</td><td>Go testing, integration tests, k6</td><td>Sejak awal</td></tr><tr><td>Orchestration</td><td>Kubernetes</td><td>Belakangan</td></tr>
-      </tbody></table>
-    </section>
-    <section class="section" id="weekly">
-      <div class="section-head"><div><div class="eyebrow">A SUSTAINABLE RHYTHM</div><h2>Weekly learning rhythm</h2></div><p>Contoh alokasi 12 jam per minggu. Geser porsinya sesuai energi, tetapi pertahankan kebiasaan membangun.</p></div>
-      <div class="weekly"><div class="week"><strong>05h</strong><span>Build product</span><small>Implementasi fitur dan integrasi sistem.</small></div><div class="week"><strong>03h</strong><span>Theory & books</span><small>Konsep fundamental yang sedang dibutuhkan.</small></div><div class="week"><strong>02h</strong><span>Research papers</span><small>Baca, rangkum, dan hubungkan ke desain.</small></div><div class="week"><strong>01h</strong><span>Experiments</span><small>Benchmark, failure test, dan profiling.</small></div><div class="week"><strong>01h</strong><span>Documentation</span><small>ADR, diagram, writeup, dan refleksi.</small></div></div>
-    </section>
-    <section class="section" id="first90">
-      <div class="section-head"><div><div class="eyebrow">START HERE</div><h2>Your first 90 days</h2></div><p>Jangan menunggu menguasai semuanya. Mulai dari MVP yang kecil, lalu biarkan masalah nyata menentukan pelajaran berikutnya.</p></div>
-      <div class="phase-grid">
-        <article class="phase"><div class="phase-num">DAYS 01—30</div><h3>Design & foundation</h3><p class="phase-desc">Pilih problem, tulis product requirements, domain model, database schema, dan architecture diagram.</p><div class="deliverable"><strong>Deliverable</strong><br>SaaS API versi pertama dengan modular monolith.</div></article>
-        <article class="phase"><div class="phase-num">DAYS 31—60</div><h3>Build & reliability</h3><p class="phase-desc">Tambahkan background processing, worker, idempotency, retry, integration tests, dan simulasi kegagalan.</p><div class="deliverable"><strong>Deliverable</strong><br>Sistem asynchronous yang dapat diuji.</div></article>
-        <article class="phase"><div class="phase-num">DAYS 61—90</div><h3>Measure & improve</h3><p class="phase-desc">Load test, ukur latency dan throughput, analisis bottleneck, tambahkan observability.</p><div class="deliverable"><strong>Deliverable</strong><br>Engineering case study dengan benchmark dan ADR.</div></article>
-        <article class="phase"><div class="phase-num">THE RULE</div><h3>Build to understand</h3><p class="phase-desc">Setiap konsep harus punya eksperimen. Setiap eksperimen harus punya hasil. Setiap hasil harus mengubah pemahaman atau desainmu.</p><div class="deliverable"><strong>North star</strong><br>Jadilah builder yang memahami sistem dari dalam.</div></article>
-      </div>
-    </section>
-    <footer class="footer"><span>FORGE / PRODUCT SYSTEMS BUILDER</span><span>Go is the tool. Systems are the depth. Products are the proof.</span></footer>
-  </main>
+<div class="container">
+
+<header class="hero">
+  <div class="eyebrow">ENGINEERING JOURNEY · 2026–2028</div>
+  <h1>Product Systems<br>Builder<span style="color:#b69aff">.</span></h1>
+  <p class="subtitle">
+    A 24-month journey from Go Backend Engineer
+    to Independent Product Systems Builder.
+    Build deeply. Understand fundamentally. Ship real products.
+  </p>
+  <div class="badge">GO · DISTRIBUTED SYSTEMS · ARCHITECTURE</div>
+</header>
+
+<section class="panel">
+  <h2>⚔ Your Progress</h2>
+  <div class="stats">
+    <div class="stat">
+      <strong id="totalDone">0</strong>
+      <span>Tasks completed</span>
+    </div>
+    <div class="stat">
+      <strong id="totalTasks">0</strong>
+      <span>Total tasks</span>
+    </div>
+    <div class="stat">
+      <strong id="overallPercent">0%</strong>
+      <span>Overall progress</span>
+    </div>
+  </div>
+
+  <div class="progress-label">
+    <span>Journey completion</span>
+    <span id="progressText">0%</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="overallBar"></div>
+  </div>
+  <p id="motivation">Your engineering journey begins here.</p>
+</section>
+
+<div class="tools">
+  <button class="primary" onclick="expandAll(true)">Expand all</button>
+  <button onclick="expandAll(false)">Collapse all</button>
+  <button onclick="exportProgress()">Export progress</button>
+  <button class="danger" onclick="resetProgress()">Reset progress</button>
 </div>
-<div class="toast" id="toast">Progress tersimpan di sesi ini ✦</d
+
+<main id="roadmap"></main>
+
+<section class="panel">
+  <h2>📚 Engineering Library</h2>
+  <p>Checklist buku utama. Baca sambil mengimplementasikan konsepnya.</p>
+  <div id="books"></div>
+</section>
+
+<section class="panel">
+  <h2>📄 Research Papers</h2>
+  <p>Foundational papers untuk membangun pemahaman distributed systems.</p>
+  <div id="papers"></div>
+</section>
+
+<section class="panel">
+  <h2>🏆 Final Builder Standards</h2>
+  <p>Kompetensi yang diharapkan setelah perjalanan 24 bulan.</p>
+  <div id="standards"></div>
+</section>
+
+<footer>
+  PRODUCT SYSTEMS BUILDER · FORGE PROJECT<br>
+  Built for deep engineering, not technology collecting.
+</footer>
+
+</div>
+
+<script>
+const phases = [
+{
+ title:"Product Backend Foundations",
+ period:"Bulan 1–3",
+ goal:"Membangun backend yang solid dan memahami domain produk.",
+ sections:[
+  {title:"Go Engineering",tasks:[
+   "Go interfaces dan composition",
+   "Go generics dan error handling",
+   "Goroutines dan channels",
+   "sync.Mutex, RWMutex dan WaitGroup",
+   "context.Context, cancellation dan timeout",
+   "Go profiling dan benchmarking"
+  ]},
+  {title:"Database Engineering",tasks:[
+   "Relational database fundamentals",
+   "PostgreSQL schema design",
+   "Indexes dan query planning",
+   "Transactions dan ACID",
+   "Isolation levels dan MVCC",
+   "Connection pooling"
+  ]},
+  {title:"Backend Architecture",tasks:[
+   "HTTP dan REST API design",
+   "API versioning",
+   "Authentication dan authorization",
+   "RBAC dan multi-tenancy",
+   "Modular monolith",
+   "Clean architecture",
+   "Domain-driven design fundamentals",
+   "Unit, integration dan E2E testing"
+  ]}
+ ],
+ project:{
+  name:"Portfolio 01 — Multi-tenant SaaS API",
+  description:"Bangun SaaS API yang bisa digunakan oleh banyak organisasi dengan isolasi data.",
+  tasks:[
+   "Organization management",
+   "User management",
+   "Role-based access control",
+   "API key management",
+   "Subscription dan usage tracking",
+   "Audit logging",
+   "Database tenant isolation",
+   "API documentation",
+   "Integration tests",
+   "Deploy MVP"
+  ]
+ },
+ milestones:[
+  "Mampu merancang database untuk domain kompleks",
+  "Memahami transaction dan concurrency problems",
+  "Mampu membangun modular monolith",
+  "Mampu menjelaskan architectural decisions",
+  "Tidak ada kebocoran data antar-tenant"
+ ]
+},
+{
+ title:"Advanced Backend & Data Engineering",
+ period:"Bulan 4–6",
+ goal:"Menguasai data processing dan asynchronous architecture.",
+ sections:[
+  {title:"Database Advanced",tasks:[
+   "PostgreSQL query planner",
+   "EXPLAIN dan EXPLAIN ANALYZE",
+   "Index optimization",
+   "Database locks",
+   "Deadlocks",
+   "Replication fundamentals",
+   "Database performance tuning"
+  ]},
+  {title:"Caching & Messaging",tasks:[
+   "Redis data structures",
+   "Cache-aside pattern",
+   "Write-through dan write-behind",
+   "Cache invalidation",
+   "Message queue fundamentals",
+   "NATS atau RabbitMQ",
+   "At-least-once delivery",
+   "Consumer acknowledgement"
+  ]},
+  {title:"Distributed Processing",tasks:[
+   "Event-driven architecture",
+   "Transactional outbox pattern",
+   "Idempotent consumer",
+   "Background worker",
+   "Exponential backoff",
+   "Dead letter queue",
+   "Rate limiting",
+   "Eventual consistency"
+  ]}
+ ],
+ project:{
+  name:"Portfolio 02 — Webhook Delivery Infrastructure",
+  description:"Bangun layanan webhook yang menerima event dan mengirimkannya secara asynchronous.",
+  tasks:[
+   "Event ingestion API",
+   "Persistent queue",
+   "Worker pool",
+   "Retry mechanism",
+   "Exponential backoff",
+   "Dead letter queue",
+   "Idempotency",
+   "Rate limiting",
+   "Delivery history",
+   "Failure simulation",
+   "Load testing"
+  ]
+ },
+ milestones:[
+  "Memahami duplicate event delivery",
+  "Mampu merancang asynchronous processing",
+  "Memahami trade-off Redis, PostgreSQL queue dan broker",
+  "Worker crash tidak menyebabkan kehilangan pekerjaan secara tidak terkontrol"
+ ]
+},
+{
+ title:"Distributed Systems",
+ period:"Bulan 7–10",
+ goal:"Memahami komunikasi, koordinasi, dan kegagalan antar-node.",
+ sections:[
+  {title:"Core Concepts",tasks:[
+   "Distributed systems fundamentals",
+   "Network partitions",
+   "Consistency models",
+   "Linearizability",
+   "Sequential consistency",
+   "Eventual consistency",
+   "CAP theorem",
+   "Failure detection",
+   "Time and clocks",
+   "Logical clocks dan causality"
+  ]},
+  {title:"Data Distribution",tasks:[
+   "Database replication",
+   "Leader-follower replication",
+   "Multi-leader replication",
+   "Partitioning dan sharding",
+   "Consistent hashing",
+   "Quorum reads dan writes",
+   "Conflict resolution"
+  ]},
+  {title:"Coordination",tasks:[
+   "Distributed transactions",
+   "Two-phase commit",
+   "Consensus fundamentals",
+   "Raft algorithm",
+   "Leader election",
+   "Distributed locking",
+   "Split brain scenarios"
+  ]}
+ ],
+ project:{
+  name:"Portfolio 03 — Distributed Job Processing",
+  description:"Bangun platform pemrosesan pekerjaan dengan multiple workers.",
+  tasks:[
+   "Job submission API",
+   "Persistent job storage",
+   "Multiple workers",
+   "Job scheduler",
+   "Job priority",
+   "Job state management",
+   "Worker coordination",
+   "Queue partitioning",
+   "Worker crash recovery",
+   "Duplicate message handling",
+   "Network failure simulation",
+   "Recovery documentation"
+  ]
+ },
+ milestones:[
+  "Memahami failure mode distributed systems",
+  "Memahami consistency dan replication",
+  "Mengetahui trade-off distributed locking",
+  "Mampu membuat sistem yang recovery setelah kegagalan",
+  "Mampu menjelaskan hasil eksperimen"
+ ]
+},
+{
+ title:"Architecture & Scalability",
+ period:"Bulan 11–15",
+ goal:"Mampu mengambil keputusan arsitektur berdasarkan kebutuhan nyata.",
+ sections:[
+  {title:"Software Architecture",tasks:[
+   "Advanced domain-driven design",
+   "Bounded contexts",
+   "Context mapping",
+   "Domain modeling",
+   "Architecture characteristics",
+   "Architecture decision records",
+   "Modular monolith vs microservices",
+   "Service boundaries"
+  ]},
+  {title:"Advanced Patterns",tasks:[
+   "CQRS",
+   "Event sourcing",
+   "Saga pattern",
+   "API gateway",
+   "Service discovery",
+   "Event-driven microservices",
+   "Service communication",
+   "Schema evolution"
+  ]},
+  {title:"Scalability",tasks:[
+   "Horizontal dan vertical scaling",
+   "Load balancing",
+   "Capacity planning",
+   "Database sharding",
+   "Multi-region architecture",
+   "Multi-tenancy strategies",
+   "Caching at scale",
+   "Performance bottleneck analysis"
+  ]}
+ ],
+ project:{
+  name:"Portfolio 04 — Developer Platform",
+  description:"Gabungkan sistem sebelumnya menjadi platform developer terintegrasi.",
+  tasks:[
+   "API management",
+   "Webhook management",
+   "Usage metering",
+   "Subscription management",
+   "Billing integration",
+   "Developer dashboard",
+   "Organization management",
+   "Event analytics",
+   "Service boundary documentation",
+   "Architecture diagrams"
+  ]
+ },
+ milestones:[
+  "Mampu menentukan service boundaries",
+  "Mampu membandingkan monolith dan microservices",
+  "Mampu melakukan capacity planning",
+  "Mampu merancang sistem berdasarkan workload",
+  "Mampu mempertanggungjawabkan architectural decisions"
+ ]
+},
+{
+ title:"Production Engineering",
+ period:"Bulan 16–20",
+ goal:"Mampu menjalankan dan memelihara produk di production.",
+ sections:[
+  {title:"Infrastructure",tasks:[
+   "Linux process dan memory",
+   "Linux networking",
+   "Docker fundamentals",
+   "Container networking",
+   "Cloud fundamentals",
+   "VPS deployment",
+   "Kubernetes fundamentals",
+   "Infrastructure as Code",
+   "Secrets management"
+  ]},
+  {title:"Delivery & Observability",tasks:[
+   "GitHub Actions",
+   "Automated CI/CD",
+   "Zero-downtime deployment concepts",
+   "Prometheus",
+   "Grafana",
+   "OpenTelemetry",
+   "Distributed tracing",
+   "Centralized logging",
+   "Alerting"
+  ]},
+  {title:"Reliability",tasks:[
+   "SLI, SLO dan SLA",
+   "Error budgets",
+   "Load testing dengan k6",
+   "Tail latency",
+   "Chaos engineering",
+   "Incident management",
+   "Backup dan disaster recovery",
+   "Cloud cost optimization"
+  ]}
+ ],
+ project:{
+  name:"Portfolio 05 — Production-grade SaaS",
+  description:"Deploy platform dengan observability, reliability dan operasional production.",
+  tasks:[
+   "Production deployment",
+   "Automated deployment pipeline",
+   "Monitoring dashboard",
+   "Centralized logs",
+   "Distributed traces",
+   "Alerting rules",
+   "Database backup",
+   "Recovery procedure",
+   "Load test report",
+   "Incident report",
+   "Infrastructure cost report"
+  ]
+ },
+ milestones:[
+  "Mampu melakukan deployment yang aman",
+  "Mampu menganalisis bottleneck dari telemetry",
+  "Mampu melakukan incident investigation",
+  "Mampu menentukan SLO",
+  "Mampu menghitung biaya operasional produk"
+ ]
+},
+{
+ title:"Independent Product Systems Builder",
+ period:"Bulan 21–24",
+ goal:"Membangun produk nyata secara mandiri dari problem discovery hingga production.",
+ sections:[
+  {title:"Product Engineering",tasks:[
+   "Problem discovery",
+   "Customer interviews",
+   "Product requirements document",
+   "MVP definition",
+   "Technical feasibility analysis",
+   "Product roadmap",
+   "Feature prioritization",
+   "Usage analytics"
+  ]},
+  {title:"Independent Architecture",tasks:[
+   "Architecture proposal",
+   "Domain model",
+   "Database design",
+   "Scalability strategy",
+   "Security review",
+   "Reliability strategy",
+   "Cost estimation",
+   "Architecture review"
+  ]},
+  {title:"Delivery & Growth",tasks:[
+   "Build production MVP",
+   "Deploy public product",
+   "Onboard initial users",
+   "Collect user feedback",
+   "Monitor product usage",
+   "Improve based on data",
+   "Write technical case study",
+   "Publish portfolio"
+  ]}
+ ],
+ project:{
+  name:"Final Portfolio — Your Own Developer Infrastructure Product",
+  description:"Ciptakan produk developer infrastructure yang menyelesaikan masalah nyata.",
+  tasks:[
+   "Identify real developer problem",
+   "Validate with potential users",
+   "Define product requirements",
+   "Design system architecture",
+   "Implement with Go",
+   "Deploy to production",
+   "Create monitoring and alerts",
+   "Run performance tests",
+   "Document engineering trade-offs",
+   "Get real user feedback",
+   "Publish technical case study",
+   "Prepare product demonstration"
+  ]
+ },
+ milestones:[
+  "Mampu mengubah kebutuhan bisnis menjadi architecture",
+  "Mampu membangun produk dari nol",
+  "Mampu melakukan trade-off reliability, scalability dan cost",
+  "Mampu mengoperasikan produk nyata",
+  "Memiliki technical portfolio yang bisa diperiksa engineer lain"
+ ]
+}
+];
+
+const books = [
+ "Fundamentals of Software Architecture — Mark Richards & Neal Ford",
+ "Designing Data-Intensive Applications, 2nd Edition — Kleppmann & Riccomini",
+ "Release It! — Michael Nygard",
+ "Building Microservices, 2nd Edition — Sam Newman",
+ "Site Reliability Engineering — Google",
+ "The Site Reliability Workbook — Google"
+];
+
+const papers = [
+ {
+ name:"Dynamo: Amazon's Highly Available Key-value Store",
+ url:"https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+ },
+ {
+ name:"MapReduce: Simplified Data Processing on Large Clusters",
+ url:"https://research.google/pubs/mapreduce-simplified-data-processing-on-large-clusters/"
+ },
+ {
+ name:"Spanner: Google's Globally-Distributed Database",
+ url:"https://research.google/pubs/spanner-googles-globally-distributed-database/"
+ },
+ {
+ name:"In Search of an Understandable Consensus Algorithm (Raft)",
+ url:"https://raft.github.io/raft.pdf"
+ },
+ {
+ name:"Paxos Made Simple",
+ url:"https://lamport.azurewebsites.net/pubs/paxos-simple.pdf"
+ },
+ {
+ name:"Dapper: A Large-Scale Distributed Systems Tracing Infrastructure",
+ url:"https://research.google/pubs/dapper-a-large-scale-distributed-systems-tracing-infrastructure/"
+ },
+ {
+ name:"The Tail at Scale",
+ url:"https://research.google/pubs/the-tail-at-scale/"
+ }
+];
+
+const standards = [
+ "Mampu merancang SaaS multi-tenant dari nol",
+ "Mampu membuat backend Go kompleks",
+ "Memahami database internals dan transaction behavior",
+ "Mampu merancang asynchronous processing",
+ "Memahami distributed systems dan consistency",
+ "Mampu menangani retry, duplication dan failure",
+ "Mampu membuat architectural decisions",
+ "Mampu melakukan load testing dan optimasi",
+ "Mampu deploy dan mengoperasikan production system",
+ "Memiliki produk nyata dan technical case study"
+];
+
+const STORAGE_KEY = "product-systems-builder-v1";
+
+function loadProgress() {
+ try {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+ } catch {
+  return {};
+ }
+}
+
+let progress = loadProgress();
+
+function saveProgress() {
+ localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+ updateStats();
+}
+
+function renderCheckbox(label, id) {
+ const checked = progress[id] === true;
+ return `
+  <label class="task">
+   <input type="checkbox"
+    data-id="${id}"
+    ${checked ? "checked" : ""}>
+   <span>${label}</span>
+  </label>
+ `;
+}
+
+function renderRoadmap() {
+ const container = document.getElementById("roadmap");
+
+ container.innerHTML = phases.map((phase,i) => {
+  let html = `
+  <details class="phase" id="phase-${i}">
+   <summary>
+    <div class="phase-head">
+     <div class="phase-number">0${i+1}</div>
+     <div class="phase-title">
+      <h3>${phase.title}</h3>
+      <small>${phase.period}</small>
+     </div>
+     <div class="phase-percent" id="phase-percent-${i}">0%</div>
+    </div>
+    <div class="progress-track">
+     <div class="progress-fill" id="phase-bar-${i}"></div>
+    </div>
+ 

@@ -660,6 +660,109 @@ p {
 
 
 /* =========================================
+   PRESS RELEASE
+========================================= */
+
+.press-section {
+  padding-top: 40px;
+}
+
+.press-card {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  overflow: hidden;
+
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: 0 22px 65px #28204a0d;
+}
+
+.press-image {
+  position: relative;
+  display: block;
+  min-height: 420px;
+  overflow: hidden;
+  background: #EEEBFF;
+}
+
+.press-image img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.press-image-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 48px 24px 22px;
+
+  color: white;
+  background: linear-gradient(transparent, #151226c9);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.press-image-caption span + span {
+  font-size: 0.74rem;
+  font-weight: 500;
+  opacity: 0.82;
+}
+
+.press-content {
+  align-self: center;
+  padding: clamp(30px, 5vw, 58px);
+}
+
+.press-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 13px;
+  border-radius: 999px;
+
+  color: var(--primary-dark);
+  background: #F0EDFF;
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.press-date {
+  margin: 24px 0 12px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.press-content h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.8rem, 3.2vw, 2.65rem);
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+}
+
+.press-description {
+  margin: 0 0 25px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.press-link {
+  width: fit-content;
+}
+
+
+/* =========================================
    DOWNLOAD
 ========================================= */
 
@@ -866,6 +969,23 @@ p {
     padding: 24px;
   }
 
+  .press-section {
+    padding-top: 20px;
+  }
+
+  .press-card {
+    grid-template-columns: 1fr;
+  }
+
+  .press-image {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .press-content {
+    padding: 30px 25px;
+  }
+
   .download-card {
     grid-template-columns: 1fr;
     padding: 32px 25px;
@@ -909,6 +1029,10 @@ p {
   .brand-logo {
     width: 35px;
     height: 35px;
+  }
+
+  .press-content {
+    padding: 25px 20px;
   }
 
   .nav-download {

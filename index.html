@@ -37,7 +37,7 @@ description: "Blog Rangga Waridat berisi catatan belajar programming, backend, d
         <div>
             <p class="section-kicker">01 / NOTES</p>
         </div>
-        <span>{{ site.posts | size }} note</span>
+        <span>{{ site.posts | size }} notes</span>
     </div>
 
     {% for post in site.posts %}
@@ -92,7 +92,7 @@ description: "Blog Rangga Waridat berisi catatan belajar programming, backend, d
                 {% assign project_count = project_count | plus: 1 %}
             {% endif %}
         {% endfor %}
-        <span>{{ project_count }} project</span>
+        <span>{{ project_count }} projects</span>
     </div>
 
     <div class="projects-grid">

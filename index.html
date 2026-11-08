@@ -35,10 +35,9 @@ description: "Blog Rangga Waridat berisi catatan belajar programming, backend, d
 
     <div class="section-heading" id="articles">
         <div>
-            <p class="section-kicker">01 / CATATAN</p>
-            <h2>Hal yang sedang kupelajari.</h2>
+            <p class="section-kicker">01 / NOTES</p>
         </div>
-        <span>{{ site.posts | size }} tulisan</span>
+        <span>{{ site.posts | size }} note</span>
     </div>
 
     {% for post in site.posts %}
@@ -83,8 +82,7 @@ description: "Blog Rangga Waridat berisi catatan belajar programming, backend, d
 <section class="projects" id="projects" aria-labelledby="projects-title">
     <div class="section-heading">
         <div>
-            <p class="section-kicker">02 / PROJECT</p>
-            <h2 id="projects-title">Hal yang kubangun.</h2>
+            <p class="section-kicker">02 / PROJECTS</p>
         </div>
         {% assign project_pages = site.pages | where_exp: "page", "page.path contains 'projects/'" %}
         {% assign project_count = 0 %}

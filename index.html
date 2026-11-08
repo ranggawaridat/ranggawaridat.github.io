@@ -84,11 +84,11 @@ description: "Blog Rangga Waridat berisi catatan belajar programming, backend, d
         <div>
             <p class="section-kicker">02 / PROJECTS</p>
         </div>
-        {% assign project_pages = site.pages | where_exp: "page", "page.path contains 'projects/'" %}
+        {% assign project_pages = site.pages %}
         {% assign project_count = 0 %}
         {% for project_page in project_pages %}
-            {% assign project_parts = project_page.path | remove_first: '/' | split: '/' %}
-            {% if project_parts.size == 3 and project_parts[0] == 'projects' and project_parts[2] == 'index.html' %}
+            {% assign project_parts = project_page.url | remove_first: '/projects/' | split: '/' %}
+            {% if project_page.url contains '/projects/' and project_parts.size == 1 and project_parts[0] != '' %}
                 {% assign project_count = project_count | plus: 1 %}
             {% endif %}
         {% endfor %}
@@ -98,8 +98,8 @@ description: "Blog Rangga Waridat berisi catatan belajar programming, backend, d
     <div class="projects-grid">
         {% assign project_number = 0 %}
         {% for project_page in project_pages %}
-            {% assign project_parts = project_page.path | remove_first: '/' | split: '/' %}
-            {% if project_parts.size == 3 and project_parts[0] == 'projects' and project_parts[2] == 'index.html' %}
+            {% assign project_parts = project_page.url | remove_first: '/projects/' | split: '/' %}
+            {% if project_page.url contains '/projects/' and project_parts.size == 1 and project_parts[0] != '' %}
                 {% assign project_number = project_number | plus: 1 %}
                 {% assign project_slug = project_parts[1] %}
                 {% assign project_words = project_slug | replace: '-', ' ' | split: ' ' %}

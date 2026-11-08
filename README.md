@@ -10,7 +10,7 @@ Situs ini dibuat dengan [Jekyll](https://jekyllrb.com/) dan dipublikasikan melal
 
 Buat folder baru langsung di dalam `projects/` dan letakkan `index.html` sebagai halaman utama, misalnya `projects/nama-project/index.html`. Project akan otomatis muncul di bagian **Projects** pada halaman utama; tidak perlu menambahkan daftar project secara manual.
 
-Opsional, tambahkan front matter berikut di bagian paling atas `index.html` untuk mengatur informasi kartu:
+Tambahkan front matter berikut di bagian paling atas `index.html` agar Jekyll mengenali halaman project dan bisa menampilkan informasinya di kartu:
 
 ```yaml
 ---

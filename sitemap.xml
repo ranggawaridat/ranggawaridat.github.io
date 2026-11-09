@@ -1,9 +1,22 @@
+---
+layout: null
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ranggawaridat.github.io/</loc>
-    <lastmod>2026-09-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <loc>{{ '/' | absolute_url }}</loc>
   </url>
+  {% for post in site.posts %}
+  <url>
+    <loc>{{ post.url | absolute_url }}</loc>
+  </url>
+  {% endfor %}
+  {% for project_page in site.pages %}
+    {% assign project_parts = project_page.url | remove_first: '/projects/' | remove_last: '/' | split: '/' %}
+    {% if project_page.url contains '/projects/' and project_parts.size == 1 and project_parts[0] != '' %}
+  <url>
+    <loc>{{ project_page.url | absolute_url }}</loc>
+  </url>
+    {% endif %}
+  {% endfor %}
 </urlset>

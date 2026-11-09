@@ -5,49 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="{{ site.author.name }}">
-    <meta name="description" content="{{ page.description | default: site.description }}">
+    {% assign seo_description = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 %}
+    {% if page.seo_title %}
+        {% assign seo_title = page.seo_title %}
+    {% elsif page.title and page.title != 'Home' %}
+        {% assign seo_title = page.title | append: ' — ' | append: site.title %}
+    {% else %}
+        {% assign seo_title = site.title | append: ' — Catatan Belajar Programming' %}
+    {% endif %}
+    {% assign canonical_url = page.url | absolute_url %}
+    <meta name="author" content="{{ site.author.name | escape }}">
+    <meta name="description" content="{{ seo_description | escape }}">
     <meta name="theme-color" content="#0f172a">
 
-    <title>
-        {% if page.title %}
-            {% if page.title != 'Home' %}
-                {{ page.title }} — {{ site.title }}
-            {% else %}
-                {{ site.title }} — Catatan Belajar Programming
-            {% endif %}
-        {% else %}
-            {{ site.title }}
-        {% endif %}
-    </title>
+    <title>{{ seo_title | escape }}</title>
 
-    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <link rel="canonical" href="{{ canonical_url }}">
     <link rel="icon" type="image/jpg" href="{{ '/assets/images/icon.jpg' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
     <meta property="og:locale" content="{{ site.locale | default: 'id_ID' }}">
-    <meta property="og:site_name" content="{{ site.title }}">
-    <meta property="og:title" content="{% if page.title and page.title != 'Home' %}{{ page.title }}{% else %}{{ site.title }} — Catatan Belajar Programming{% endif %}">
-    <meta property="og:description" content="{{ page.description | default: site.description }}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    <meta property="og:title" content="{{ seo_title | escape }}">
+    <meta property="og:description" content="{{ seo_description | escape }}">
+    <meta property="og:url" content="{{ canonical_url }}">
     <meta property="og:image" content="{{ '/assets/images/icon.jpg' | absolute_url }}">
+    <meta property="og:image:alt" content="Logo {{ site.title | escape }}">
+    {% if page.date %}
+    <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    {% endif %}
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="{{ site.social.twitter }}">
-    <meta name="twitter:title" content="{% if page.title and page.title != 'Home' %}{{ page.title }}{% else %}{{ site.title }} — Catatan Belajar Programming{% endif %}">
-    <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+    <meta name="twitter:title" content="{{ seo_title | escape }}">
+    <meta name="twitter:description" content="{{ seo_description | escape }}">
     <meta name="twitter:image" content="{{ '/assets/images/icon.jpg' | absolute_url }}">
 
     <script type="application/ld+json">
+        {% if page.date %}
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": {{ page.title | jsonify }},
+            "description": {{ seo_description | jsonify }},
+            "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+            "author": {
+                "@type": "Person",
+                "name": {{ site.author.name | jsonify }}
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": {{ canonical_url | jsonify }}
+            },
+            "image": {{ '/assets/images/icon.jpg' | absolute_url | jsonify }},
+            "inLanguage": {{ site.lang | default: 'id' | jsonify }}
+        }
+        {% else %}
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "{{ site.title }}",
-            "url": "{{ site.url }}",
-            "description": "{{ site.description }}",
-            "inLanguage": "{{ site.lang | default: 'id' }}"
+            "name": {{ site.title | jsonify }},
+            "url": {{ site.url | append: site.baseurl | append: '/' | jsonify }},
+            "description": {{ site.description | jsonify }},
+            "inLanguage": {{ site.lang | default: 'id' | jsonify }}
         }
+        {% endif %}
     </script>
 </head>
 

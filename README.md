@@ -1,23 +1,38 @@
-# Rangga Waridat
+A Record of What I Learn.
 
-Blog pribadi untuk mendokumentasikan proses belajar software development, terutama backend dengan Go. Isinya berupa catatan, eksperimen, dan hal-hal yang dipelajari saat membangun project.
+A personal engineering archive by Rangga Waridat.
 
-Situs ini dibuat dengan [Jekyll](https://jekyllrb.com/) dan dipublikasikan melalui GitHub Pages.
+This repository contains a collection of notes, technical explorations, experiments, and projects gathered throughout my journey as a developer.
 
-**Situs:** [ranggawaridat.github.io](https://ranggawaridat.github.io)
+I write about things that spark my curiosity, concepts I find worth understanding, and knowledge I want to preserve for future reference.
 
-## Menambahkan project
+What You'll Find Here
 
-Buat folder baru langsung di dalam `projects/` dan letakkan `index.html` sebagai halaman utama, misalnya `projects/nama-project/index.html`. Project akan otomatis muncul di bagian **Projects** pada halaman utama; tidak perlu menambahkan daftar project secara manual.
+- Software Engineering — Go, backend development, software architecture, and engineering practices.
+- Networking — TCP/IP, DNS, TLS, HTTP, and network protocols.
+- Database Engineering — PostgreSQL, indexing, transactions, and query optimization.
+- Infrastructure & Cloud — Linux, VPS, deployment, DevOps, and observability.
+- Cybersecurity — Application security, API security, and technical explorations.
+- Projects — Things I build, experiments, and practical implementations.
 
-Tambahkan front matter berikut di bagian paling atas `index.html` agar Jekyll mengenali halaman project dan bisa menampilkan informasinya di kartu:
+Philosophy
 
-```yaml
+I don't write just to publish articles or maintain a posting schedule.
+
+Curiosity is what drives this archive.
+
+Some notes begin with a simple question. Others come from experiments, problems I encounter, or concepts I want to understand more deeply.
+
+Over time, these notes evolve as my knowledge grows. Older ideas may be revisited, refined, and expanded with new findings.
+
+This is not a finished knowledge base. It is an ongoing record of learning, exploration, and technical growth.
+
+Explore
+
+🌐 Website: https://ranggawaridat.github.io
+
+💻 GitHub: https://github.com/ranggawaridat
+
 ---
-project_title: "Nama Project"
-project_description: "Deskripsi singkat project."
-project_category: "WEB APP"
----
-```
 
-Folder di dalam folder project (misalnya `web/`) tidak akan ditampilkan sebagai project terpisah.
+Learn deeply. Build things. Document everything worth remembering.

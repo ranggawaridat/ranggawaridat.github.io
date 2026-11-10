@@ -13,7 +13,7 @@ project_category: "WEB APP"
     <title>Sistem Pakar Diagnosis Awal Penyakit Pernapasan Kronis</title>
     <meta name="title" content="Sistem Pakar Diagnosis Awal Penyakit Pernapasan Kronis">
     <meta name="description" content="Aplikasi Web Sistem Pakar dengan metode Forward Chaining untuk diagnosis awal penyakit pernapasan kronis (Asma, PPOK, FPI, Bronkiektasis, Sarkoidosis). Tugas Mata Kuliah Kecerdasan Buatan.">
-    <meta name="keywords" content="Sistem Pakar, Forward Chaining, Artificial Intelligence, Penyakit Pernapasan Kronis, Asma, PPOK, FPI, Bronkiektasis, Sarkoidosis, Flutter Web, Kecerdasan Buatan">
+    <meta name="keywords" content="Sistem Pakar, Forward Chaining, Penyakit Pernapasan Kronis, Asma, PPOK, FPI, Bronkiektasis, Sarkoidosis, Flutter Web">
     <meta name="author" content="Rangga Waridat & Tim">
     <meta name="robots" content="index, follow">
 
@@ -117,7 +117,7 @@ project_category: "WEB APP"
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-xs font-bold text-teal-600 uppercase tracking-widest mb-3">Landasan Ilmiah</h2>
                 <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Bedah Jurnal Acuan Sistem Pakar</h3>
-                <p class="mt-4 text-slate-600">Aturan inferensi dan basis pengetahuan sistem ini diadaptasi sepenuhnya dari publikasi penelitian ilmiah terkini.</p>
+                <p class="mt-4 text-slate-600">Aturan inferensi dan basis pengetahuan sistem ini diadaptasi sepenuhnya dari publikasi penelitian ilmiah.</p>
             </div>
 
             <div class="bg-slate-50 rounded-3xl p-8 lg:p-12 border border-slate-100 shadow-sm grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -134,12 +134,12 @@ project_category: "WEB APP"
                     <div>
                         <h5 class="font-bold text-slate-900 text-lg mb-2">Metode Penelusuran: Forward Chaining</h5>
                         <p class="text-slate-600 text-sm leading-relaxed">
-                            Penelitian ini memanfaatkan pendekatan <em>Forward Chaining</em> (penalaran maju). Sistem memulai pencarian fakta dari input gejala klinis yang dirasakan oleh pengguna ($G_{01} \dots G_{19}$), lalu mencocokkannya secara sistematis terhadap aturan inferensi ($Rule_1 \dots Rule_5$) hingga diperoleh kesimpulan diagnosis akhir penyakit ($P_{01} \dots P_{05}$).
+                            Penelitian ini memanfaatkan pendekatan <em>Forward Chaining</em>. Sistem memulai pencarian fakta dari input gejala klinis yang dirasakan oleh pengguna, lalu mencocokkannya secara sistematis terhadap aturan inferensi hingga diperoleh kesimpulan diagnosis akhir penyakit.
                         </p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                         <div class="bg-white p-4 rounded-xl border border-slate-200">
-                            <p class="text-xs text-slate-400 font-semibold">Tabel Penyakit ($P_{01}-P_{05}$)</p>
+                            <p class="text-xs text-slate-400 font-semibold">Tabel Penyakit</p>
                             <ul class="text-xs text-slate-700 font-semibold mt-2 space-y-1">
                                 <li>• P01: Asma</li>
                                 <li>• P02: PPOK (Paru Obstruktif Kronis)</li>
@@ -149,55 +149,12 @@ project_category: "WEB APP"
                             </ul>
                         </div>
                         <div class="bg-white p-4 rounded-xl border border-slate-200">
-                            <p class="text-xs text-slate-400 font-semibold">Basis Gejala ($G_{01}-G_{19}$)</p>
+                            <p class="text-xs text-slate-400 font-semibold">Basis Gejala</p>
                             <p class="text-xs text-slate-600 mt-2 leading-relaxed">
                                 Meliputi 19 data gejala spesifik seperti sesak napas, batuk kronis, mengi, produksi lendir berlebih, nyeri dada, hingga hemoptisis (batuk darah).
                             </p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Penjelasan Aplikasi Web -->
-    <section id="features" class="py-20 bg-slate-50 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold text-teal-600 uppercase tracking-widest mb-3">Teknologi & Fitur</h2>
-                <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Arsitektur Aplikasi Web Flutter</h3>
-                <p class="mt-4 text-slate-600">Dikembangkan menggunakan framework Flutter Web yang disederhanakan (Single-Purpose Diagnostics) agar sangat cepat diakses tanpa hambatan registrasi.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 text-xl font-bold mb-6">
-                        <i class="fa-solid fa-sliders"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">Interaktif & Tanpa Auth</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Aplikasi sengaja dirancang tanpa alur login/register sehingga pengguna umum dapat langsung menjawab kuesioner gejala secara praktis dan privat.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                    <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 text-xl font-bold mb-6">
-                        <i class="fa-solid fa-microchip"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">Engine Forward Chaining</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Algoritma inferensi dieksekusi secara lokal di sisi klien (Client-Side State Engine), memberikan kecepatan respon instan tanpa *latency* server.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-xl font-bold mb-6">
-                        <i class="fa-solid fa-file-medical-pro"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">Hasil & Solusi Medis Awal</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Setelah mendeteksi pola gejala, sistem menampilkan diagnosis penyakit, penjelasan deskriptif, dan rekomendasi langkah penanganan awal.
-                    </p>
                 </div>
             </div>
         </div>
@@ -220,7 +177,7 @@ project_category: "WEB APP"
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 text-xs">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <p>&copy; Tugas Mata Kuliah Artificial Intelligence.</p>
+            <p>&copy; Tugas Mata Kuliah Kecerdasan Buatan.</p>
             <div class="flex space-x-6">
                 <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan" class="hover:text-white">Aplikasi Web</a>
                 <a href="#journal" class="hover:text-white">Jurnal Referensi</a>

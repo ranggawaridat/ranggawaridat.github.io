@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Primary Meta Tags -->
+    <title>Sistem Pakar Diagnosis Awal Penyakit Pernapasan Kronis | Forward Chaining AI</title>
+    <meta name="title" content="Sistem Pakar Diagnosis Awal Penyakit Pernapasan Kronis | Forward Chaining AI">
+    <meta name="description" content="Aplikasi web Sistem Pakar berbasis Artificial Intelligence dengan metode Forward Chaining untuk diagnosis awal penyakit pernapasan kronis (Asma, PPOK, FPI, Bronkiektasis, Sarkoidosis). Tugas Mata Kuliah Kecerdasan Buatan.">
+    <meta name="keywords" content="Sistem Pakar, Forward Chaining, Artificial Intelligence, Penyakit Pernapasan Kronis, Asma, PPOK, FPI, Bronkiektasis, Sarkoidosis, Flutter Web, Kecerdasan Buatan">
+    <meta name="author" content="Rangga Waridat & Tim">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan">
+    <meta property="og:title" content="Sistem Pakar Diagnosis Awal Penyakit Pernapasan Kronis">
+    <meta property="og:description" content="Deteksi dini penyakit pernapasan kronis menggunakan metode penalaran majemuk (Forward Chaining). Implementasi Tugas Mata Kuliah AI.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan">
+    <meta property="twitter:title" content="Sistem Pakar Diagnosis Awal Penyakit Pernapasan Kronis">
+    <meta property="twitter:description" content="Deteksi dini penyakit pernapasan kronis berbasis Artificial Intelligence dengan metode Forward Chaining.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan">
+
+    <!-- Schema.org JSON-LD for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Sistem Pakar Diagnosis Awal Penyakit Pernapasan Kronis",
+      "operatingSystem": "Web, Android, iOS",
+      "applicationCategory": "HealthApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
+      "description": "Aplikasi Sistem Pakar diagnosis awal penyakit pernapasan kronis menggunakan metode Forward Chaining.",
+      "author": {
+        "@type": "Organization",
+        "name": "Tim Mahasiswa Kecerdasan Buatan"
+      }
+    }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-teal-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-teal-500/30">
+                    <i class="fa-solid fa-lungs"></i>
+                </div>
+                <span class="font-bold text-xl text-slate-900 tracking-tight">Pernapasan<span class="text-teal-600">AI</span></span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <a href="#about" class="hover:text-teal-600 transition-colors">Tentang Proyek</a>
+                <a href="#journal" class="hover:text-teal-600 transition-colors">Referensi Jurnal</a>
+                <a href="#features" class="hover:text-teal-600 transition-colors">Fitur Web</a>
+                <a href="#acknowledgments" class="hover:text-teal-600 transition-colors">Apresiasi</a>
+            </div>
+            <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan" target="_blank" rel="noopener" class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-xl font-semibold shadow-md shadow-teal-600/20 hover:shadow-lg hover:shadow-teal-600/30 transition-all flex items-center space-x-2 text-sm">
+                <span>Buka Aplikasi Web</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden bg-gradient-to-b from-teal-50/50 via-white to-slate-50">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="inline-flex items-center space-x-2 bg-teal-100/60 border border-teal-200 text-teal-800 text-xs font-bold px-3.5 py-1.5 rounded-full">
+                    <span class="flex h-2 w-2 rounded-full bg-teal-500 animate-pulse"></span>
+                    <span>Tugas Akhir Mata Kuliah Artificial Intelligence</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                    Sistem Pakar <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-600">Forward Chaining</span> Diagnosis Pernapasan Kronis
+                </h1>
+                <p class="text-slate-600 text-lg leading-relaxed">
+                    Platform skrining kesehatan awal mandiri berbasis Artificial Intelligence untuk mendeteksi 5 jenis penyakit paru-paru kronis berdasarkan 19 fakta gejala klinis secara cepat, presisi, dan terstruktur.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan" target="_blank" rel="noopener" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-teal-600/25 hover:shadow-teal-600/40 transition-all text-center flex items-center justify-center space-x-3 text-lg">
+                        <i class="fa-solid fa-stethoscope"></i>
+                        <span>Mulai Tes Diagnosis</span>
+                    </a>
+                    <a href="#journal" class="bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold px-6 py-4 rounded-xl hover:bg-slate-50 transition-all text-center flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-book-open text-teal-600"></i>
+                        <span>Baca Ringkasan Jurnal</span>
+                    </a>
+                </div>
+                <div class="pt-6 flex items-center space-x-6 text-xs font-medium text-slate-500 border-t border-slate-200">
+                    <div class="flex items-center space-x-2"><i class="fa-solid fa-bolt text-teal-600"></i><span>Hasil Real-Time</span></div>
+                    <div class="flex items-center space-x-2"><i class="fa-solid fa-user-shield text-teal-600"></i><span>Tanpa Perlu Login</span></div>
+                    <div class="flex items-center space-x-2"><i class="fa-solid fa-laptop-code text-teal-600"></i><span>Flutter Web Engine</span></div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -top-10 -left-10 w-72 h-72 bg-teal-200/40 rounded-full blur-3xl -z-10"></div>
+                <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-emerald-200/40 rounded-full blur-3xl -z-10"></div>
+                <div class="bg-white p-6 rounded-3xl shadow-2xl border border-slate-100 relative">
+                    <div class="bg-slate-900 rounded-2xl p-6 text-white space-y-4 font-mono text-sm shadow-inner">
+                        <div class="flex items-center space-x-2 border-b border-slate-800 pb-3 text-xs text-slate-400">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                            <span class="ml-2">Forward_Chaining_Engine.dart</span>
+                        </div>
+                        <p class="text-teal-400">// Algoritma Penalar Kuesioner Interaktif</p>
+                        <p><span class="text-purple-400">IF</span> (G01: Sesak Nafas & G02: Batuk Malam & G03: Mengi & G04: Dada Sesak & G05: Nafas Pendek)</p>
+                        <p class="text-emerald-400"><span class="text-purple-400">THEN</span> Diagnosis = "P01 - Asma"</p>
+                        <p class="text-slate-500 text-xs">// 5 Rules, 19 Symptoms Evaluated</p>
+                    </div>
+                    <div class="mt-6 bg-teal-50 p-4 rounded-xl border border-teal-100 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-teal-700 font-bold uppercase tracking-wider">Akses Langsung Web App</p>
+                            <p class="text-slate-800 font-bold text-sm">ranggawaridat.github.io/projects/sistem-pakar-pernapasan</p>
+                        </div>
+                        <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan" target="_blank" class="text-teal-600 hover:text-teal-800 font-bold text-xl"><i class="fa-solid fa-circle-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ringkasan Jurnal & Landasan Teori -->
+    <section id="journal" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-teal-600 uppercase tracking-widest mb-3">Landasan Ilmiah</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Bedah Jurnal Acuan Sistem Pakar</h3>
+                <p class="mt-4 text-slate-600">Aturan inferensi dan basis pengetahuan sistem ini diadaptasi sepenuhnya dari publikasi penelitian ilmiah terkini.</p>
+            </div>
+
+            <div class="bg-slate-50 rounded-3xl p-8 lg:p-12 border border-slate-100 shadow-sm grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4 border-b lg:border-b-0 lg:border-r border-slate-200 pb-6 lg:pb-0 lg:pr-8">
+                    <span class="bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-md">Jurnal Utama</span>
+                    <h4 class="text-xl font-bold text-slate-900 leading-snug">Penerapan Sistem Pakar untuk Diagnosis Awal Penyakit Pernapasan Kronis pada Manusia</h4>
+                    <p class="text-xs text-slate-500">Dipublikasikan pada: JAMASTIKA, Vol. 3 No. 2 (Oktober 2024)</p>
+                    <div class="pt-2 text-sm text-slate-600 space-y-1">
+                        <p><strong>Penulis:</strong> Nur Septia Fajrina, Muhammad Akbar Nurdianto, Muhammad Sulthan Zahran, Anggraini Puspita Sari</p>
+                        <p><strong>Afiliasi:</strong> UPN Veteran Jawa Timur</p>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-6">
+                    <div>
+                        <h5 class="font-bold text-slate-900 text-lg mb-2">Metode Penelusuran: Forward Chaining</h5>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Penelitian ini memanfaatkan pendekatan <em>Forward Chaining</em> (penalaran maju). Sistem memulai pencarian fakta dari input gejala klinis yang dirasakan oleh pengguna ($G_{01} \dots G_{19}$), lalu mencocokkannya secara sistematis terhadap aturan inferensi ($Rule_1 \dots Rule_5$) hingga diperoleh kesimpulan diagnosis akhir penyakit ($P_{01} \dots P_{05}$).
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                            <p class="text-xs text-slate-400 font-semibold">Tabel Penyakit ($P_{01}-P_{05}$)</p>
+                            <ul class="text-xs text-slate-700 font-semibold mt-2 space-y-1">
+                                <li>• P01: Asma</li>
+                                <li>• P02: PPOK (Paru Obstruktif Kronis)</li>
+                                <li>• P03: FPI (Fibrosis Paru Idiopatik)</li>
+                                <li>• P04: Bronkiektasis</li>
+                                <li>• P05: Sarkoidosis</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                            <p class="text-xs text-slate-400 font-semibold">Basis Gejala ($G_{01}-G_{19}$)</p>
+                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                                Meliputi 19 data gejala spesifik seperti sesak napas, batuk kronis, mengi, produksi lendir berlebih, nyeri dada, hingga hemoptisis (batuk darah).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Penjelasan Aplikasi Web -->
+    <section id="features" class="py-20 bg-slate-50 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-teal-600 uppercase tracking-widest mb-3">Teknologi & Fitur</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Arsitektur Aplikasi Web Flutter</h3>
+                <p class="mt-4 text-slate-600">Dikembangkan menggunakan framework Flutter Web yang disederhanakan (Single-Purpose Diagnostics) agar sangat cepat diakses tanpa hambatan registrasi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 text-xl font-bold mb-6">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Interaktif & Tanpa Auth</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Aplikasi sengaja dirancang tanpa alur login/register sehingga pengguna umum dapat langsung menjawab kuesioner gejala secara praktis dan privat.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 text-xl font-bold mb-6">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Engine Forward Chaining</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Algoritma inferensi dieksekusi secara lokal di sisi klien (Client-Side State Engine), memberikan kecepatan respon instan tanpa *latency* server.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-xl font-bold mb-6">
+                        <i class="fa-solid fa-file-medical-pro"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Hasil & Solusi Medis Awal</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Setelah mendeteksi pola gejala, sistem menampilkan diagnosis penyakit, penjelasan deskriptif, dan rekomendasi langkah penanganan awal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ucapan Terima Kasih & Tim Kelompok -->
+    <section id="acknowledgments" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-gradient-to-br from-slate-900 to-teal-950 text-white rounded-3xl p-8 lg:p-14 shadow-2xl relative overflow-hidden">
+                <div class="max-w-3xl space-y-6 relative z-10">
+                    <span class="text-teal-400 font-bold text-xs uppercase tracking-widest">Apresiasi & Ucapan Terima Kasih</span>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold leading-tight">Didedikasikan untuk Perkuliahan Artificial Intelligence</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Proyek pengembangan aplikasi Sistem Pakar ini disusun untuk memenuhi tugas besar mata kuliah **Artificial Intelligence (Kecerdasan Buatan)**. Penulis menyampaikan apresiasi dan rasa terima kasih sebesar-besarnya kepada:
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-chalkboard-user text-teal-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Dosen Pengampu Mata Kuliah AI</h4>
+                                <p class="text-xs text-slate-400">Atas bimbingan, arahan teori sistem pakar, serta ilmu yang diberikan selama proses pembelajaran.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-users text-teal-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Rekan-Rekan Anggota Kelompok Proyek</h4>
+                                <p class="text-xs text-slate-400">Terima kasih atas kolaborasi, kerja keras, dan diskusi intensif dalam merancang logika aturan serta mengimplementasikannya ke dalam Flutter Web.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="py-16 bg-teal-600 text-white text-center">
+        <div class="max-w-4xl mx-auto px-6 space-y-6">
+            <h3 class="text-3xl font-extrabold">Siap Mencoba Diagnosis Pernapasan?</h3>
+            <p class="text-teal-100 text-sm">Akses aplikasi web langsung di browser kamu tanpa perlu instalasi.</p>
+            <div>
+                <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan" target="_blank" rel="noopener" class="bg-white hover:bg-slate-100 text-teal-900 font-bold px-8 py-4 rounded-xl shadow-lg transition-all inline-flex items-center space-x-2">
+                    <span>Buka Sistem Pakar Web</span>
+                    <i class="fa-solid fa-external-link"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <p>&copy; Tugas Mata Kuliah Artificial Intelligence. Rangga Waridat & Team.</p>
+            <div class="flex space-x-6">
+                <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan" class="hover:text-white">Aplikasi Web</a>
+                <a href="#journal" class="hover:text-white">Jurnal Referensi</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

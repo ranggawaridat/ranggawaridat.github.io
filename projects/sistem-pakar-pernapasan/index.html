@@ -67,35 +67,84 @@ project_category: "WEB APP"
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-teal-500 selection:text-white">
 
     <!-- Navigation Bar -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <nav class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-teal-500/30">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-700 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-teal-500/30">
                     <i class="fa-solid fa-lungs"></i>
                 </div>
-                <span class="font-bold text-xl text-slate-900 tracking-tight">Sistem Pakar Pernapasan</span>
+                <span class="font-bold text-base sm:text-xl text-slate-900 tracking-tight">Sistem Pakar Pernapasan</span>
             </div>
+            <a href="https://github.com/ranggawaridat/sistem-pakar-pernapasan/releases/latest" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-200">
+                <i class="fa-brands fa-android text-base"></i>
+                <span>Unduh APK</span>
+            </a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden bg-gradient-to-b from-teal-50/50 via-white to-slate-50">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
-                    Sistem Pakar <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-600">Forward Chaining</span> Diagnosis Pernapasan Kronis
+    <header class="relative isolate overflow-hidden bg-gradient-to-br from-teal-50 via-white to-emerald-50">
+        <div aria-hidden="true" class="absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full bg-teal-200/40 blur-3xl"></div>
+        <div aria-hidden="true" class="absolute -bottom-40 -left-20 -z-10 h-96 w-96 rounded-full bg-emerald-100/70 blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-6 py-16 sm:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div class="space-y-7">
+                <div class="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-wider text-teal-800 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                    Skrining awal • Gratis
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.12] tracking-tight">
+                    Kenali Gejala, <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-600">Jaga Pernapasan.</span>
                 </h1>
-                <p class="text-slate-600 text-lg leading-relaxed">
-                    Platform skrining kesehatan awal mandiri untuk mendeteksi 5 jenis penyakit paru-paru kronis berdasarkan 19 fakta gejala klinis secara cepat, presisi, dan terstruktur.
+                <p class="max-w-xl text-slate-600 text-lg leading-relaxed">
+                    Sistem pakar untuk skrining awal penyakit pernapasan kronis menggunakan metode <em>Forward Chaining</em>. Jawab pertanyaan seputar gejala dan pelajari hasilnya.
                 </p>
-                <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan/web/" target="_blank" rel="noopener" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-teal-600/25 hover:shadow-teal-600/40 transition-all text-center flex items-center justify-center space-x-3 text-lg">
+                <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch gap-3 pt-1">
+                    <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan/web/" target="_blank" rel="noopener noreferrer" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-4 rounded-xl shadow-xl shadow-teal-600/25 hover:shadow-teal-600/40 transition-all text-center flex items-center justify-center gap-3 text-base">
                         <i class="fa-solid fa-stethoscope"></i>
                         <span>Mulai Tes Diagnosis</span>
                     </a>
-                    <a href="#journal" class="bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold px-6 py-4 rounded-xl hover:bg-slate-50 transition-all text-center flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-book-open text-teal-600"></i>
-                        <span>Baca Ringkasan Jurnal</span>
+                    <a href="https://github.com/ranggawaridat/sistem-pakar-pernapasan/releases/latest" target="_blank" rel="noopener noreferrer" class="bg-white border border-slate-200 hover:border-teal-300 text-slate-800 font-bold px-6 py-4 rounded-xl hover:bg-teal-50 transition-all text-center flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-android text-emerald-600 text-lg"></i>
+                        <span>Unduh Aplikasi Android</span>
+                    </a>
+                </div>
+                <p class="text-xs text-slate-500">Aplikasi ini membantu skrining awal dan tidak menggantikan diagnosis tenaga medis.</p>
+            </div>
+
+            <div class="relative mx-auto w-full max-w-lg">
+                <div aria-hidden="true" class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-teal-200/70 to-emerald-100/40 blur-2xl"></div>
+                <div class="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/90 p-6 shadow-2xl shadow-teal-900/10 sm:p-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-500">Kenali lebih awal</p>
+                            <h2 class="mt-1 text-xl font-extrabold text-slate-900">Skrining Pernapasan</h2>
+                        </div>
+                        <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-2xl text-teal-700">
+                            <i class="fa-solid fa-lungs"></i>
+                        </span>
+                    </div>
+                    <div class="my-7 flex min-h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 text-white">
+                        <div class="text-center">
+                            <i class="fa-solid fa-heart-pulse text-6xl opacity-95"></i>
+                            <p class="mt-3 text-sm font-semibold text-teal-50">Mulai dari gejala yang dirasakan</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="rounded-xl bg-slate-50 p-3 text-center">
+                            <p class="text-2xl font-extrabold text-teal-700">05</p>
+                            <p class="mt-1 text-xs font-medium text-slate-500">Penyakit</p>
+                        </div>
+                        <div class="rounded-xl bg-slate-50 p-3 text-center">
+                            <p class="text-2xl font-extrabold text-teal-700">19</p>
+                            <p class="mt-1 text-xs font-medium text-slate-500">Gejala</p>
+                        </div>
+                        <div class="rounded-xl bg-slate-50 p-3 text-center">
+                            <p class="text-2xl font-extrabold text-teal-700"><i class="fa-solid fa-code-branch text-xl"></i></p>
+                            <p class="mt-1 text-xs font-medium text-slate-500">Forward Chaining</p>
+                        </div>
+                    </div>
+                    <a href="#journal" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-teal-700 hover:text-teal-900">
+                        Pelajari landasan ilmiah <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
                 </div>
             </div>
@@ -152,14 +201,19 @@ project_category: "WEB APP"
     </section>
 
     <!-- Call to Action Banner -->
-    <section class="py-16 bg-teal-600 text-white text-center">
-        <div class="max-w-4xl mx-auto px-6 space-y-6">
-            <h3 class="text-3xl font-extrabold">Siap Mencoba Diagnosis Pernapasan?</h3>
-            <p class="text-teal-100 text-sm">Akses aplikasi web langsung di browser kamu tanpa perlu instalasi.</p>
-            <div>
-                <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan/web/" target="_blank" rel="noopener" class="bg-white hover:bg-slate-100 text-teal-900 font-bold px-8 py-4 rounded-xl shadow-lg transition-all inline-flex items-center space-x-2">
+    <section class="relative overflow-hidden bg-gradient-to-br from-teal-700 to-emerald-800 py-16 text-center text-white">
+        <div aria-hidden="true" class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+        <div class="relative max-w-4xl mx-auto px-6 space-y-6">
+            <h3 class="text-3xl sm:text-4xl font-extrabold">Mulai Skrining Sekarang</h3>
+            <p class="text-teal-100">Pilih akses melalui browser atau unduh aplikasi Android dari rilis terbaru.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3">
+                <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan/web/" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-100 text-teal-900 font-bold px-7 py-4 rounded-xl shadow-lg transition-all inline-flex items-center justify-center gap-2">
                     <span>Buka Sistem Pakar Web</span>
                     <i class="fa-solid fa-external-link"></i>
+                </a>
+                <a href="https://github.com/ranggawaridat/sistem-pakar-pernapasan/releases/latest" target="_blank" rel="noopener noreferrer" class="border border-white/40 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-4 rounded-xl transition-all inline-flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-android"></i>
+                    <span>Unduh APK Android</span>
                 </a>
             </div>
         </div>
@@ -169,8 +223,9 @@ project_category: "WEB APP"
     <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 text-xs">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <p>&copy; Tugas Mata Kuliah Kecerdasan Buatan.</p>
-            <div class="flex space-x-6">
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
                 <a href="https://ranggawaridat.github.io/projects/sistem-pakar-pernapasan/web/" class="hover:text-white">Aplikasi Web</a>
+                <a href="https://github.com/ranggawaridat/sistem-pakar-pernapasan/releases/latest" target="_blank" rel="noopener noreferrer" class="hover:text-white">Unduh APK</a>
                 <a href="https://doi.org/10.35473/jamastika.v3i2.3366" class="hover:text-white">Jurnal Referensi</a>
             </div>
         </div>

@@ -5,8 +5,6 @@ date: 2026-11-09
 description: "Catatan tentang cara kerja DNS, DNS records, recursive resolution, TLS handshake, sertifikat digital, HTTPS, dan implementasinya pada Go API di VPS."
 ---
 
-# DNS dan TLS: Domain Resolution & Secure Communication
-
 ## 1. Pendahuluan
 
 Ketika pengguna mengakses sebuah aplikasi melalui alamat seperti `https://api.example.com`, terdapat beberapa proses jaringan yang terjadi sebelum aplikasi dapat menerima request.

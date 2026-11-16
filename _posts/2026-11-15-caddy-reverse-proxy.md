@@ -5,8 +5,6 @@ date: 2026-11-15
 description: "Memahami Caddy, reverse proxy, DNS, routing berdasarkan domain dan path, serta deployment beberapa aplikasi Go pada satu VPS."
 ---
 
-# Caddy sebagai Reverse Proxy untuk Banyak Aplikasi Go di Satu VPS
-
 Saat menjalankan aplikasi di VPS, kita sering memulai dengan membuka port secara langsung. Misalnya aplikasi Go berjalan di port `8080`, lalu diakses melalui `http://IP-VPS:8080`.
 
 Cara tersebut sederhana dan cocok untuk eksperimen. Namun, ketika jumlah aplikasi bertambah, mengelola banyak port publik mulai terasa kurang praktis.

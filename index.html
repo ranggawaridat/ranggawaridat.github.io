@@ -1,7 +1,8 @@
 ---
 layout: default
 title: "Home"
-description: "Blog Rangga Waridat berisi catatan belajar programming, backend, dan software development."
+seo_title: "Rangga Waridat — Catatan Belajar Programming & Backend"
+description: "Arsip belajar programming, backend, dan software engineering. Catatan kode, eksperimen, dan project."
 ---
 
 <section class="home-hero" aria-labelledby="home-title">
@@ -31,7 +32,7 @@ description: "Blog Rangga Waridat berisi catatan belajar programming, backend, d
 
 </section>
 
-<section class="articles">
+<section class="articles" aria-labelledby="articles-title">
 
     <div class="section-heading" id="articles">
         <div>
@@ -44,9 +45,9 @@ description: "Blog Rangga Waridat berisi catatan belajar programming, backend, d
 
     <article class="article-card">
 
-        <p class="post-date">
+        <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
             {{ post.date | date: "%d %B %Y" }}
-        </p>
+        </time>
 
         <h3>
             <a href="{{ post.url | relative_url }}">

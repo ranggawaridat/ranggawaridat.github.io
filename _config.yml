@@ -1,5 +1,6 @@
 title: "Rangga Waridat"
 description: "Catatan belajar programming, backend, dan software development."
+keywords: "Rangga Waridat, blog programming, catatan belajar backend & software development"
 url: "https://ranggawaridat.github.io"
 lang: "id"
 locale: "id_ID"
@@ -13,6 +14,8 @@ author:
 social:
   name: "Rangga Waridat"
   instagram: "@ranggawaridat"
+  github_url: "https://github.com/ranggawaridat"
+  instagram_url: "https://instagram.com/ranggawaridat"
 
 defaults:
   - scope:

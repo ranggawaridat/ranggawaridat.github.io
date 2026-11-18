@@ -5,10 +5,15 @@ layout: null
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>{{ '/' | absolute_url }}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
   {% for post in site.posts %}
   <url>
     <loc>{{ post.url | absolute_url }}</loc>
+    <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   {% endfor %}
   {% for project_page in site.pages %}
@@ -16,6 +21,8 @@ layout: null
     {% if project_page.url contains '/projects/' and project_parts.size == 1 and project_parts[0] != '' %}
   <url>
     <loc>{{ project_page.url | absolute_url }}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
     {% endif %}
   {% endfor %}

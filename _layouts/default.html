@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
     {% assign seo_description = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 %}
+    {% assign seo_keywords = page.tags | default: page.categories | default: site.keywords %}
+    {% assign seo_image = page.image | default: '/assets/images/icon.jpg' | absolute_url %}
+    {% assign seo_image_alt = page.image_alt | default: 'Logo Rangga Waridat' %}
     {% if page.seo_title %}
         {% assign seo_title = page.seo_title %}
     {% elsif page.title and page.title != 'Home' %}
@@ -16,6 +20,9 @@
     {% assign canonical_url = page.url | absolute_url %}
     <meta name="author" content="{{ site.author.name | escape }}">
     <meta name="description" content="{{ seo_description | escape }}">
+    {% if seo_keywords and seo_keywords != empty %}
+    <meta name="keywords" content="{{ seo_keywords | join: ', ' | escape }}">
+    {% endif %}
     <meta name="theme-color" content="#0f172a">
 
     <title>{{ seo_title | escape }}</title>
@@ -30,17 +37,25 @@
     <meta property="og:title" content="{{ seo_title | escape }}">
     <meta property="og:description" content="{{ seo_description | escape }}">
     <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:image" content="{{ '/assets/images/icon.jpg' | absolute_url }}">
-    <meta property="og:image:alt" content="Logo {{ site.title | escape }}">
+    <meta property="og:image" content="{{ seo_image }}">
+    <meta property="og:image:alt" content="{{ seo_image_alt | escape }}">
     {% if page.date %}
     <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    <meta property="article:modified_time" content="{{ page.last_modified_at | default: page.date | date_to_xmlschema }}">
+    {% if page.categories %}
+    <meta property="article:section" content="{{ page.categories | first }}">
+    {% endif %}
     {% endif %}
 
     <meta name="twitter:card" content="summary_large_image">
+    {% if site.social.twitter %}
     <meta name="twitter:site" content="{{ site.social.twitter }}">
+    <meta name="twitter:creator" content="{{ site.social.twitter }}">
+    {% endif %}
     <meta name="twitter:title" content="{{ seo_title | escape }}">
     <meta name="twitter:description" content="{{ seo_description | escape }}">
-    <meta name="twitter:image" content="{{ '/assets/images/icon.jpg' | absolute_url }}">
+    <meta name="twitter:image" content="{{ seo_image }}">
+    <meta name="twitter:image:alt" content="{{ seo_image_alt | escape }}">
 
     <script type="application/ld+json">
         {% if page.date %}
@@ -50,25 +65,55 @@
             "headline": {{ page.title | jsonify }},
             "description": {{ seo_description | jsonify }},
             "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+            "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
             "author": {
                 "@type": "Person",
-                "name": {{ site.author.name | jsonify }}
+                "name": {{ site.author.name | jsonify }},
+                "url": {{ '/' | absolute_url | jsonify }}
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": {{ site.author.name | jsonify }},
+                "url": {{ '/' | absolute_url | jsonify }}
             },
             "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": {{ canonical_url | jsonify }}
             },
-            "image": {{ '/assets/images/icon.jpg' | absolute_url | jsonify }},
+            "image": {{ seo_image | jsonify }},
+            {% if seo_keywords and seo_keywords != empty %}
+            "keywords": {{ seo_keywords | join: ', ' | jsonify }},
+            {% endif %}
+            {% if page.categories %}
+            "articleSection": {{ page.categories | join: ', ' | jsonify }},
+            {% endif %}
             "inLanguage": {{ site.lang | default: 'id' | jsonify }}
         }
         {% else %}
         {
             "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": {{ site.title | jsonify }},
-            "url": {{ site.url | append: site.baseurl | append: '/' | jsonify }},
-            "description": {{ site.description | jsonify }},
-            "inLanguage": {{ site.lang | default: 'id' | jsonify }}
+            "@graph": [
+                {
+                    "@type": "WebSite",
+                    "@id": {{ '/' | absolute_url | append: '#website' | jsonify }},
+                    "name": {{ site.title | jsonify }},
+                    "url": {{ '/' | absolute_url | jsonify }},
+                    "description": {{ site.description | jsonify }},
+                    "publisher": { "@id": {{ '/' | absolute_url | append: '#person' | jsonify }} },
+                    "inLanguage": {{ site.lang | default: 'id' | jsonify }}
+                },
+                {
+                    "@type": "Person",
+                    "@id": {{ '/' | absolute_url | append: '#person' | jsonify }},
+                    "name": {{ site.author.name | jsonify }},
+                    "url": {{ '/' | absolute_url | jsonify }},
+                    "email": {{ site.author.email | jsonify }},
+                    "sameAs": [
+                        {{ site.social.github_url | jsonify }},
+                        {{ site.social.instagram_url | jsonify }},
+                    ]
+                }
+            ]
         }
         {% endif %}
     </script>

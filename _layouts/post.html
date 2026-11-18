@@ -6,9 +6,9 @@ layout: default
 
     <header class="post-header">
 
-        <p class="post-date">
+        <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">
             {{ page.date | date: "%d %B %Y" }}
-        </p>
+        </time>
 
         <h1>
             {{ page.title }}

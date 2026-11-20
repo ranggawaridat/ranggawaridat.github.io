@@ -2,9 +2,9 @@
 layout: post
 title: "Lesson 03"
 description: "MySQL Integration with Go"
-date: 2026-11-19
+date: 2026-11-20
 categories: [golang, backend, database]
-tags: [go, mysql, database-sql, golang-migrate, backend-engineering]
+tags: [go, mysql, database-sql, goose, backend-engineering]
 series: "Go Backend Engineering"
 lesson: 3
 ---
@@ -30,7 +30,7 @@ Kita akan menggunakan:
 | MySQL | Relational database |
 | database/sql | Database interface dari Go |
 | go-sql-driver/mysql | MySQL driver |
-| golang-migrate | Database migration |
+| goose | Database migration |
 
 Kita tidak akan mengganti arsitektur TaskForge. Kita hanya mengganti implementasi repository dari memory menjadi MySQL.
 
@@ -149,19 +149,37 @@ Jangan commit password asli ke Git.
 
 ---
 
-## 4. Database Migration
+## 4. Database Migration with Goose
 
 Kita tidak akan membuat tabel secara manual setiap kali aplikasi dijalankan.
 
-Sebagai gantinya, kita menggunakan database migration.
+Sebagai gantinya, kita menggunakan database migration untuk mengelola perubahan struktur database secara terkontrol dan berurutan.
 
-Migration adalah mekanisme untuk mengelola perubahan struktur database secara terkontrol dan berurutan.
+Pada project TaskForge, kita menggunakan [Goose](https://github.com/pressly/goose).
 
-Install golang-migrate CLI sesuai sistem operasi:
+Goose mendukung SQL migration maupun Go migration. Untuk project ini, kita akan menggunakan SQL migration agar perubahan database mudah dibaca, diperiksa, dan dikelola.
 
-Dokumentasi instalasi:
+### 4.1 Install Goose
 
-https://github.com/golang-migrate/migrate/tree/master/cmd/migrate
+Install Goose CLI:
+
+```bash
+go install github.com/pressly/goose/v3/cmd/goose@latest
+```
+
+Pastikan Goose sudah tersedia:
+
+```bash
+goose -version
+```
+
+Install MySQL driver untuk Goose:
+
+```bash
+go get github.com/go-sql-driver/mysql
+```
+
+### 4.2 Create Migration Directory
 
 Buat folder migration:
 
@@ -180,20 +198,23 @@ taskforge/
 ├── internal/
 │   ├── health/
 │   ├── task/
-│   └── router/
+│   ├── router/
+│   └── platform/
+│       └── database/
 │
 ├── migrations/
 ├── go.mod
 └── go.sum
 ```
 
-### 4.1 Create Migration
+### 4.3 Create Migration File
 
 Buat file:
 
-`migrations/000001_create_tasks_table.up.sql`
+`migrations/00001_create_tasks_table.sql`
 
 ```sql
+-- +goose Up
 CREATE TABLE tasks (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
@@ -207,51 +228,127 @@ CREATE TABLE tasks (
     INDEX idx_tasks_completed (completed),
     INDEX idx_tasks_created_at (created_at)
 );
-```
 
-Penjelasan:
-
-| Column | Fungsi |
-|---|---|
-| id | Primary key |
-| title | Judul task |
-| description | Deskripsi task |
-| completed | Status penyelesaian |
-| created_at | Waktu pembuatan |
-| updated_at | Waktu perubahan terakhir |
-
-Kita menggunakan `BIGINT UNSIGNED` untuk ID agar kapasitas ID lebih besar dan tidak menerima nilai negatif.
-
-### 4.2 Create Down Migration
-
-Buat file:
-
-`migrations/000001_create_tasks_table.down.sql`
-
-```sql
+-- +goose Down
 DROP TABLE tasks;
 ```
 
-File `up` digunakan untuk menerapkan perubahan.
+Goose menggunakan annotation:
 
-File `down` digunakan untuk membatalkan perubahan tersebut.
+- `-- +goose Up` untuk perubahan yang diterapkan.
+- `-- +goose Down` untuk membatalkan perubahan.
 
-**Peringatan:** menjalankan down migration ini akan menghapus tabel beserta seluruh datanya.
+Dengan format ini, kita tidak perlu membuat dua file terpisah untuk setiap migration.
 
-### 4.3 Run Migration
+### 4.4 Configure Database Connection
 
-Jalankan:
+Goose membutuhkan koneksi database untuk menjalankan migration.
+
+Gunakan environment variables:
+
+Linux/macOS:
 
 ```bash
-migrate \
-  -path migrations \
-  -database "mysql://taskforge_user:change-this-password@tcp(127.0.0.1:3306)/taskforge" \
-  up
+export DB_HOST=127.0.0.1
+export DB_PORT=3306
+export DB_USER=taskforge_user
+export DB_PASSWORD=change-this-password
+export DB_NAME=taskforge
 ```
 
-Untuk password yang mengandung karakter khusus, gunakan URL encoding atau mekanisme konfigurasi credential yang aman.
+PowerShell:
 
-Periksa tabel:
+```powershell
+$env:DB_HOST="127.0.0.1"
+$env:DB_PORT="3306"
+$env:DB_USER="taskforge_user"
+$env:DB_PASSWORD="change-this-password"
+$env:DB_NAME="taskforge"
+```
+
+Buat DSN untuk Goose:
+
+```bash
+export GOOSE_DRIVER=mysql
+export GOOSE_DBSTRING="taskforge_user:change-this-password@tcp(127.0.0.1:3306)/taskforge?parseTime=true"
+```
+
+PowerShell:
+
+```powershell
+$env:GOOSE_DRIVER="mysql"
+$env:GOOSE_DBSTRING="taskforge_user:change-this-password@tcp(127.0.0.1:3306)/taskforge?parseTime=true"
+```
+
+Gunakan password yang sama dengan konfigurasi MySQL. Jangan commit credential asli ke repository.
+
+### 4.5 Run Migration
+
+Jalankan seluruh migration yang belum diterapkan:
+
+```bash
+goose -dir migrations up
+```
+
+Periksa status migration:
+
+```bash
+goose -dir migrations status
+```
+
+Melihat versi migration saat ini:
+
+```bash
+goose -dir migrations version
+```
+
+### 4.6 Rollback Migration
+
+Untuk membatalkan migration terakhir:
+
+```bash
+goose -dir migrations down
+```
+
+Untuk membatalkan seluruh migration:
+
+```bash
+goose -dir migrations reset
+```
+
+**Peringatan:** `down` dan `reset` dapat menghapus tabel atau data, tergantung isi migration. Jangan menjalankannya sembarangan pada production.
+
+### 4.7 Create New Migration
+
+Ketika kita menambahkan fitur baru yang membutuhkan perubahan database, buat migration baru:
+
+```bash
+goose -dir migrations create add_task_priority sql
+```
+
+Goose akan membuat file migration baru dengan timestamp atau versi sesuai konfigurasi tool.
+
+Contoh isi migration:
+
+```sql
+-- +goose Up
+ALTER TABLE tasks
+ADD COLUMN priority VARCHAR(20) NOT NULL DEFAULT 'normal';
+
+-- +goose Down
+ALTER TABLE tasks
+DROP COLUMN priority;
+```
+
+Kemudian jalankan:
+
+```bash
+goose -dir migrations up
+```
+
+### 4.8 Verify Database Schema
+
+Masuk ke MySQL:
 
 ```sql
 USE taskforge;
@@ -261,7 +358,24 @@ SHOW TABLES;
 DESCRIBE tasks;
 ```
 
-Sekarang tabel `tasks` sudah tersedia.
+Goose juga akan mengelola tabel `goose_db_version` untuk mencatat versi migration yang sudah diterapkan.
+
+Dengan demikian, Goose dapat mengetahui migration mana yang sudah dijalankan dan mana yang belum.
+
+### 4.9 Migration Best Practices
+
+Beberapa prinsip yang perlu diterapkan:
+
+1. Jangan mengubah migration lama yang sudah diterapkan pada environment bersama.
+2. Buat migration baru untuk setiap perubahan schema.
+3. Selalu siapkan bagian `Down` jika rollback memang aman dan memungkinkan.
+4. Periksa SQL migration sebelum menjalankannya.
+5. Pisahkan proses migration dari startup aplikasi.
+6. Gunakan database user khusus migration dengan privilege DDL.
+7. Backup database sebelum migration berisiko tinggi.
+8. Uji migration pada database staging sebelum production.
+
+Migration merupakan bagian dari lifecycle aplikasi. Perubahan schema harus dikelola seperti perubahan kode, bukan dilakukan secara manual tanpa pencatatan.
 
 ---
 
@@ -1086,7 +1200,7 @@ MySQL Database
 - [Go database/sql](https://pkg.go.dev/database/sql)
 - [Go MySQL Driver](https://github.com/go-sql-driver/mysql)
 - [MySQL Documentation](https://dev.mysql.com/doc/)
-- [golang-migrate](https://github.com/golang-migrate/migrate)
+- [goose](https://github.com/goose/migrate)
 - [Go Context](https://pkg.go.dev/context)
 
 ---

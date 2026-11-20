@@ -207,11 +207,13 @@ taskforge/
 └── go.sum
 ```
 
-### 4.3 Create Migration File
+### 4.3 Generate Migration File
 
-Buat file:
+Gunakan perintah Goose untuk membuat file migration:
 
-`migrations/00001_create_tasks_table.sql`
+goose -dir migrations create create_tasks_table sql
+
+Goose akan otomatis membuat file migration dengan timestamp sebagai prefix nama file di dalam folder "migrations/".
 
 ```sql
 -- +goose Up

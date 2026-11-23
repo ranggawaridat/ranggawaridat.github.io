@@ -35,7 +35,7 @@ description: "Arsip belajar programming, backend, dan software engineering. Cata
 <section class="articles" aria-labelledby="articles-title">
 
     <div class="section-heading" id="articles">
-        <div>
+    <div>
             <p class="section-kicker">01 / NOTES</p>
         </div>
         <span>{{ site.posts | size }} notes</span>
@@ -110,10 +110,17 @@ description: "Arsip belajar programming, backend, dan software engineering. Cata
 
                 <article class="project-card">
                     <a class="project-card-link" href="{{ project_page.url | relative_url }}">
-                        <div class="project-visual" aria-hidden="true">
+                        <div class="project-visual">
+                            {% if project_page.project_image %}
+                            <img
+                                src="{{ project_page.project_image | relative_url }}"
+                                alt="Ilustrasi {{ project_page.project_title | default: project_fallback_title | strip }}"
+                                loading="lazy"
+                                width="960"
+                                height="600"
+                            >
+                            {% endif %}
                             <span class="project-visual-index">{% if project_number < 10 %}0{% endif %}{{ project_number }}</span>
-                            <span class="project-visual-mark">{{ project_fallback_title | strip | slice: 0 }}</span>
-                            <span class="project-visual-orbit"></span>
                         </div>
                         <div class="project-card-content">
                             <p class="project-label">{{ project_page.project_category | default: "PROJECT" }}</p>
@@ -129,4 +136,17 @@ description: "Arsip belajar programming, backend, dan software engineering. Cata
     {% if project_count == 0 %}
         <p>Belum ada project.</p>
     {% endif %}
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-title">
+    <p class="section-kicker">04 / CONTACT</p>
+    <div class="contact-content">
+        <!-- <h2 id="contact-title">Ada ide atau ingin ngobrol?</h2>
+        <p>Saya terbuka untuk bertukar pikiran soal software, proyek, dan hal-hal yang menarik untuk dibangun.</p> -->
+        <a class="contact-email" href="mailto:{{ site.author.email }}">{{ site.author.email }} <span aria-hidden="true">↗</span></a>
+        <div class="contact-links">
+            <a href="{{ site.social.github_url }}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <!-- <a href="{{ site.social.instagram_url }}" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a> -->
+        </div>
+    </div>
 </section>

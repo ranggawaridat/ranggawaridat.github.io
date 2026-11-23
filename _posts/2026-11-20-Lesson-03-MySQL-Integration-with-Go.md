@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Lesson 03"
-description: "MySQL Integration with Go"
+title: "Lesson 03: Integrating MySQL with Go"
+description: "Menghubungkan TaskForge ke MySQL, mengelola migrasi dengan Goose, dan menyimpan data secara persisten."
 date: 2026-11-20
 categories: [golang, backend, database]
 tags: [go, mysql, database-sql, goose, backend-engineering]

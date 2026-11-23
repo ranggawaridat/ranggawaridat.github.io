@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Lesson 02"
-description: "Building REST API CRUD with Go and Chi"
+title: "Lesson 02: Building a REST API with Go and Chi"
+description: "Merancang struktur REST API dan membangun fitur CRUD TaskForge dengan Go dan Chi."
 date: 2026-11-19
 categories: [golang, backend]
 tags: [go, chi, crud, rest-api, backend-engineering]

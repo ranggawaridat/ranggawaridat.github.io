@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Lesson 01"
-description: "REST API Fundamentals with Go and Chi"
+title: "Lesson 01: REST API Fundamentals with Go and Chi"
+description: "Memahami HTTP dan prinsip REST, lalu menyiapkan HTTP server sederhana dengan Go dan Chi."
 date: 2026-11-19
 categories: [golang, backend]
 tags: [go, chi, rest-api, http, backend-engineering]

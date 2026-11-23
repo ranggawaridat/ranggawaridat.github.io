@@ -1,0 +1,762 @@
+---
+project_title: "Puff & Crush"
+project_description: "Game arcade aksi & strategi penuh ledakan, peningkatan senjata, dan tantangan bertingkat."
+project_category: "GAME"
+---
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#110b2d">
+  <meta name="description" content="Puff & Crush adalah game arcade aksi berbasis Flutter. Ledakkan musuh, kalahkan bos, dan raih skor tertinggi.">
+  <title>Puff & Crush — Arcade Action Game</title>
+  <link rel="canonical" href="https://ranggawaridat.github.io/projects/puff-and-crush/">
+  <link rel="icon" type="image/png" href="web/favicon.png">
+  <style>
+    :root {
+      --ink: #100a2a;
+      --ink-2: #171040;
+      --cream: #fff8ee;
+      --pink: #ff5b9d;
+      --orange: #ff8a3d;
+      --yellow: #ffd45c;
+      --purple: #7667ed;
+      --cyan: #55d8cc;
+      --green: #94df79;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img, svg { display: block; }
+
+    .shell {
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .nav-wrap {
+      position: absolute;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .nav {
+      height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 2px solid rgba(255,255,255,.78);
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: inset 0 -5px 0 rgba(111,28,86,.18);
+      font-size: 22px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .nav-links a { opacity: .78; transition: .2s ease; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border: 2px solid #fff;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 21%, rgba(255,212,92,.2) 0 3%, transparent 3.2%),
+        radial-gradient(circle at 9% 82%, rgba(85,216,204,.14) 0 7%, transparent 7.2%),
+        linear-gradient(135deg, #171040 0%, #241358 58%, #40216c 100%);
+      color: #fff;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 430px;
+      height: 430px;
+      right: -155px;
+      bottom: -230px;
+      border: 56px solid rgba(255,255,255,.045);
+      border-radius: 50%;
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      min-height: 760px;
+      display: grid;
+      grid-template-columns: 47% 53%;
+      align-items: center;
+      padding-top: 74px;
+    }
+    .hero-copy { max-width: 610px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 22px;
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 3px;
+      border-radius: 99px;
+      background: currentColor;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 600px;
+      margin-bottom: 24px;
+      font-size: clamp(64px, 7vw, 102px);
+      line-height: .86;
+      letter-spacing: -7px;
+      text-transform: uppercase;
+    }
+    h1 span {
+      display: block;
+      color: var(--pink);
+      text-shadow: 0 7px 0 #ca3f78;
+    }
+    .hero-desc {
+      max-width: 520px;
+      margin-bottom: 34px;
+      color: rgba(255,255,255,.72);
+      font-size: 18px;
+      line-height: 1.72;
+    }
+    .actions { display: flex; align-items: center; gap: 16px; }
+    .btn {
+      min-height: 58px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 13px;
+      font-weight: 900;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary {
+      background: var(--pink);
+      color: #fff;
+      box-shadow: 0 10px 0 #c93f76, 0 18px 34px rgba(255,91,157,.22);
+    }
+    .btn-primary:active { transform: translateY(4px); box-shadow: 0 4px 0 #c93f76; }
+    .btn-ghost {
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.07);
+    }
+
+    .game-stage {
+      position: relative;
+      height: 610px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .orbital {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -10px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+    }
+    .orbital::before, .orbital::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 50%;
+    }
+    .orbital::before { inset: 38px; }
+    .orbital::after { inset: 82px; }
+    .spark {
+      position: absolute;
+      z-index: 4;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 24px var(--yellow);
+    }
+    .spark.one { top: 90px; right: 80px; }
+    .spark.two { bottom: 140px; left: 35px; width: 8px; height: 8px; background: var(--cyan); }
+    .spark.three { top: 210px; right: -8px; width: 7px; height: 7px; background: var(--pink); }
+
+    .phone {
+      position: relative;
+      z-index: 3;
+      width: 318px;
+      height: 560px;
+      overflow: hidden;
+      border: 8px solid #090619;
+      border-radius: 38px;
+      background: #0d0824;
+      box-shadow: 0 38px 80px rgba(5,2,20,.55), 0 0 0 2px rgba(255,255,255,.12);
+      transform: rotate(3deg);
+    }
+    .phone-screen {
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 85%, rgba(255,91,157,.25), transparent 24%),
+        linear-gradient(180deg, #312366 0%, #17103c 58%, #100a29 100%);
+    }
+    .phone-notch {
+      position: absolute;
+      z-index: 6;
+      top: 8px;
+      left: 50%;
+      width: 76px;
+      height: 18px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: #090619;
+    }
+    .game-ui {
+      position: absolute;
+      z-index: 5;
+      top: 34px;
+      left: 18px;
+      right: 18px;
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+    }
+    .lives { display: flex; gap: 4px; }
+    .heart { color: var(--pink); }
+    .arena {
+      position: absolute;
+      inset: 70px 20px 46px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+    }
+    .puff {
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      bottom: 75px;
+      width: 76px;
+      height: 86px;
+      transform: translateX(-50%);
+      border: 4px solid #2d1d63;
+      border-radius: 54% 54% 46% 46%;
+      background: var(--pink);
+      box-shadow: inset 0 -14px 0 #df4b86, 0 12px 28px rgba(255,91,157,.25);
+    }
+    .puff::before, .puff::after {
+      content: "";
+      position: absolute;
+      top: 33px;
+      width: 8px;
+      height: 11px;
+      border-radius: 50%;
+      background: #2d1d63;
+    }
+    .puff::before { left: 18px; }
+    .puff::after { right: 18px; }
+    .puff-eye {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 50px;
+      width: 20px;
+      height: 8px;
+      transform: translateX(-50%);
+      border-bottom: 3px solid #6f275e;
+      border-radius: 50%;
+    }
+    .enemy {
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      border: 3px solid #402e69;
+      border-radius: 12px;
+      background: var(--yellow);
+      box-shadow: inset 0 -8px 0 #db9e3f;
+      transform: rotate(10deg);
+    }
+    .enemy::before, .enemy::after {
+      content: "";
+      position: absolute;
+      top: 13px;
+      width: 5px;
+      height: 7px;
+      border-radius: 50%;
+      background: #402e69;
+    }
+    .enemy::before { left: 8px; }
+    .enemy::after { right: 8px; }
+    .enemy.e1 { top: 62px; left: 42px; }
+    .enemy.e2 { top: 112px; right: 38px; background: var(--cyan); transform: rotate(-12deg); }
+    .enemy.e3 { top: 190px; left: 62px; background: var(--green); transform: rotate(18deg); }
+    .burst {
+      position: absolute;
+      bottom: 150px;
+      left: 50%;
+      width: 110px;
+      height: 110px;
+      transform: translateX(-50%);
+      border: 8px dotted var(--yellow);
+      border-radius: 50%;
+      opacity: .75;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .floor {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 72px;
+      background:
+        linear-gradient(135deg, transparent 12px, rgba(255,255,255,.04) 13px 25px, transparent 26px) 0 0 / 36px 36px,
+        #0d0926;
+    }
+    @keyframes pulse {
+      50% { transform: translateX(-50%) scale(.82); opacity: .35; }
+    }
+
+    .ticker {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid #e9dfcf;
+      background: var(--yellow);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      min-width: 100%;
+      display: flex;
+      justify-content: space-around;
+      gap: 30px;
+    }
+    .ticker b { color: #a04a78; }
+
+    .features {
+      padding: 112px 0 120px;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(118,103,237,.08), transparent 20%),
+        var(--cream);
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 48px;
+    }
+    .section-kicker {
+      margin-bottom: 12px;
+      color: #947f67;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(44px, 6vw, 74px);
+      line-height: .95;
+      letter-spacing: -5px;
+      text-transform: uppercase;
+    }
+    .section-note {
+      max-width: 330px;
+      margin: 0 0 7px;
+      color: #766f63;
+      line-height: 1.7;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .feature-card {
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+      border: 1px solid #eadfd0;
+      border-radius: 24px;
+      background: rgba(255,255,255,.55);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 50px rgba(63,44,97,.10);
+    }
+    .feature-card:nth-child(2) { background: #2b2057; color: #fff; }
+    .feature-card:nth-child(3) { background: #f0e8da; }
+    .feature-num {
+      display: inline-grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 950;
+    }
+    .feature-card h3 {
+      margin: 48px 0 12px;
+      font-size: 28px;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+    }
+    .feature-card p {
+      margin: 0;
+      color: #766f63;
+      line-height: 1.65;
+    }
+    .feature-card:nth-child(2) p { color: rgba(255,255,255,.64); }
+    .feature-icon {
+      position: absolute;
+      right: 24px;
+      top: 25px;
+      width: 78px;
+      height: 78px;
+      opacity: .12;
+    }
+
+    .play-section {
+      padding: 100px 0;
+      background: #20164b;
+      color: #fff;
+    }
+    .play-panel {
+      display: grid;
+      grid-template-columns: 36% 64%;
+      align-items: stretch;
+      min-height: 520px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 28px;
+      background: #100a2a;
+    }
+    .play-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 44px;
+    }
+    .play-copy h2 { font-size: 54px; }
+    .play-copy p {
+      max-width: 310px;
+      color: rgba(255,255,255,.65);
+      line-height: 1.7;
+    }
+    .play-frame {
+      position: relative;
+      min-height: 520px;
+      border-left: 1px solid rgba(255,255,255,.11);
+      background: #0d0924;
+    }
+    .play-frame iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      border: 0;
+    }
+    .play-frame::after {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 30px rgba(8,5,26,.24);
+    }
+    .play-badge {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(148,223,121,.12);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .play-badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    .footer {
+      padding: 28px 0;
+      background: #0c0820;
+      color: rgba(255,255,255,.58);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .footer a { color: #fff; font-weight: 800; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .shell { width: min(100% - 36px, 760px); }
+      .nav-links a:not(.nav-play) { display: none; }
+      .hero { min-height: 980px; }
+      .hero-grid {
+        min-height: 980px;
+        grid-template-columns: 1fr;
+        align-content: start;
+        padding-top: 150px;
+      }
+      .hero-copy { text-align: center; margin-inline: auto; }
+      .eyebrow { justify-content: center; }
+      .hero-desc { margin-inline: auto; }
+      .actions { justify-content: center; }
+      .game-stage {
+        height: 520px;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .phone { width: 290px; height: 510px; }
+      .orbital { width: 470px; height: 470px; right: 50%; transform: translateX(50%); }
+      .section-head { align-items: start; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .feature-card:last-child { grid-column: span 2; }
+      .play-panel { grid-template-columns: 1fr; }
+      .play-copy { min-height: 260px; }
+      .play-frame { border-left: 0; border-top: 1px solid rgba(255,255,255,.11); }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: calc(100% - 28px); }
+      .nav { height: 76px; }
+      .brand { font-size: 17px; }
+      .brand-mark { width: 36px; height: 36px; }
+      .nav-play { padding: 9px 12px; font-size: 12px; }
+      .hero { min-height: 910px; }
+      .hero-grid { min-height: 910px; padding-top: 112px; }
+      h1 { font-size: clamp(54px, 18vw, 74px); letter-spacing: -5px; }
+      .hero-desc { font-size: 16px; }
+      .actions { align-items: stretch; flex-direction: column; max-width: 360px; margin-inline: auto; }
+      .game-stage { height: 440px; }
+      .phone { width: 250px; height: 430px; border-width: 6px; border-radius: 32px; }
+      .orbital { width: 400px; height: 400px; }
+      .arena { inset: 58px 14px 38px; }
+      .puff { bottom: 56px; width: 66px; height: 74px; }
+      .burst { bottom: 125px; width: 90px; height: 90px; }
+      .ticker-track { justify-content: flex-start; }
+      .ticker-track span:nth-child(n+4) { display: none; }
+      .features { padding: 78px 0; }
+      .section-head { display: block; }
+      h2 { font-size: 48px; letter-spacing: -3px; }
+      .section-note { margin-top: 20px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-card { min-height: 280px; }
+      .feature-card:last-child { grid-column: auto; }
+      .play-section { padding: 60px 0; }
+      .play-copy { padding: 28px; min-height: 240px; }
+      .play-copy h2 { font-size: 44px; }
+      .play-frame, .play-frame iframe { min-height: 440px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav-wrap">
+    <nav class="shell nav" aria-label="Navigasi utama">
+      <a class="brand" href="#" aria-label="Puff and Crush">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span>Puff &amp; Crush</span>
+      </a>
+      <div class="nav-links">
+        <a href="#game">Mainkan</a>
+        <a href="#fitur">Fitur</a>
+        <a class="nav-play" href="web/" target="_blank" rel="noopener">Game <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Arcade · Action · Crush</p>
+          <h1>Puff <span>&amp; Crush</span></h1>
+          <p class="hero-desc">Lumpuhkan musuh, hancurkan pertahanan, dan kembalilah untuk memenangkan gelombang berikutnya.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#game">Mulai bermain <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#fitur">Lihat fitur</a>
+          </div>
+        </div>
+
+        <div class="game-stage reveal" aria-label="Preview game">
+          <div class="orbital"></div>
+          <span class="spark one"></span>
+          <span class="spark two"></span>
+          <span class="spark three"></span>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="game-ui">
+                <span>STAGE 04</span>
+                <span class="lives"><span class="heart">♥</span><span class="heart">♥</span><span class="heart">♥</span></span>
+              </div>
+              <div class="arena">
+                <div class="enemy e1"></div>
+                <div class="enemy e2"></div>
+                <div class="enemy e3"></div>
+                <div class="burst"></div>
+                <div class="puff"><span class="puff-eye"></span></div>
+              </div>
+              <div class="floor"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Puff mode aktif <b>◆</b></span>
+        <span>Kalahkan bos <b>◆</b></span>
+        <span>Upgrade senjata <b>◆</b></span>
+        <span>Rebut skor tertinggi <b>◆</b></span>
+      </div>
+    </div>
+
+    <section class="features" id="fitur">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Kenapa bermain</p>
+            <h2>Lebih dari<br>sekadar pukul.</h2>
+          </div>
+          <p class="section-note">Bangun kombinasi serangan, baca pola musuh, dan nikmati aksi cepat dengan ritme yang berubah di setiap tahap.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <span class="feature-num">01</span>
+            <svg class="feature-icon" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M50 2l9 32 29-15-20 27 30 7-32 9 9 32-25-20-25 20 9-32-32-9 30-7-20-27 29 15z"/></svg>
+            <h3>Aksi<br>Tanpa Henti</h3>
+            <p>Serangan cepat, musuh gesit, dan ledakan memikat yang membuat setiap gelombang terasa hidup.</p>
+          </article>
+          <article class="feature-card reveal">
+            <span class="feature-num">02</span>
+            <svg class="feature-icon" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><circle cx="50" cy="50" r="45"/><circle cx="50" cy="50" r="28"/><circle cx="50" cy="50" r="10"/></svg>
+            <h3>Tantangan<br>Bertingkat</h3>
+            <p>Temukan pola musuh baru, hadapi boss, dan uji ketepatanmu ketika intensitas pertempuran meningkat.</p>
+          </article>
+          <article class="feature-card reveal">
+            <span class="feature-num">03</span>
+            <svg class="feature-icon" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M16 78V22h68v56H16zm12-12h44V34H28v32zm8-24h28v16H36V42z"/></svg>
+            <h3>Kuasai<br>Arsenaimu</h3>
+            <p>Aktifkan peningkatan, manfaatkan armor, dan gunakan momentum Crush untuk membalikkan keadaan.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="play-section" id="game">
+      <div class="shell">
+        <div class="play-panel reveal">
+          <div class="play-copy">
+            <span class="play-badge">Game siap dimainkan</span>
+            <h2>Mainkan.<br>Hancurkan.</h2>
+            <p>Main langsung di browser. Gunakan kontrol yang tersedia pada game untuk bertahan dan mengalahkan musuh.</p>
+            <a class="btn btn-primary" href="web/" target="_blank" rel="noopener">Buka layar penuh <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="play-frame">
+            <iframe src="web/" title="Puff and Crush — game interaktif" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <span>© 2026 Puff &amp; Crush</span>
+      <a href="../../">Rangga Waridat ↗</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>

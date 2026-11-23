@@ -1,0 +1,785 @@
+---
+project_title: "Blink Slash"
+project_description: "Prototype game arcade drag-and-dash dengan slow-motion, tebasan neon, dan mekanik combo."
+project_category: "GAME PROTOTYPE"
+---
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b13">
+  <meta name="description" content="Blink Slash adalah prototype game arcade Flutter. Seret untuk melesat, aktifkan slow-motion, tebas musuh, hindari bom, dan susun combo.">
+  <title>Blink Slash — Prototype Arcade Game</title>
+  <link rel="canonical" href="https://ranggawaridat.github.io/projects/blink-slash/">
+  <link rel="icon" type="image/png" href="web/favicon.png">
+  <style>
+    :root {
+      --ink: #090b13;
+      --panel: #11131f;
+      --panel-2: #171927;
+      --paper: #f2f1ea;
+      --cyan: #38f8db;
+      --lime: #cbff65;
+      --pink: #ff4fa3;
+      --orange: #ff9952;
+      --line: rgba(255,255,255,.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--ink);
+      color: #fff;
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img, svg { display: block; }
+    .shell {
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .nav-wrap {
+      position: absolute;
+      z-index: 30;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .nav {
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: -.7px;
+    }
+    .brand-mark {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(56,248,219,.7);
+      transform: rotate(45deg);
+      box-shadow: 0 0 22px rgba(56,248,219,.12);
+    }
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 4px;
+      left: 9px;
+      top: 16px;
+      background: var(--cyan);
+      box-shadow: 7px -7px 0 -1px var(--lime);
+      transform: rotate(-45deg);
+    }
+    .brand-name {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .brand-name i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 12px var(--pink);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav-links a { color: rgba(255,255,255,.66); transition: .2s ease; }
+    .nav-links a:hover { color: #fff; }
+    .nav-links .nav-play {
+      padding: 11px 16px;
+      border: 1px solid rgba(56,248,219,.5);
+      border-radius: 7px;
+      color: var(--cyan);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px),
+        radial-gradient(circle at 78% 48%, rgba(56,248,219,.09), transparent 18%),
+        var(--ink);
+      background-size: 52px 52px, 52px 52px, auto, auto;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      right: -310px;
+      top: 110px;
+      border: 1px solid rgba(56,248,219,.16);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 54px rgba(56,248,219,.025),
+        0 0 0 108px rgba(56,248,219,.018);
+    }
+    .hero-grid {
+      min-height: 760px;
+      display: grid;
+      grid-template-columns: 52% 48%;
+      align-items: center;
+      padding-top: 82px;
+    }
+    .hero-copy { position: relative; z-index: 4; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 24px;
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 15px var(--lime);
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 22px;
+      max-width: 660px;
+      font-size: clamp(70px, 8vw, 118px);
+      line-height: .78;
+      letter-spacing: -9px;
+      text-transform: uppercase;
+    }
+    h1 span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--cyan);
+      text-shadow: 8px 8px 0 rgba(56,248,219,.07);
+    }
+    .hero-desc {
+      max-width: 520px;
+      margin-bottom: 34px;
+      color: rgba(255,255,255,.62);
+      font-size: 18px;
+      line-height: 1.72;
+    }
+    .actions { display: flex; gap: 12px; align-items: center; }
+    .btn {
+      min-height: 56px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 21px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 900;
+      transition: .18s ease;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary {
+      border-color: var(--cyan);
+      background: var(--cyan);
+      color: var(--ink);
+      box-shadow: 0 12px 36px rgba(56,248,219,.14);
+    }
+    .btn-ghost { background: rgba(255,255,255,.035); }
+
+    .prototype-stage {
+      position: relative;
+      height: 580px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .stage-ring {
+      position: absolute;
+      right: -35px;
+      width: 500px;
+      height: 500px;
+      border: 1px solid rgba(56,248,219,.11);
+      border-radius: 50%;
+    }
+    .stage-ring::before, .stage-ring::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.055);
+      border-radius: 50%;
+    }
+    .stage-ring::before { inset: 52px; }
+    .stage-ring::after { inset: 112px; }
+    .slash-board {
+      position: relative;
+      z-index: 3;
+      width: 430px;
+      height: 500px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(56,248,219,.11), transparent 8%),
+        linear-gradient(180deg, rgba(21,24,38,.96), rgba(9,11,19,.98));
+      box-shadow: 0 30px 70px rgba(0,0,0,.48);
+      transform: perspective(900px) rotateY(-5deg) rotateZ(1.5deg);
+    }
+    .board-head {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.7);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
+    .board-score {
+      color: #fff;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    .board-score small {
+      color: var(--cyan);
+      font-size: 9px;
+    }
+    .board-arena {
+      position: absolute;
+      inset: 58px 0 0;
+    }
+    .target {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--pink);
+      border-radius: 50%;
+      background: rgba(255,79,163,.10);
+      box-shadow: 0 0 18px rgba(255,79,163,.28), inset 0 0 10px rgba(255,79,163,.15);
+    }
+    .target::before, .target::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 50%;
+    }
+    .target::after { inset: 14px; background: #fff; border: 0; }
+    .target.t1 { left: 68px; top: 84px; }
+    .target.t2 { right: 74px; top: 136px; width: 44px; height: 44px; }
+    .target.t3 { left: 95px; bottom: 92px; width: 30px; height: 30px; }
+    .bomb {
+      position: absolute;
+      right: 116px;
+      bottom: 72px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #242735;
+      border: 2px solid var(--orange);
+      box-shadow: 0 0 16px rgba(255,153,82,.24);
+    }
+    .bomb::before {
+      content: "";
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      right: -7px;
+      top: -8px;
+      border-top: 2px solid var(--orange);
+      border-right: 2px solid var(--orange);
+      border-radius: 0 9px 0 0;
+    }
+    .player {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      bottom: 82px;
+      width: 24px;
+      height: 24px;
+      transform: translateX(-50%) rotate(45deg);
+      border: 3px solid #fff;
+      border-radius: 5px;
+      background: var(--cyan);
+      box-shadow: 0 0 22px rgba(56,248,219,.75);
+    }
+    .trail {
+      position: absolute;
+      z-index: 4;
+      width: 245px;
+      height: 8px;
+      left: 103px;
+      top: 224px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, transparent, rgba(56,248,219,.9), #fff);
+      filter: drop-shadow(0 0 8px var(--cyan));
+      transform: rotate(-29deg);
+      clip-path: polygon(0 100%, 100% 0, 100% 18%, 8% 100%);
+    }
+    .aim-line {
+      position: absolute;
+      z-index: 3;
+      width: 150px;
+      left: 192px;
+      bottom: 130px;
+      border-top: 2px dashed rgba(203,255,101,.65);
+      transform: rotate(-40deg);
+      transform-origin: left;
+    }
+    .slow-tag {
+      position: absolute;
+      z-index: 6;
+      left: 18px;
+      bottom: 16px;
+      padding: 7px 9px;
+      border: 1px solid rgba(203,255,101,.28);
+      border-radius: 5px;
+      color: var(--lime);
+      background: rgba(9,11,19,.78);
+      font-size: 9px;
+      font-weight: 950;
+      letter-spacing: 1.2px;
+    }
+    .charge-row {
+      position: absolute;
+      z-index: 6;
+      right: 18px;
+      bottom: 17px;
+      display: flex;
+      gap: 5px;
+    }
+    .charge {
+      width: 28px;
+      height: 5px;
+      border-radius: 99px;
+      background: var(--cyan);
+      box-shadow: 0 0 8px rgba(56,248,219,.5);
+    }
+    .combo {
+      position: absolute;
+      z-index: 7;
+      right: 28px;
+      top: 78px;
+      color: var(--lime);
+      font-size: 28px;
+      font-weight: 950;
+      font-style: italic;
+      transform: rotate(-4deg);
+    }
+    .combo small {
+      display: block;
+      color: rgba(255,255,255,.6);
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-align: right;
+    }
+
+    .ticker {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-top: 1px solid rgba(56,248,219,.28);
+      border-bottom: 1px solid rgba(56,248,219,.28);
+      background: var(--cyan);
+      color: var(--ink);
+    }
+    .ticker-track {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .mechanics {
+      padding: 112px 0 120px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 48px;
+    }
+    .section-kicker {
+      margin-bottom: 12px;
+      color: #777969;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: .9;
+      letter-spacing: -6px;
+      text-transform: uppercase;
+    }
+    .section-note {
+      max-width: 340px;
+      margin: 0 0 5px;
+      color: #73766b;
+      line-height: 1.7;
+    }
+    .mechanic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .mechanic-card {
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border: 1px solid #d9dacd;
+      border-radius: 18px;
+      background: rgba(255,255,255,.46);
+    }
+    .mechanic-card:nth-child(2) {
+      background: var(--ink);
+      color: #fff;
+    }
+    .mechanic-card:nth-child(3) {
+      background: #dfeeb1;
+    }
+    .mechanic-num {
+      display: inline-grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid #bfc1b2;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 950;
+    }
+    .mechanic-card h3 {
+      margin: 58px 0 12px;
+      font-size: 29px;
+      line-height: 1;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+    }
+    .mechanic-card p {
+      max-width: 280px;
+      margin: 0;
+      color: #73766b;
+      line-height: 1.65;
+    }
+    .mechanic-card:nth-child(2) p { color: rgba(255,255,255,.58); }
+    .card-glyph {
+      position: absolute;
+      right: 24px;
+      top: 24px;
+      color: rgba(9,11,19,.08);
+      font-size: 82px;
+      font-weight: 950;
+      line-height: 1;
+    }
+    .mechanic-card:nth-child(2) .card-glyph { color: rgba(56,248,219,.12); }
+
+    .play-section {
+      padding: 100px 0;
+      background: #0d0f19;
+    }
+    .play-panel {
+      display: grid;
+      grid-template-columns: 34% 66%;
+      min-height: 550px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #090b13;
+    }
+    .play-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px;
+    }
+    .prototype-label {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid rgba(203,255,101,.24);
+      border-radius: 99px;
+      color: var(--lime);
+      background: rgba(203,255,101,.06);
+      font-size: 9px;
+      font-weight: 950;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .prototype-label::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 10px currentColor;
+    }
+    .play-copy h2 { font-size: 58px; }
+    .play-copy p {
+      max-width: 300px;
+      color: rgba(255,255,255,.58);
+      line-height: 1.72;
+    }
+    .play-frame {
+      position: relative;
+      min-height: 550px;
+      border-left: 1px solid var(--line);
+      background: #090b13;
+    }
+    .play-frame iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 550px;
+      border: 0;
+    }
+
+    .footer {
+      padding: 28px 0;
+      border-top: 1px solid rgba(255,255,255,.07);
+      background: #070811;
+      color: rgba(255,255,255,.48);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .footer a { color: #fff; font-weight: 800; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .shell { width: min(100% - 36px, 760px); }
+      .nav-links a:not(.nav-play) { display: none; }
+      .hero { min-height: 1040px; }
+      .hero-grid {
+        min-height: 1040px;
+        grid-template-columns: 1fr;
+        align-content: start;
+        padding-top: 150px;
+      }
+      .hero-copy { text-align: center; }
+      h1 { margin-inline: auto; }
+      .hero-desc { margin-inline: auto; }
+      .status, .actions { justify-content: center; }
+      .prototype-stage {
+        height: 550px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .slash-board { transform: none; }
+      .stage-ring { right: 50%; transform: translateX(50%); }
+      .section-head { align-items: start; }
+      .mechanic-grid { grid-template-columns: 1fr 1fr; }
+      .mechanic-card:last-child { grid-column: span 2; }
+      .play-panel { grid-template-columns: 1fr; }
+      .play-copy { min-height: 290px; }
+      .play-frame { border-left: 0; border-top: 1px solid var(--line); }
+    }
+    @media (max-width: 680px) {
+      .shell { width: calc(100% - 28px); }
+      .nav { height: 76px; }
+      .brand { font-size: 15px; }
+      .brand-mark { width: 34px; height: 34px; }
+      .nav-links { gap: 0; }
+      .nav-play { padding: 9px 11px !important; font-size: 12px; }
+      .hero { min-height: 900px; }
+      .hero-grid { min-height: 900px; padding-top: 118px; }
+      h1 { font-size: clamp(58px, 19vw, 78px); letter-spacing: -6px; }
+      .hero-desc { font-size: 16px; }
+      .actions { align-items: stretch; flex-direction: column; max-width: 340px; margin-inline: auto; }
+      .prototype-stage { height: 460px; margin-top: 12px; }
+      .slash-board { width: min(360px, 100%); height: 430px; }
+      .stage-ring { width: 380px; height: 380px; }
+      .board-arena { transform: scale(.92); transform-origin: center; }
+      .ticker-track { justify-content: flex-start; }
+      .ticker-track span:nth-child(n+4) { display: none; }
+      .mechanics { padding: 78px 0; }
+      .section-head { display: block; }
+      h2 { font-size: 48px; letter-spacing: -4px; }
+      .section-note { margin-top: 20px; }
+      .mechanic-grid { grid-template-columns: 1fr; }
+      .mechanic-card { min-height: 280px; }
+      .mechanic-card:last-child { grid-column: auto; }
+      .play-section { padding: 60px 0; }
+      .play-copy { min-height: 270px; padding: 28px; }
+      .play-copy h2 { font-size: 44px; }
+      .play-frame, .play-frame iframe { min-height: 460px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav-wrap">
+    <nav class="shell nav" aria-label="Navigasi utama">
+      <a class="brand" href="#" aria-label="Blink Slash">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">BLINK SLASH <i></i></span>
+      </a>
+      <div class="nav-links">
+        <a href="#mechanics">Mekanik</a>
+        <a href="#play">Prototype</a>
+        <a class="nav-play" href="web/" target="_blank" rel="noopener">Main <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <p class="status">Prototype · Build aktif</p>
+          <h1>Blink <span>Slash</span></h1>
+          <p class="hero-desc">Seret untuk melesat. Lepas untuk menebas. Sesuaikan arah serangan sambil dunia bergerak lambat.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#play">Coba prototype <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#mechanics">Lihat mekanik</a>
+          </div>
+        </div>
+
+        <div class="prototype-stage reveal" aria-label="Preview Blink Slash">
+          <div class="stage-ring"></div>
+          <div class="slash-board">
+            <div class="board-head">
+              <span>PROTOTYPE / RUN 01</span>
+              <span class="board-score">024 <small>PTS</small></span>
+            </div>
+            <div class="board-arena">
+              <span class="target t1"></span>
+              <span class="target t2"></span>
+              <span class="target t3"></span>
+              <span class="bomb"></span>
+              <span class="aim-line"></span>
+              <span class="trail"></span>
+              <span class="player"></span>
+              <span class="slow-tag">SLOW-MO 0.12×</span>
+              <span class="charge-row"><span class="charge"></span><span class="charge"></span></span>
+              <span class="combo">x5<small>COMBO</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Drag to aim</span>
+        <span>◆</span>
+        <span>Release to slash</span>
+        <span>◆</span>
+        <span>Build the combo</span>
+        <span>◆</span>
+        <span>Avoid the bomb</span>
+      </div>
+    </div>
+
+    <section class="mechanics" id="mechanics">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Satu kontrol utama</p>
+            <h2>Gerak cepat.<br>Pikir cepat.</h2>
+          </div>
+          <p class="section-note">Prototype ini berpusat pada satu mekanik: seret untuk memvisualkan arah, lepaskan untuk berpindah seketika, lalu tebas semua yang terkena lintasan.</p>
+        </div>
+
+        <div class="mechanic-grid">
+          <article class="mechanic-card reveal">
+            <span class="mechanic-num">01</span>
+            <span class="card-glyph">↗</span>
+            <h3>Drag &amp;<br>Blink</h3>
+            <p>Seret layar untuk menentukan vektor dash. Dua muatan dash tersedia untuk membentuk lintasan seranganmu.</p>
+          </article>
+          <article class="mechanic-card reveal">
+            <span class="mechanic-num">02</span>
+            <span class="card-glyph">0.12</span>
+            <h3>Freeze<br>Time</h3>
+            <p>Saat membidik, waktu permainan melambat hingga 0.12× untuk memberi ruang membaca posisi musuh.</p>
+          </article>
+          <article class="mechanic-card reveal">
+            <span class="mechanic-num">03</span>
+            <span class="card-glyph">×</span>
+            <h3>Slice &amp;<br>Combo</h3>
+            <p>Tebas beberapa target dalam satu lintasan untuk menaikkan skor dan combo. Sentuh bom berarti game over.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="play-section" id="play">
+      <div class="shell">
+        <div class="play-panel reveal">
+          <div class="play-copy">
+            <span class="prototype-label">Prototype playable</span>
+            <h2>Coba.<br>Pelajari.</h2>
+            <p>Seret untuk mengarahkan dash, lepaskan untuk bergerak, dan hindari target bom berwarna jingga.</p>
+            <a class="btn btn-primary" href="web/" target="_blank" rel="noopener">Buka layar penuh <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="play-frame">
+            <iframe src="web/" title="Blink Slash — prototype interaktif" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <span>© 2026 Blink Slash · Prototype</span>
+      <a href="../../">Rangga Waridat ↗</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>

@@ -401,12 +401,8 @@ h6 {
 .project-visual img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 240ms ease;
-}
-
-.project-card:hover .project-visual img {
-  transform: scale(1.025);
+  object-fit: contain;
+  object-position: center;
 }
 
 .project-visual-index {
